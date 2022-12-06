@@ -26,11 +26,14 @@
                         </div>
                     </li> -->
                     <li class="sidebar-list">
-                        <a class="sidebar-link sidebar-title {{request()->route()->getPrefix() == 'transaksi/penjualan' ? 'active' : '' }}" href="#"><i class="fa fa-exchange fa-md mx-1"></i><span>Pelayanan</span>
-                            <div class="according-menu"><i class="fa fa-angle-{{request()->route()->getPrefix() == 'transaksi/penjualan' ? 'down' : 'right' }}"></i></div>
+                        <a class="sidebar-link sidebar-title {{ request()->is('pasien*') ? 'active' : '' }}" href="#"><i class="fa fa-exchange fa-md mx-1"></i><span>Pelayanan</span>
+                            <div class="according-menu"><i class="fa fa-angle-{{ request()->is('pasien*') ? 'down' : 'right' }}"></i></div>
                         </a>
-                        <ul class="sidebar-submenu" style="display: {{ request()->route()->getPrefix() == 'transaksi/penjualan' ? 'block;' : 'none;' }}">
-                            <li><a class="lan-4 {{ Route::currentRouteName()=='index' ? 'active' : '' }}" href="#">Pendaftaran Pasien</a></li>
+                        <ul class="sidebar-submenu" style="display: {{  request()->is('pasien*') ? 'block;' : 'none;' }}">
+                            <li><a class="lan-4 {{ Route::currentRouteName()=='pasien.index' ? 'active' : '' }}" href="{{route('pasien.index')}}">Data Pasien</a></li>
+                        </ul>
+                        <ul class="sidebar-submenu" style="display: {{  request()->is('pasien*') ? 'block;' : 'none;' }}">
+                            <li><a class="lan-4 {{ Route::currentRouteName()=='pasien.create' ? 'active' : '' }}" href="{{route('pasien.create')}}">Pendaftaran Pasien</a></li>
                         </ul>
                     </li>
                     <li class="sidebar-list">

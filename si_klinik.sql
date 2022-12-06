@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Waktu pembuatan: 05 Des 2022 pada 15.19
+-- Waktu pembuatan: 06 Des 2022 pada 14.07
 -- Versi server: 5.7.33
 -- Versi PHP: 8.1.3
 
@@ -85,8 +85,9 @@ CREATE TABLE `pasien` (
 --
 
 INSERT INTO `pasien` (`idpasien`, `tanggal`, `nik`, `no_bpjs`, `nama_lengkap`, `tempat_lahir`, `tanggal_lahir`, `jenis_kelamin`, `alamat`, `pekerjaan`, `agama`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(2, '2022-12-05', '5308745689450001', '9654789512', 'Alexander Evan', 'Ende', '1999-10-29', 'Laki-laki', 'Jln. Kokos Raya No 34', 'PNS', 'Budha', '2022-12-05 04:47:42', '2022-12-05 04:47:42', NULL),
-(3, '2022-12-05', '231', '123', 'e', 'eee', '2022-12-26', 'Laki-laki', 'asda', '1', '1', '2022-12-05 07:18:55', '2022-12-05 07:18:55', NULL);
+(2, '2022-12-06', '5308745689450002', '1111', 'Alexander', 'Maumere', '2000-10-29', 'Perempuan', 'Jln. Kokos Raya No 35', 'WIRASWASTA', 'ISLAM', '2022-12-05 04:47:42', '2022-12-06 05:51:12', NULL),
+(3, '2022-12-06', '5816516161615', '8795416464', 'Richardo', 'Mataram', '2022-12-26', 'Perempuan', 'RMS V No 3', 'WIRASWASTA', 'BUDHA', '2022-12-05 07:18:55', '2022-12-06 06:06:56', '2022-12-06 06:06:56'),
+(4, '2022-12-06', '123', '456', 'Marianus', 'Ende', '1962-12-21', 'Laki-laki', 'Jln. Sultan Hassanudin', 'PNS', 'KATOLIK', '2022-12-06 05:53:11', '2022-12-06 05:53:11', NULL);
 
 -- --------------------------------------------------------
 
@@ -179,7 +180,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT untuk tabel `pasien`
 --
 ALTER TABLE `pasien`
-  MODIFY `idpasien` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `idpasien` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT untuk tabel `users`

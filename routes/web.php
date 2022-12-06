@@ -44,8 +44,16 @@ Route::get('/clear-cache', function () {
 Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-// Route::get('/add', [App\Http\Controllers\PasienController::class, 'create']);
 Route::controller(PasienController::class)->group(function () {
-    Route::get('/add', 'create');
-    Route::post('/store','store')->name('pasien.store');
+    Route::prefix('pasien')->group(function () {
+        Route::name('pasien.')->group(function () {
+            Route::get('index', 'index')->name('index');
+            Route::get('add', 'create')->name('create');
+            Route::get('show/{id}', 'show')->name('show');
+            Route::get('edit/{id}', 'edit')->name('edit');
+            Route::post('store', 'store')->name('store');
+            Route::put('update/{id}','update')->name('update');
+            Route::delete('delete/{id}','delete')->name('delete');
+        });
+    });
 });

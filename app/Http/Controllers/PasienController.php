@@ -5,13 +5,14 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Pasien;
+
 class PasienController extends Controller
 {
     //
     public function index()
     {
         $pasien = Pasien::all();
-        return view('admin.pasien.index', compact('pasien'));
+        return view('pages.pasien.index', compact('pasien'));
     }
     public function create()
     {
@@ -40,8 +41,8 @@ class PasienController extends Controller
     }
     public function edit($id)
     {
-        $pasien = Pasien::find($id)->first();
-        return view('admin.pasien.edit', compact('pasien'));
+        $pasien = Pasien::where('idpasien', $id)->first();
+        return view('pages.pasien.edit', compact('pasien'));
     }
     public function update(Request $request, $id)
     {
@@ -60,13 +61,14 @@ class PasienController extends Controller
             $pasien->save();
             // return redirect()->back()->with('pesan', 'Berhasil Ubah Data Pasien');
         } catch (\Exception $e) {
+            return $e->getMessage();
             // return redirect()->back()->with('pesan', $e->getMessage());
         }
     }
     public function show($id)
     {
-        $pasien = Pasien::find($id)->first();
-        // return view('admin.pasien.show', compact('pasien'));
+        $pasien = Pasien::where('idpasien', $id)->first();
+        return view('pages.pasien.show', compact('pasien'));
     }
     public function delete($id)
     {
@@ -74,7 +76,7 @@ class PasienController extends Controller
             Pasien::where('idpasien', $id)->delete();
             // return redirect()->back()->with('pesan', 'Berhasil Hapus Data Pasien');
         } catch (\Exception $e) {
-            // return redirect()->back()->with('pesan', $e->getMessage());
+            return $e->getMessage();
         }
     }
 }

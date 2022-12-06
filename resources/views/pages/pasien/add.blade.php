@@ -83,11 +83,9 @@
                                 <div class="mb-3">
                                     <label class="form-label">Pekerjaan</label>
                                     <select class="form-select digits" name="pekerjaan">
-                                        <option>1</option>
-                                        <option>2</option>
-                                        <option>3</option>
-                                        <option>4</option>
-                                        <option>5</option>
+                                       
+                                        <option value="WIRASWASTA">WIRASWASTA</option>
+                                        <option value="PNS">PNS</option>
                                     </select>
                                 </div>
                             </div>
@@ -97,11 +95,13 @@
                                 <div class="mb-3">
                                     <label class="form-label">Agama</label>
                                     <select class="form-select digits" name="agama">
-                                        <option>1</option>
-                                        <option>2</option>
-                                        <option>3</option>
-                                        <option>4</option>
-                                        <option>5</option>
+                                      
+                                        <option value="ISLAM">ISLAM</option>
+                                        <option value="KRISTEN">KRISTEN</option>
+                                        <option value="KATOLIK">KATOLIK</option>
+                                        <option value="BUDHA">BUDHA</option>
+                                        <option value="HINDU">HINDU</option>
+                                        <option value="KONGFUCU">KONGFUCU</option>
                                     </select>
                                 </div>
                             </div>
@@ -111,11 +111,11 @@
                                 <label class="form-label">Jenis Kelamin</label>
                                 <div class="m-t-15 m-checkbox-inline custom-radio-ml">
                                     <div class="form-check form-check-inline radio radio-primary">
-                                        <input class="form-check-input" id="radioinline1" type="radio" name="jenis_kelamin" value="Laki-laki" data-bs-original-title="" title="">
+                                        <input class="form-check-input" id="radioinline1" type="radio" name="jenis_kelamin" value="Laki-laki">
                                         <label class="form-check-label mb-0" for="radioinline1">Laki-laki</label>
                                     </div>
                                     <div class="form-check form-check-inline radio radio-primary">
-                                        <input class="form-check-input" id="radioinline2" type="radio" name="jenis_kelamin" value="Perempuan" data-bs-original-title="" title="">
+                                        <input class="form-check-input" id="radioinline2" type="radio" name="jenis_kelamin" value="Perempuan">
                                         <label class="form-check-label mb-0" for="radioinline2">Perempuan</label>
                                     </div>
                                 </div>
