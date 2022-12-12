@@ -5,6 +5,9 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PasienController;
+use App\Http\Controllers\DokterController;
+use App\Http\Controllers\PendaftaranPasienController;
+use App\Http\Controllers\PoliController;
 
 Route::get('/', function () {
     return view('pages.buat-transaksi-baru');
@@ -52,8 +55,45 @@ Route::controller(PasienController::class)->group(function () {
             Route::get('show/{id}', 'show')->name('show');
             Route::get('edit/{id}', 'edit')->name('edit');
             Route::post('store', 'store')->name('store');
-            Route::put('update/{id}','update')->name('update');
-            Route::delete('delete/{id}','delete')->name('delete');
+            Route::put('update/{id}', 'update')->name('update');
+            Route::delete('delete/{id}', 'delete')->name('delete');
+        });
+    });
+});
+
+Route::controller(DokterController::class)->group(function () {
+    Route::prefix('dokter')->group(function () {
+        Route::name('dokter.')->group(function () {
+            Route::get('index', 'index')->name('index');
+            Route::get('add', 'create')->name('create');
+            Route::get('show/{id}', 'show')->name('show');
+            Route::get('edit/{id}', 'edit')->name('edit');
+            Route::post('store', 'store')->name('store');
+            Route::put('update/{id}', 'update')->name('update');
+            Route::delete('delete/{id}', 'delete')->name('delete');
+        });
+    });
+});
+
+Route::controller(PoliController::class)->group(function () {
+    Route::prefix('poli')->group(function () {
+        Route::name('poli.')->group(function () {
+            Route::get('index', 'index')->name('index');
+            Route::get('add', 'create')->name('create');
+            Route::get('show/{id}', 'show')->name('show');
+            Route::get('edit/{id}', 'edit')->name('edit');
+            Route::post('store', 'store')->name('store');
+            Route::put('update/{id}', 'update')->name('update');
+            Route::delete('delete/{id}', 'delete')->name('delete');
+        });
+    });
+});
+
+Route::controller(PendaftaranPasienController::class)->group(function () {
+    Route::prefix('pendaftaran')->group(function () {
+        Route::name('pendaftaran.')->group(function () {
+            Route::get('index', 'index')->name('index');
+            Route::post('store', 'store')->name('store');
         });
     });
 });

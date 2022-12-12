@@ -33,7 +33,7 @@ class PasienController extends Controller
             $pasien->agama = $request->get('agama');
             $pasien->pekerjaan = $request->get('pekerjaan');
             $pasien->save();
-            // return redirect()->back()->with('pesan', 'Berhasil Tambah Data Pasien');
+            return redirect()->back()->with('pesan', 'Berhasil Tambah Data Pasien');
         } catch (\Exception $e) {
             return $e->getMessage();
             // return redirect()->back()->with('pesan', $e->getMessage());
@@ -59,7 +59,7 @@ class PasienController extends Controller
             $pasien->agama = $request->get('agama');
             $pasien->pekerjaan = $request->get('pekerjaan');
             $pasien->save();
-            // return redirect()->back()->with('pesan', 'Berhasil Ubah Data Pasien');
+            return redirect()->back()->with('pesan', 'Berhasil Ubah Data Pasien');
         } catch (\Exception $e) {
             return $e->getMessage();
             // return redirect()->back()->with('pesan', $e->getMessage());
@@ -74,7 +74,7 @@ class PasienController extends Controller
     {
         try {
             Pasien::where('idpasien', $id)->delete();
-            // return redirect()->back()->with('pesan', 'Berhasil Hapus Data Pasien');
+            return redirect()->back()->with('pesan', 'Berhasil Hapus Data Pasien');
         } catch (\Exception $e) {
             return $e->getMessage();
         }

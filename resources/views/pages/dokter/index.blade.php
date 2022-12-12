@@ -9,7 +9,7 @@
 @endsection
 
 @section('breadcrumb-title')
-<h3>Master Data Pasien</h3>
+<h3>Master Data Dokter</h3>
 @endsection
 
 @section('breadcrumb-items')
@@ -29,10 +29,10 @@
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
                         <div class="">
-                            <h3>Daftar Data Pasien<h3>
+                            <h3>Daftar Data Dokter<h3>
                         </div>
                         <div class="">
-                            <a class="btn btn-primary" href="{{route('pasien.create')}}">Tambah Data Pasien</a>
+                            <a class="btn btn-primary" href="{{route('dokter.create')}}">Tambah Data Dokter</a>
                         </div>
                     </div>
                 </div>
@@ -42,37 +42,33 @@
                             <thead>
                                 <tr>
                                     <th>No</th>
-                                    <th>NIK</th>
-                                    <th>BPJS No</th>
-                                    <th>Nama</th>
+                                   
+                                    <th>Nama Lengkap</th>
                                     <th>TTL</th>
                                     <th>Jenis Kelamin</th>
                                     <th>Alamat</th>
-                                    <th>Pekerjaan</th>
-                                    <th>Agama</th>
+                                    
                                     <th>Detail</th>
                                     <th>Edit</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($pasien as $key => $value)
+                                @foreach ($dokter as $key => $value)
                                 <tr>
                                     <td>{{$key+1}}</td>
-                                    <td>{{$value->nik}}</td>
-                                    <td>{{$value->no_bpjs}}</td>
+                                  
                                     <td>{{$value->nama_lengkap}}</td>
                                     <td>{{$value->tempat_lahir}}, {{$value->tanggal_lahir}}</td>
                                     <td>{{$value->alamat}}</td>
                                     <td>{{$value->jenis_kelamin}}</td>
-                                    <td>{{$value->pekerjaan}}</td>
-                                    <td>{{$value->agama}}</td>
+                                
                                     <td>
-                                        <a class="btn btn-success" href="{{route('pasien.show',$value->idpasien)}}">
+                                        <a class="btn btn-success" href="{{route('dokter.show',$value->iddokter)}}">
                                             Detail
                                         </a>
                                     </td>
                                     <td>
-                                        <a class="btn btn-warning" href="{{route('pasien.edit',$value->idpasien)}}">
+                                        <a class="btn btn-warning" href="{{route('dokter.edit',$value->iddokter)}}">
                                             Edit
                                         </a>
                                     </td>
