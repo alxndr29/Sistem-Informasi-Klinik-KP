@@ -10,4 +10,14 @@ class Kunjungan extends Model
     use HasFactory;
     protected $table = 'kunjungan';
     protected $primaryKey = 'idkunjungan';
+
+    public function pasien(){
+        return $this->belongsTo(Pasien::class, 'pasien_idpasien');
+    }
+    public function poli(){
+        return $this->belongsTo(Poli::class,'poli_idpoli');
+    }
+    public function dokter(){
+        return $this->belongsTo(Dokter::class,'dokter_iddokter');
+    }
 }

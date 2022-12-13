@@ -8,9 +8,13 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Poli extends Model
 {
     use HasFactory;
-    use HasFactory;
     use SoftDeletes;
     protected $dates = ['deleted_at'];
     protected $table = 'poli';
     protected $primaryKey = 'idpoli';
+
+    public function kunjungan()
+    {
+        return $this->hasMany(Kunjungan::class);
+    }
 }

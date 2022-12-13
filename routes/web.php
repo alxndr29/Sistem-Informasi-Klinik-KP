@@ -6,6 +6,8 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PasienController;
 use App\Http\Controllers\DokterController;
+use App\Http\Controllers\ObatController;
+use App\Http\Controllers\PemeriksaanPasienController;
 use App\Http\Controllers\PendaftaranPasienController;
 use App\Http\Controllers\PoliController;
 
@@ -94,6 +96,29 @@ Route::controller(PendaftaranPasienController::class)->group(function () {
         Route::name('pendaftaran.')->group(function () {
             Route::get('index', 'index')->name('index');
             Route::post('store', 'store')->name('store');
+        });
+    });
+});
+
+Route::controller(PemeriksaanPasienController::class)->group(function () {
+    Route::prefix('pemeriksaan')->group(function () {
+        Route::name('pemeriksaan.')->group(function () {
+            Route::get('index', 'index')->name('index');
+            Route::get('edit/{id}', 'edit')->name('edit');
+        });
+    });
+});
+
+Route::controller(ObatController::class)->group(function () {
+    Route::prefix('obat')->group(function () {
+        Route::name('obat.')->group(function () {
+            Route::get('index', 'index')->name('index');
+            Route::get('add', 'create')->name('create');
+            // Route::get('show/{id}', 'show')->name('show');
+            Route::get('edit/{id}', 'edit')->name('edit');
+            Route::post('store', 'store')->name('store');
+            Route::put('update/{id}', 'update')->name('update');
+            Route::delete('delete/{id}', 'delete')->name('delete');
         });
     });
 });

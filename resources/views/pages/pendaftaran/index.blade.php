@@ -34,14 +34,25 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <form method="post" action="{{route('pasien.store')}}" class="form theme-form">
+                    <form method="post" action="{{route('pendaftaran.store')}}" class="form theme-form">
                         @csrf
                         <div class="row">
                             <div class="col">
                                 <div class="mb-3">
+                                    <label class="form-label">Tanggal:</label>
+                                    <input class="form-control" type="date" name="tanggal" readonly value="@php echo date('Y-m-d'); @endphp">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <div class="mb-3">
                                     <label class="form-label">Pilih Pasien</label>
-                                    <select class="form-select digits" name="pasien" id="coba">
-                                        <option value="" selected>-- Pilih Pasien --</option>
+                                    <select class="form-select digits" name="pasien" id="pasien" required>
+                                        <!-- <option value="" selected>-- Pilih Pasien --</option> -->
+                                        @foreach ($pasien as $value)
+                                        <option value="{{$value->idpasien}}">{{$value->nama_lengkap}}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
@@ -50,8 +61,11 @@
                             <div class="col">
                                 <div class="mb-3">
                                     <label class="form-label">Pilih Poli</label>
-                                    <select class="form-select digits" name="poli">
-                                        <option value="" selected>-- Pilih Poli --</option>
+                                    <select class="form-select digits" name="poli" id="poli" required>
+                                        <!-- <option value="" selected>-- Pilih Poli --</option> -->
+                                        @foreach ($poli as $value)
+                                        <option value="{{$value->idpoli}}">{{$value->nama_lengkap}}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
@@ -60,8 +74,11 @@
                             <div class="col">
                                 <div class="mb-3">
                                     <label class="form-label">Pilih Dokter</label>
-                                    <select class="form-select digits" name="dokter">
-                                        <option value="" selected>-- Pilih Dokter --</option>
+                                    <select class="form-select digits" name="dokter" id="dokter" required>
+                                        <!-- <option value="" selected>-- Pilih Dokter --</option> -->
+                                        @foreach ($dokter as $value)
+                                        <option value="{{$value->iddokter}}">{{$value->nama_lengkap}}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
@@ -70,7 +87,7 @@
                             <div class="col">
                                 <div>
                                     <label class="form-label">Keluhan / Diagnosa Awal</label>
-                                    <textarea class="form-control" rows="3" name="alamat"></textarea>
+                                    <textarea class="form-control" rows="3" name="diagnosa_awal" required></textarea>
                                 </div>
                             </div>
                         </div>
@@ -102,7 +119,9 @@
 
 <script type="text/javascript">
     $(document).ready(function() {
-        $('#coba').select2();
+        $('#pasien').select2();
+        $('#poli').select2();
+        $('#dokter').select2();
     });
 </script>
 

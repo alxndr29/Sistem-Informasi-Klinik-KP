@@ -41,6 +41,16 @@
                             <i class="fa fa-truck-loading fa-md mx-1"> </i><span>Pendaftaran Pasien</span>
                         </a>
                     </li>
+                    <li class="sidebar-list">
+                        <a class="sidebar-link sidebar-title link-nav {{ request()->is('pemeriksaan*') ? 'active' : '' }}" href="{{route('pemeriksaan.index')}}">
+                            <i class="fa fa-truck-loading fa-md mx-1"> </i><span>Pemeriksaan Pasien</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-list">
+                        <a class="sidebar-link sidebar-title link-nav {{ request()->is('obat*') ? 'active' : '' }}" href="{{route('obat.index')}}">
+                            <i class="fa fa-truck-loading fa-md mx-1"> </i><span>Data Obat</span>
+                        </a>
+                    </li>
                     <li class="sidebar-main-title">
 
                     <li class="sidebar-list"><a class="sidebar-link sidebar-title link-nav {{ Route::currentRouteName()=='user.index' ? 'active' : '' }}" href="#"><i data-feather="user"> </i><span>User</span></a></li>

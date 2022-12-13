@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Waktu pembuatan: 12 Des 2022 pada 14.44
+-- Waktu pembuatan: 13 Des 2022 pada 14.04
 -- Versi server: 5.7.33
 -- Versi PHP: 8.1.3
 
@@ -77,8 +77,20 @@ CREATE TABLE `kunjungan` (
   `dokter_iddokter` int(11) NOT NULL,
   `poli_idpoli` int(11) NOT NULL,
   `diagnosa_awal` varchar(45) DEFAULT NULL,
-  `hasil_diagnosa` varchar(45) DEFAULT NULL
+  `hasil_diagnosa` varchar(45) DEFAULT NULL,
+  `tanggal` date DEFAULT NULL,
+  `jam_datang` time DEFAULT NULL,
+  `jam_selesai` time DEFAULT NULL,
+  `tarif` double DEFAULT NULL,
+  `status_bayar` tinyint(4) DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `kunjungan`
+--
+
+INSERT INTO `kunjungan` (`idkunjungan`, `status`, `created_at`, `updated_at`, `pasien_idpasien`, `dokter_iddokter`, `poli_idpoli`, `diagnosa_awal`, `hasil_diagnosa`, `tanggal`, `jam_datang`, `jam_selesai`, `tarif`, `status_bayar`) VALUES
+(1, NULL, '2022-12-13 02:58:41', '2022-12-13 02:58:41', 2, 2, 2, 's', NULL, '2022-12-13', '10:58:41', NULL, NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -110,11 +122,17 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 CREATE TABLE `obat` (
   `idobat` int(11) NOT NULL,
   `nama` varchar(45) DEFAULT NULL,
-  `min_stock` int(11) DEFAULT NULL,
-  `keuntungan` int(11) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `obat`
+--
+
+INSERT INTO `obat` (`idobat`, `nama`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 'Paracetamol Edit', '2022-12-13 05:46:02', '2022-12-13 05:52:55', NULL);
 
 -- --------------------------------------------------------
 
@@ -227,21 +245,6 @@ CREATE TABLE `stok_in_has_obat` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tarif_berobat`
---
-
-CREATE TABLE `tarif_berobat` (
-  `idtarif_berobat` int(11) NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  `tarif` int(11) DEFAULT NULL,
-  `status` enum('Lunas','Kredit') DEFAULT NULL,
-  `kunjungan_idkunjungan` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
 -- Struktur dari tabel `users`
 --
 
@@ -341,13 +344,6 @@ ALTER TABLE `stok_in_has_obat`
   ADD KEY `fk_stok_in_has_obat_stok_in1_idx` (`stok_in_idstok_in`);
 
 --
--- Indeks untuk tabel `tarif_berobat`
---
-ALTER TABLE `tarif_berobat`
-  ADD PRIMARY KEY (`idtarif_berobat`),
-  ADD KEY `fk_tarif_berobat_kunjungan1_idx` (`kunjungan_idkunjungan`);
-
---
 -- Indeks untuk tabel `users`
 --
 ALTER TABLE `users`
@@ -374,7 +370,7 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT untuk tabel `kunjungan`
 --
 ALTER TABLE `kunjungan`
-  MODIFY `idkunjungan` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idkunjungan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT untuk tabel `migrations`
@@ -386,7 +382,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT untuk tabel `obat`
 --
 ALTER TABLE `obat`
-  MODIFY `idobat` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idobat` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT untuk tabel `pasien`
@@ -437,12 +433,6 @@ ALTER TABLE `resep_stock_out`
 ALTER TABLE `stok_in_has_obat`
   ADD CONSTRAINT `fk_stok_in_has_obat_obat1` FOREIGN KEY (`obat_idobat`) REFERENCES `obat` (`idobat`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_stok_in_has_obat_stok_in1` FOREIGN KEY (`stok_in_idstok_in`) REFERENCES `stok_in` (`idstok_in`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Ketidakleluasaan untuk tabel `tarif_berobat`
---
-ALTER TABLE `tarif_berobat`
-  ADD CONSTRAINT `fk_tarif_berobat_kunjungan1` FOREIGN KEY (`kunjungan_idkunjungan`) REFERENCES `kunjungan` (`idkunjungan`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
