@@ -10,11 +10,11 @@
         "build": "vite build"
     },
     "devDependencies": {
-        "@popperjs/core": "^2.10.2",
+        "@popperjs/core": "^2.11.6",
         "@vitejs/plugin-vue": "^3.1.2",
         "@vue/compiler-sfc": "^3.2.41",
         "axios": "^0.19",
-        "bootstrap": "^5.2.1",
+        "bootstrap": "^5.2.3",
         "cross-env": "^7.0.3",
         "dotenv": "^16.0.3",
         "gulp-autoprefixer": "^7.0.1",
@@ -25,7 +25,7 @@
         "node-sass": "^5.0.0",
         "postcss": "^8.3.1",
         "resolve-url-loader": "^3.1.0",
-        "sass": "^1.32.11",
+        "sass": "^1.56.1",
         "vite": "^3.1.8",
         "vue-loader": "^16.8.3"
     },

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Waktu pembuatan: 13 Des 2022 pada 14.04
+-- Waktu pembuatan: 15 Des 2022 pada 00.11
 -- Versi server: 5.7.33
 -- Versi PHP: 8.1.3
 
@@ -111,7 +111,19 @@ CREATE TABLE `migrations` (
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (1, '2014_10_12_000000_create_users_table', 1),
 (2, '2014_10_12_100000_create_password_resets_table', 1),
-(3, '2019_08_19_000000_create_failed_jobs_table', 1);
+(3, '2019_08_19_000000_create_failed_jobs_table', 1),
+(4, '2022_10_06_215330_create_customers_table', 2),
+(5, '2022_10_07_094114_create_suppliers_table', 2),
+(6, '2022_10_07_094406_create_product_uoms_table', 2),
+(7, '2022_10_07_114126_create_product_types_table', 2),
+(8, '2022_10_07_120544_create_product_categories_table', 2),
+(9, '2022_10_07_120825_create_purchases_order_table', 2),
+(10, '2022_10_07_121030_create_sales_order_table', 2),
+(11, '2022_10_08_094224_create_products_table', 2),
+(12, '2022_10_12_213850_create_stock_in_table', 2),
+(13, '2022_10_12_214317_create_stock_out_table', 2),
+(14, '2022_10_24_221910_create_stock_opnames_table', 2),
+(15, '2022_10_24_222025_create_detail_stock_opname', 2);
 
 -- --------------------------------------------------------
 
@@ -170,18 +182,6 @@ INSERT INTO `pasien` (`idpasien`, `tanggal`, `nik`, `no_bpjs`, `nama_lengkap`, `
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `password_resets`
---
-
-CREATE TABLE `password_resets` (
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `token` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
-
---
 -- Struktur dari tabel `poli`
 --
 
@@ -227,19 +227,6 @@ CREATE TABLE `stok_in` (
   `idstok_in` int(11) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Struktur dari tabel `stok_in_has_obat`
---
-
-CREATE TABLE `stok_in_has_obat` (
-  `stok_in_idstok_in` int(11) NOT NULL,
-  `obat_idobat` int(11) NOT NULL,
-  `jumlah` varchar(45) DEFAULT NULL,
-  `harga` varchar(45) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -310,12 +297,6 @@ ALTER TABLE `pasien`
   ADD PRIMARY KEY (`idpasien`);
 
 --
--- Indeks untuk tabel `password_resets`
---
-ALTER TABLE `password_resets`
-  ADD KEY `password_resets_email_index` (`email`);
-
---
 -- Indeks untuk tabel `poli`
 --
 ALTER TABLE `poli`
@@ -334,14 +315,6 @@ ALTER TABLE `resep_stock_out`
 --
 ALTER TABLE `stok_in`
   ADD PRIMARY KEY (`idstok_in`);
-
---
--- Indeks untuk tabel `stok_in_has_obat`
---
-ALTER TABLE `stok_in_has_obat`
-  ADD PRIMARY KEY (`stok_in_idstok_in`,`obat_idobat`),
-  ADD KEY `fk_stok_in_has_obat_obat1_idx` (`obat_idobat`),
-  ADD KEY `fk_stok_in_has_obat_stok_in1_idx` (`stok_in_idstok_in`);
 
 --
 -- Indeks untuk tabel `users`
@@ -376,7 +349,7 @@ ALTER TABLE `kunjungan`
 -- AUTO_INCREMENT untuk tabel `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT untuk tabel `obat`
@@ -426,13 +399,6 @@ ALTER TABLE `kunjungan`
 ALTER TABLE `resep_stock_out`
   ADD CONSTRAINT `fk_kunjungan_has_obat_kunjungan1` FOREIGN KEY (`kunjungan_idkunjungan`) REFERENCES `kunjungan` (`idkunjungan`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_kunjungan_has_obat_obat1` FOREIGN KEY (`obat_idobat`) REFERENCES `obat` (`idobat`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Ketidakleluasaan untuk tabel `stok_in_has_obat`
---
-ALTER TABLE `stok_in_has_obat`
-  ADD CONSTRAINT `fk_stok_in_has_obat_obat1` FOREIGN KEY (`obat_idobat`) REFERENCES `obat` (`idobat`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_stok_in_has_obat_stok_in1` FOREIGN KEY (`stok_in_idstok_in`) REFERENCES `stok_in` (`idstok_in`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

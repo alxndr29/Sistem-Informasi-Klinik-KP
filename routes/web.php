@@ -12,7 +12,7 @@ use App\Http\Controllers\PendaftaranPasienController;
 use App\Http\Controllers\PoliController;
 
 Route::get('/', function () {
-    return view('pages.buat-transaksi-baru');
+    return redirect('pasien.index');
 })->name('/');
 
 //Language Change
@@ -46,79 +46,87 @@ Route::get('/clear-cache', function () {
     return "Cache is cleared";
 })->name('clear.cache');
 
+// Auth::routes();
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
+Route::middleware(['auth'])->group(function () {
+    Route::controller(PasienController::class)->group(function () {
+        Route::prefix('pasien')->group(function () {
+            Route::name('pasien.')->group(function () {
+                Route::get('index', 'index')->name('index');
+                Route::get('add', 'create')->name('create');
+                Route::get('show/{id}', 'show')->name('show');
+                Route::get('edit/{id}', 'edit')->name('edit');
+                Route::post('store', 'store')->name('store');
+                Route::put('update/{id}', 'update')->name('update');
+                Route::delete('delete/{id}', 'delete')->name('delete');
+            });
+        });
+    });
+
+    Route::controller(DokterController::class)->group(function () {
+        Route::prefix('dokter')->group(function () {
+            Route::name('dokter.')->group(function () {
+                Route::get('index', 'index')->name('index');
+                Route::get('add', 'create')->name('create');
+                Route::get('show/{id}', 'show')->name('show');
+                Route::get('edit/{id}', 'edit')->name('edit');
+                Route::post('store', 'store')->name('store');
+                Route::put('update/{id}', 'update')->name('update');
+                Route::delete('delete/{id}', 'delete')->name('delete');
+            });
+        });
+    });
+
+    Route::controller(PoliController::class)->group(function () {
+        Route::prefix('poli')->group(function () {
+            Route::name('poli.')->group(function () {
+                Route::get('index', 'index')->name('index');
+                Route::get('add', 'create')->name('create');
+                Route::get('show/{id}', 'show')->name('show');
+                Route::get('edit/{id}', 'edit')->name('edit');
+                Route::post('store', 'store')->name('store');
+                Route::put('update/{id}', 'update')->name('update');
+                Route::delete('delete/{id}', 'delete')->name('delete');
+            });
+        });
+    });
+
+    Route::controller(PendaftaranPasienController::class)->group(function () {
+        Route::prefix('pendaftaran')->group(function () {
+            Route::name('pendaftaran.')->group(function () {
+                Route::get('index', 'index')->name('index');
+                Route::post('store', 'store')->name('store');
+            });
+        });
+    });
+
+    Route::controller(PemeriksaanPasienController::class)->group(function () {
+        Route::prefix('pemeriksaan')->group(function () {
+            Route::name('pemeriksaan.')->group(function () {
+                Route::get('index', 'index')->name('index');
+                Route::get('edit/{id}', 'edit')->name('edit');
+            });
+        });
+    });
+
+    Route::controller(ObatController::class)->group(function () {
+        Route::prefix('obat')->group(function () {
+            Route::name('obat.')->group(function () {
+                Route::get('index', 'index')->name('index');
+                Route::get('add', 'create')->name('create');
+                // Route::get('show/{id}', 'show')->name('show');
+                Route::get('edit/{id}', 'edit')->name('edit');
+                Route::post('store', 'store')->name('store');
+                Route::put('update/{id}', 'update')->name('update');
+                Route::delete('delete/{id}', 'delete')->name('delete');
+            });
+        });
+    });
+   
+});
+
 Auth::routes();
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware('auth');
 
-Route::controller(PasienController::class)->group(function () {
-    Route::prefix('pasien')->group(function () {
-        Route::name('pasien.')->group(function () {
-            Route::get('index', 'index')->name('index');
-            Route::get('add', 'create')->name('create');
-            Route::get('show/{id}', 'show')->name('show');
-            Route::get('edit/{id}', 'edit')->name('edit');
-            Route::post('store', 'store')->name('store');
-            Route::put('update/{id}', 'update')->name('update');
-            Route::delete('delete/{id}', 'delete')->name('delete');
-        });
-    });
-});
-
-Route::controller(DokterController::class)->group(function () {
-    Route::prefix('dokter')->group(function () {
-        Route::name('dokter.')->group(function () {
-            Route::get('index', 'index')->name('index');
-            Route::get('add', 'create')->name('create');
-            Route::get('show/{id}', 'show')->name('show');
-            Route::get('edit/{id}', 'edit')->name('edit');
-            Route::post('store', 'store')->name('store');
-            Route::put('update/{id}', 'update')->name('update');
-            Route::delete('delete/{id}', 'delete')->name('delete');
-        });
-    });
-});
-
-Route::controller(PoliController::class)->group(function () {
-    Route::prefix('poli')->group(function () {
-        Route::name('poli.')->group(function () {
-            Route::get('index', 'index')->name('index');
-            Route::get('add', 'create')->name('create');
-            Route::get('show/{id}', 'show')->name('show');
-            Route::get('edit/{id}', 'edit')->name('edit');
-            Route::post('store', 'store')->name('store');
-            Route::put('update/{id}', 'update')->name('update');
-            Route::delete('delete/{id}', 'delete')->name('delete');
-        });
-    });
-});
-
-Route::controller(PendaftaranPasienController::class)->group(function () {
-    Route::prefix('pendaftaran')->group(function () {
-        Route::name('pendaftaran.')->group(function () {
-            Route::get('index', 'index')->name('index');
-            Route::post('store', 'store')->name('store');
-        });
-    });
-});
-
-Route::controller(PemeriksaanPasienController::class)->group(function () {
-    Route::prefix('pemeriksaan')->group(function () {
-        Route::name('pemeriksaan.')->group(function () {
-            Route::get('index', 'index')->name('index');
-            Route::get('edit/{id}', 'edit')->name('edit');
-        });
-    });
-});
-
-Route::controller(ObatController::class)->group(function () {
-    Route::prefix('obat')->group(function () {
-        Route::name('obat.')->group(function () {
-            Route::get('index', 'index')->name('index');
-            Route::get('add', 'create')->name('create');
-            // Route::get('show/{id}', 'show')->name('show');
-            Route::get('edit/{id}', 'edit')->name('edit');
-            Route::post('store', 'store')->name('store');
-            Route::put('update/{id}', 'update')->name('update');
-            Route::delete('delete/{id}', 'delete')->name('delete');
-        });
-    });
-});
