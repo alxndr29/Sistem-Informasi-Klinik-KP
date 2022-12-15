@@ -12,7 +12,7 @@ use App\Http\Controllers\PendaftaranPasienController;
 use App\Http\Controllers\PoliController;
 
 Route::get('/', function () {
-    return redirect('pasien.index');
+    return redirect('pasien/index');
 })->name('/');
 
 //Language Change
@@ -107,6 +107,8 @@ Route::middleware(['auth'])->group(function () {
             Route::name('pemeriksaan.')->group(function () {
                 Route::get('index', 'index')->name('index');
                 Route::get('edit/{id}', 'edit')->name('edit');
+                Route::post('store', 'storeDokter')->name('storedokter');
+                Route::get('editadmin/{id}', 'editAdmin')->name('editadmin');
             });
         });
     });
@@ -116,6 +118,7 @@ Route::middleware(['auth'])->group(function () {
             Route::name('obat.')->group(function () {
                 Route::get('index', 'index')->name('index');
                 Route::get('add', 'create')->name('create');
+                Route::get('ajaxget', 'get_obat')->name('ajaxget');
                 // Route::get('show/{id}', 'show')->name('show');
                 Route::get('edit/{id}', 'edit')->name('edit');
                 Route::post('store', 'store')->name('store');

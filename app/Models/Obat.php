@@ -13,4 +13,9 @@ class Obat extends Model
     protected $dates = ['deleted_at'];
     protected $table = 'obat';
     protected $primaryKey = 'idobat';
+
+    public function resep_stock_out()
+    {
+        return $this->belongsToMany(Kunjungan::class, 'resep_stock_out', 'obat_idobat', 'kunjungan_idkunjungan');
+    }
 }

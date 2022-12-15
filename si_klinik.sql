@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Waktu pembuatan: 15 Des 2022 pada 00.11
+-- Waktu pembuatan: 15 Des 2022 pada 13.51
 -- Versi server: 5.7.33
 -- Versi PHP: 8.1.3
 
@@ -81,7 +81,7 @@ CREATE TABLE `kunjungan` (
   `tanggal` date DEFAULT NULL,
   `jam_datang` time DEFAULT NULL,
   `jam_selesai` time DEFAULT NULL,
-  `tarif` double DEFAULT NULL,
+  `tarif_obat` double DEFAULT NULL,
   `status_bayar` tinyint(4) DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -89,7 +89,7 @@ CREATE TABLE `kunjungan` (
 -- Dumping data untuk tabel `kunjungan`
 --
 
-INSERT INTO `kunjungan` (`idkunjungan`, `status`, `created_at`, `updated_at`, `pasien_idpasien`, `dokter_iddokter`, `poli_idpoli`, `diagnosa_awal`, `hasil_diagnosa`, `tanggal`, `jam_datang`, `jam_selesai`, `tarif`, `status_bayar`) VALUES
+INSERT INTO `kunjungan` (`idkunjungan`, `status`, `created_at`, `updated_at`, `pasien_idpasien`, `dokter_iddokter`, `poli_idpoli`, `diagnosa_awal`, `hasil_diagnosa`, `tanggal`, `jam_datang`, `jam_selesai`, `tarif_obat`, `status_bayar`) VALUES
 (1, NULL, '2022-12-13 02:58:41', '2022-12-13 02:58:41', 2, 2, 2, 's', NULL, '2022-12-13', '10:58:41', NULL, NULL, 0);
 
 -- --------------------------------------------------------
@@ -134,6 +134,7 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 CREATE TABLE `obat` (
   `idobat` int(11) NOT NULL,
   `nama` varchar(45) DEFAULT NULL,
+  `satuan` enum('Strip','Tablet','Sirup') DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
@@ -143,8 +144,10 @@ CREATE TABLE `obat` (
 -- Dumping data untuk tabel `obat`
 --
 
-INSERT INTO `obat` (`idobat`, `nama`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 'Paracetamol Edit', '2022-12-13 05:46:02', '2022-12-13 05:52:55', NULL);
+INSERT INTO `obat` (`idobat`, `nama`, `satuan`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 'Paracetamol', 'Strip', '2022-12-13 05:46:02', '2022-12-15 03:58:21', NULL),
+(2, 'Neozep Forte', NULL, '2022-12-15 03:58:34', '2022-12-15 03:58:34', NULL),
+(3, 'Neuremacil', NULL, '2022-12-15 03:58:50', '2022-12-15 03:58:50', NULL);
 
 -- --------------------------------------------------------
 
@@ -182,6 +185,18 @@ INSERT INTO `pasien` (`idpasien`, `tanggal`, `nik`, `no_bpjs`, `nama_lengkap`, `
 -- --------------------------------------------------------
 
 --
+-- Struktur dari tabel `password_resets`
+--
+
+CREATE TABLE `password_resets` (
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `token` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Struktur dari tabel `poli`
 --
 
@@ -212,10 +227,17 @@ CREATE TABLE `resep_stock_out` (
   `kunjungan_idkunjungan` int(11) NOT NULL,
   `obat_idobat` int(11) NOT NULL,
   `jumlah` int(11) DEFAULT NULL,
-  `keuntungan` int(11) DEFAULT NULL,
   `harga` int(11) DEFAULT NULL,
   `keterangan` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `resep_stock_out`
+--
+
+INSERT INTO `resep_stock_out` (`kunjungan_idkunjungan`, `obat_idobat`, `jumlah`, `harga`, `keterangan`) VALUES
+(1, 1, 3, 3500, 1),
+(1, 2, 2, 7500, 1);
 
 -- --------------------------------------------------------
 
@@ -225,8 +247,22 @@ CREATE TABLE `resep_stock_out` (
 
 CREATE TABLE `stok_in` (
   `idstok_in` int(11) NOT NULL,
+  `tanggal` date DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `stok_in_has_obat`
+--
+
+CREATE TABLE `stok_in_has_obat` (
+  `stok_in_idstok_in` int(11) NOT NULL,
+  `obat_idobat` int(11) NOT NULL,
+  `jumlah` varchar(45) DEFAULT NULL,
+  `harga` varchar(45) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -297,6 +333,12 @@ ALTER TABLE `pasien`
   ADD PRIMARY KEY (`idpasien`);
 
 --
+-- Indeks untuk tabel `password_resets`
+--
+ALTER TABLE `password_resets`
+  ADD KEY `password_resets_email_index` (`email`);
+
+--
 -- Indeks untuk tabel `poli`
 --
 ALTER TABLE `poli`
@@ -315,6 +357,14 @@ ALTER TABLE `resep_stock_out`
 --
 ALTER TABLE `stok_in`
   ADD PRIMARY KEY (`idstok_in`);
+
+--
+-- Indeks untuk tabel `stok_in_has_obat`
+--
+ALTER TABLE `stok_in_has_obat`
+  ADD PRIMARY KEY (`stok_in_idstok_in`,`obat_idobat`),
+  ADD KEY `fk_stok_in_has_obat_obat1_idx` (`obat_idobat`),
+  ADD KEY `fk_stok_in_has_obat_stok_in1_idx` (`stok_in_idstok_in`);
 
 --
 -- Indeks untuk tabel `users`
@@ -355,7 +405,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT untuk tabel `obat`
 --
 ALTER TABLE `obat`
-  MODIFY `idobat` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `idobat` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT untuk tabel `pasien`
@@ -399,6 +449,13 @@ ALTER TABLE `kunjungan`
 ALTER TABLE `resep_stock_out`
   ADD CONSTRAINT `fk_kunjungan_has_obat_kunjungan1` FOREIGN KEY (`kunjungan_idkunjungan`) REFERENCES `kunjungan` (`idkunjungan`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_kunjungan_has_obat_obat1` FOREIGN KEY (`obat_idobat`) REFERENCES `obat` (`idobat`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Ketidakleluasaan untuk tabel `stok_in_has_obat`
+--
+ALTER TABLE `stok_in_has_obat`
+  ADD CONSTRAINT `fk_stok_in_has_obat_obat1` FOREIGN KEY (`obat_idobat`) REFERENCES `obat` (`idobat`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_stok_in_has_obat_stok_in1` FOREIGN KEY (`stok_in_idstok_in`) REFERENCES `stok_in` (`idstok_in`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -59,4 +59,7 @@ class ObatController extends Controller
             return $e->getMessage();
         }
     }
+    public function get_obat(){
+        return Obat::all();
+    }
 }
