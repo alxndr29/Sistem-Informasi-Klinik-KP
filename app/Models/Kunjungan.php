@@ -20,7 +20,7 @@ class Kunjungan extends Model
     public function dokter(){
         return $this->belongsTo(Dokter::class,'dokter_iddokter');
     }
-    public function resep_stock_out(){
-        return $this->belongsToMany(Obat::class,'resep_stock_out','kunjungan_idkunjungan','obat_idobat');
+    public function obat(){
+        return $this->belongsToMany(Obat::class,'resep_stock_out','kunjungan_idkunjungan','obat_idobat')->withPivot('harga','jumlah','keterangan');
     }
 }

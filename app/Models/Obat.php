@@ -14,8 +14,8 @@ class Obat extends Model
     protected $table = 'obat';
     protected $primaryKey = 'idobat';
 
-    public function resep_stock_out()
+    public function obat()
     {
-        return $this->belongsToMany(Kunjungan::class, 'resep_stock_out', 'obat_idobat', 'kunjungan_idkunjungan');
+        return $this->belongsToMany(Kunjungan::class, 'resep_stock_out', 'obat_idobat', 'kunjungan_idkunjungan')->withPivot('harga', 'jumlah', 'keterangan');
     }
 }

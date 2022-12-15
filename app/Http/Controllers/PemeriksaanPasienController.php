@@ -25,7 +25,9 @@ class PemeriksaanPasienController extends Controller
     }
     public function editAdmin($id){
         $kunjungan = Kunjungan::find($id);
-        return $kunjungan->resep_stock_out()->get();
+        foreach($kunjungan->obat as $value){
+           return $value->pivot->harga;
+        }
     }
     public function storeDokter(Request $request)
     {
