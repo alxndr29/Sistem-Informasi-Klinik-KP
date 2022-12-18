@@ -30,7 +30,7 @@
                     <div class="media static-top-widget">
                         <div class="media-body">
                             <h6 class="font-roboto">Total Pasien Selesai Hari Ini</h6>
-                            <h4 class="mb-0 counter">100 Orang</h4>
+                            <h4 class="mb-0 counter">{{$total_pasien_hari_ini}} Orang</h4>
                         </div>
                         <svg class="fill-secondary" width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M22.5938 14.1562V17.2278C20.9604 17.8102 19.7812 19.3566 19.7812 21.1875C19.7812 23.5138 21.6737 25.4062 24 25.4062C24.7759 25.4062 25.4062 26.0366 25.4062 26.8125C25.4062 27.5884 24.7759 28.2188 24 28.2188C23.2241 28.2188 22.5938 27.5884 22.5938 26.8125H19.7812C19.7812 28.6434 20.9604 30.1898 22.5938 30.7722V33.8438H25.4062V30.7722C27.0396 30.1898 28.2188 28.6434 28.2188 26.8125C28.2188 24.4862 26.3263 22.5938 24 22.5938C23.2241 22.5938 22.5938 21.9634 22.5938 21.1875C22.5938 20.4116 23.2241 19.7812 24 19.7812C24.7759 19.7812 25.4062 20.4116 25.4062 21.1875H28.2188C28.2188 19.3566 27.0396 17.8102 25.4062 17.2278V14.1562H22.5938Z"></path>
@@ -53,7 +53,7 @@
                     <div class="media static-top-widget">
                         <div class="media-body">
                             <h6 class="font-roboto">Total Pasien 7 Hari Terakhir</h6>
-                            <h4 class="mb-0 counter">100 Pasien</h4>
+                            <h4 class="mb-0 counter">{{$total_pasien_7_hari}} Pasien</h4>
                         </div>
                         <svg class="fill-success" width="45" height="39" viewBox="0 0 45 39" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M5.92047 8.49509C5.81037 8.42629 5.81748 8.25971 5.93378 8.20177C7.49907 7.41686 9.01464 6.65821 10.5302 5.89775C14.4012 3.95495 18.2696 2.00762 22.1478 0.0792996C22.3387 -0.0157583 22.6468 -0.029338 22.8359 0.060288C28.2402 2.64315 33.6357 5.24502 39.033 7.84327C39.0339 7.84327 39.0339 7.84417 39.0348 7.84417C39.152 7.90121 39.1582 8.06869 39.0472 8.1375C38.9939 8.17009 38.9433 8.20087 38.8918 8.22984C33.5398 11.2228 28.187 14.2121 22.8385 17.2115C22.5793 17.3572 22.3839 17.3762 22.1131 17.2296C16.7851 14.3507 11.4518 11.4826 6.12023 8.61188C6.05453 8.57748 5.98972 8.53855 5.92047 8.49509Z"></path>
@@ -77,7 +77,7 @@
                     <div class="media static-top-widget">
                         <div class="media-body">
                             <h6 class="font-roboto">Total Pasien Bulan Ini</h6>
-                            <h4 class="mb-0 counter">100 Pasien</h4>
+                            <h4 class="mb-0 counter">{{ $total_pasien_1_bulan}} Pasien</h4>
                         </div>
                         <svg class="fill-primary" width="44" height="46" viewBox="0 0 44 46" xmlns="http://www.w3.org/2000/svg">
                             <path d="M9.73709 35.2337C6.17884 31.58 4.00316 26.8452 3.49802 21.7377C1.60687 24.237 0.581465 27.3024 0.586192 30.5195C0.589372 32.612 1.03986 34.692 1.89348 36.5729L0.1333 41.9282C-0.169286 42.8488 0.0517454 43.8484 0.7102 44.5369C1.17358 45.0213 1.78451 45.2794 2.4128 45.2794C2.67714 45.2794 2.94458 45.2337 3.2054 45.14L8.32806 43.2997C10.1272 44.1922 12.1167 44.6631 14.1182 44.6665C17.2557 44.6709 20.2418 43.558 22.657 41.5068C17.8005 41.0474 13.2702 38.8615 9.73709 35.2337Z"></path>
@@ -98,7 +98,7 @@
                     <div class="media static-top-widget">
                         <div class="media-body">
                             <h6 class="font-roboto">Total Pemasukan</h6>
-                            <h4 class="mb-0 counter">Rp. {{number_format(1250000)}}</h4>
+                            <h4 class="mb-0 counter">Rp. {{number_format($total_pemasukan->pemasukan)}}</h4>
                         </div>
                         <svg class="fill-danger" width="41" height="46" viewBox="0 0 41 46" xmlns="http://www.w3.org/2000/svg">
                             <path d="M17.5245 23.3155C24.0019 23.3152 26.3325 16.8296 26.9426 11.5022C27.6941 4.93936 24.5906 0 17.5245 0C10.4593 0 7.35423 4.93899 8.10639 11.5022C8.71709 16.8296 11.047 23.316 17.5245 23.3155Z"></path>
@@ -134,9 +134,11 @@
                                     <th>Nama</th>
                                     <th>Poli Tujuan</th>
                                     <th>Dokter Tujuan</th>
+                                    <th>Status</th>
                                     <th>Jam Datang</th>
                                     <th>Jam Selesai</th>
-                                    <th>Total Biaya</th>
+                                    <th>Tarif Obat</th>
+                                    <th>Tarif Periksa</th>
                                     <th>Aksi</th>
                                 </tr>
 
@@ -148,26 +150,26 @@
                                     <td>{{$value->pasien->nama_lengkap}}</td>
                                     <td>{{$value->poli->nama_lengkap}}</td>
                                     <td>{{$value->dokter->nama_lengkap}}</td>
+                                    <td>{{$value->status}}</td>
                                     <td>{{$value->jam_datang}}</td>
                                     @if ($value->jam_selesai == null)
                                     <td></td>
                                     @else
                                     <td>{{$value->jam_selesai}}</td>
                                     @endif
-                                    <td>Rp. {{number_format($value->tarif)}}</td>
+                                    <td>Rp. {{number_format($value->tarif_obat)}}</td>
+                                    <td>Rp. {{number_format($value->tarif_periksa)}}</td>
                                     <td>
+                                        @if ($value->status == "Menunggu Pemeriksaan")
                                         <a href="{{route('pemeriksaan.edit',$value->idkunjungan)}}" class="btn btn-primary">Detail</a>
+                                        @endif
+                                        @if ($value->status == "Menunggu Pembayaran")
+                                        <a href="{{route('pemeriksaan.bayar',$value->idkunjungan)}}" class="btn btn-primary">Detail</a>
+                                        @endif
                                     </td>
                                 </tr>
                                 @endforeach
-                                <!-- @php
-                                foreach($kunjungan as $key => $balue){
-                                    $a = $value->pasien->nama_lengkap;
-                                    echo '<tr>';
-                                    echo '<td>'.$a.'</td>';
-                                    echo '</tr>';
-                                }
-                                @endphp -->
+
                             </tbody>
                         </table>
                     </div>

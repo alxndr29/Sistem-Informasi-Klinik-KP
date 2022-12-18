@@ -149,19 +149,30 @@
                             <thead>
                                 <tr>
                                     <th>No</th>
-                                    <th>NIK</th>
-                                    <th>BPJS No</th>
-                                    <th>Nama</th>
-                                    <th>TTL</th>
-                                    <th>Jenis Kelamin</th>
-                                    <th>Alamat</th>
-                                    <th>Pekerjaan</th>
-                                    <th>Agama</th>
-                                    <th>Detail</th>
-                                    <th>Edit</th>
+                                    <th>Tanggal</th>
+                                    <th>Jam Datang</th>
+                                    <th>Jam Selesai</th>
+                                    <th>Dokter</th>
+                                    <th>Poli</th>
+                                    <th>Hasil Diagnsoa</th>
+                                    <th>Tarif Berobat</th>
+                                    <th>Status</th>
                                 </tr>
                             </thead>
                             <tbody>
+                                @foreach($pasien->kunjungan as $key => $value)
+                                <tr>
+                                    <td>{{$key+1}}</td>
+                                    <td>{{$value->tanggal}}</td>
+                                    <td>{{$value->jam_datang}}</td>
+                                    <td>{{$value->jam_selesai}}</td>
+                                    <td>{{$value->dokter->nama_lengkap}}</td>
+                                    <td>{{$value->poli->nama_lengkap}}</td>
+                                    <td>{{$value->hasil_diagnosa}}</td>
+                                    <td>Rp. {{$value->tarif_obat}}</td>
+                                    <td>{{$value->status}}</td>
+                                </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>

@@ -21,6 +21,6 @@ class Kunjungan extends Model
         return $this->belongsTo(Dokter::class,'dokter_iddokter');
     }
     public function obat(){
-        return $this->belongsToMany(Obat::class,'resep_stock_out','kunjungan_idkunjungan','obat_idobat')->withPivot('harga','jumlah','keterangan');
+        return $this->belongsToMany(Obat::class, 'resep_stock_out', 'kunjungan_idkunjungan', 'obat_idobat')->withPivot('harga','jumlah','keterangan');
     }
 }

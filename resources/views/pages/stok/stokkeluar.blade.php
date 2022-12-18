@@ -9,7 +9,7 @@
 @endsection
 
 @section('breadcrumb-title')
-<h3>Master Data Obat</h3>
+<h3>Stok Obat Keluar</h3>
 @endsection
 
 @section('breadcrumb-items')
@@ -28,13 +28,21 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
-                        <div class="">
-                            <h3>Daftar Data Obat<h3>
+                        <div>
+                            <h3>Data Stok Keluar<h3>
                         </div>
-                        <div class="">
-                            <a class="btn btn-primary m-1" href="{{route('obat.create')}}">Tambah Data Obat</a>
-                            <a class="btn btn-primary m-1" href="{{route('obat.tambahstok')}}">Tambah Stok Obat</a>
+                        <!--
+                        <div>
+                            <label>Tanggal Awal</label>
+                            <input class="form-control" type="date" name="awal" required>
                         </div>
+                        <div>
+                            <label>Tanggal Akhir</label>
+                            <input class="form-control" type="date" name="akhir" required>
+                        </div>
+                        <div>
+                            <a class="btn btn-primary m-1" href="{{route('obat.tambahstok')}}">Cari</a>
+                        </div> -->
                     </div>
                 </div>
                 <div class="card-body">
@@ -43,19 +51,28 @@
                             <thead>
                                 <tr>
                                     <th>No</th>
+                                    <th>ID Kunjungan</th>
+                                    <th>Tanggal</th>
                                     <th>Nama</th>
-                                    <th>Edit</th>
+                                    <th>Satuan</th>
+                                    <th>Harga</th>
+                                    <th>Jumlah</th>
+
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($obat as $key => $value)
+                                @foreach ($kunjungan as $key => $value)
+                                @foreach ($value->obat as $obat)
                                 <tr>
                                     <td>{{$key+1}}</td>
-                                    <td>{{$value->nama}}</td>
-                                    <th>
-                                        <a class="btn btn-primary" href="{{route('obat.edit',$value->idobat)}}">Edit</a>
-                                    </th>
+                                    <td>KJNG-{{$value->idkunjungan}}</td>
+                                    <td>{{$value->tanggal}}</td>
+                                    <td>{{$obat->nama}}</td>
+                                    <td>{{$obat->satuan}}</td>
+                                    <td>Rp. {{number_format($obat->pivot->harga)}}</td>
+                                    <td>{{$obat->pivot->jumlah}}</td>
                                 </tr>
+                                @endforeach
                                 @endforeach
                             </tbody>
                         </table>
@@ -80,4 +97,11 @@
 <script src="{{asset('assets/js/datepicker/date-picker/datepicker.js')}}"></script>
 <script src="{{asset('assets/js/datepicker/date-picker/datepicker.en.js')}}"></script>
 <script src="{{asset('assets/js/datepicker/date-picker/datepicker.custom.js')}}"></script>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+
+    });
+</script>
+
 @endsection

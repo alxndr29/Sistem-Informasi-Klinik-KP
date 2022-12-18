@@ -107,6 +107,8 @@ Route::middleware(['auth'])->group(function () {
             Route::name('pemeriksaan.')->group(function () {
                 Route::get('index', 'index')->name('index');
                 Route::get('edit/{id}', 'edit')->name('edit');
+                Route::get('bayar/{id}', 'bayar')->name('bayar');
+                Route::put('bayarput/{id}', 'bayarput')->name('bayarput');
                 Route::post('store', 'storeDokter')->name('storedokter');
                 Route::get('editadmin/{id}', 'editAdmin')->name('editadmin');
             });
@@ -117,13 +119,16 @@ Route::middleware(['auth'])->group(function () {
         Route::prefix('obat')->group(function () {
             Route::name('obat.')->group(function () {
                 Route::get('index', 'index')->name('index');
-                Route::get('add', 'create')->name('create');
+                Route::get('index/add', 'create')->name('create');
                 Route::get('ajaxget', 'get_obat')->name('ajaxget');
-                // Route::get('show/{id}', 'show')->name('show');
+                Route::get('index/tambahstok','tambahstok')->name('tambahstok');
+                Route::post('tambahstokpost', 'tambahstokpost')->name('tambahstokpost');
                 Route::get('edit/{id}', 'edit')->name('edit');
                 Route::post('store', 'store')->name('store');
                 Route::put('update/{id}', 'update')->name('update');
                 Route::delete('delete/{id}', 'delete')->name('delete');
+                Route::get('obatmasuk/{awal?}/{akhir?}', 'obatmasuk')->name('obatmasuk');
+                Route::get('obatkeluar/{awal?}/{akhir?}', 'obatkeluar')->name('obatkeluar');
             });
         });
     });

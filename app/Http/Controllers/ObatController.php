@@ -3,8 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Kunjungan;
 use Illuminate\Http\Request;
 use App\Models\Obat;
+use App\Models\Stockin;
+use PhpParser\Node\Stmt\Catch_;
+use Illuminate\Support\Facades\DB;
 
 class ObatController extends Controller
 {
@@ -59,7 +63,51 @@ class ObatController extends Controller
             return $e->getMessage();
         }
     }
-    public function get_obat(){
+    public function get_obat()
+    {
         return Obat::all();
+    }
+    public function tambahstok()
+    {
+        $obat = Obat::all();
+        return view('pages.obat.tambahstok', compact('obat'));
+    }
+    public function tambahstokpost(Request $request)
+    {
+        DB::beginTransaction();
+        try {
+            $stockin = new Stockin();
+            $stockin->tanggal = date('Y-m-d');
+            $stockin->save();
+            foreach ($request->get('daftar_harga') as $key => $value) {
+                if ($request->get('daftar_harga')[$key] != 0 || $request->get('daftar_jumlah')[$key] != 0) {
+                    $stockin->obat()->attach((int) $key, ['jumlah' => $request->get('daftar_jumlah')[$key], 'harga' => $request->get('daftar_harga')[$key]]);
+                }
+            }
+            DB::commit();
+            return redirect('obat/index')->with('pesan', 'Berhasil Tambah Stok Obat');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return $e->getMessage();
+        }
+    }
+    public function obatmasuk($awal = null, $akhir = null)
+    {
+        if ($awal == null && $akhir == null) {
+            $stokin = Stockin::all();
+          
+        } else {
+            $stokin = Stockin::where('tanggal', '', $awal)->where('tanggal', '', $akhir)->get();
+        }
+
+        return view('pages.stok.stokmasuk', compact('stokin'));
+    }
+    public function obatkeluar($awal = null, $akhir = null){
+        if ($awal == null && $akhir == null) {
+            $kunjungan = Kunjungan::all();
+        } else {
+            $kunjungan = Kunjungan::where('tanggal', '', $awal)->where('tanggal', '', $akhir)->get();
+        }
+        return view('pages.stok.stokkeluar', compact('kunjungan'));
     }
 }

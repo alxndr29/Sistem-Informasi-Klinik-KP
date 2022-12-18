@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Waktu pembuatan: 15 Des 2022 pada 13.51
+-- Waktu pembuatan: 18 Des 2022 pada 16.18
 -- Versi server: 5.7.33
 -- Versi PHP: 8.1.3
 
@@ -82,15 +82,17 @@ CREATE TABLE `kunjungan` (
   `jam_datang` time DEFAULT NULL,
   `jam_selesai` time DEFAULT NULL,
   `tarif_obat` double DEFAULT NULL,
-  `status_bayar` tinyint(4) DEFAULT '0'
+  `status_bayar` tinyint(4) DEFAULT '0',
+  `metode_pembayaran` varchar(45) DEFAULT NULL,
+  `tarif_periksa` double DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data untuk tabel `kunjungan`
 --
 
-INSERT INTO `kunjungan` (`idkunjungan`, `status`, `created_at`, `updated_at`, `pasien_idpasien`, `dokter_iddokter`, `poli_idpoli`, `diagnosa_awal`, `hasil_diagnosa`, `tanggal`, `jam_datang`, `jam_selesai`, `tarif_obat`, `status_bayar`) VALUES
-(1, NULL, '2022-12-13 02:58:41', '2022-12-13 02:58:41', 2, 2, 2, 's', NULL, '2022-12-13', '10:58:41', NULL, NULL, 0);
+INSERT INTO `kunjungan` (`idkunjungan`, `status`, `created_at`, `updated_at`, `pasien_idpasien`, `dokter_iddokter`, `poli_idpoli`, `diagnosa_awal`, `hasil_diagnosa`, `tanggal`, `jam_datang`, `jam_selesai`, `tarif_obat`, `status_bayar`, `metode_pembayaran`, `tarif_periksa`) VALUES
+(3, 'Selesai', '2022-12-18 06:55:55', '2022-12-18 08:07:53', 4, 2, 3, 'Tidak Sehat', 'Sehat', '2022-12-18', '02:55:55', '04:07:53', 60000, 0, 'Cash', 50000);
 
 -- --------------------------------------------------------
 
@@ -146,8 +148,30 @@ CREATE TABLE `obat` (
 
 INSERT INTO `obat` (`idobat`, `nama`, `satuan`, `created_at`, `updated_at`, `deleted_at`) VALUES
 (1, 'Paracetamol', 'Strip', '2022-12-13 05:46:02', '2022-12-15 03:58:21', NULL),
-(2, 'Neozep Forte', NULL, '2022-12-15 03:58:34', '2022-12-15 03:58:34', NULL),
-(3, 'Neuremacil', NULL, '2022-12-15 03:58:50', '2022-12-15 03:58:50', NULL);
+(2, 'Neozep Forte', 'Tablet', '2022-12-15 03:58:34', '2022-12-15 03:58:34', NULL),
+(3, 'Neuremacil', 'Sirup', '2022-12-15 03:58:50', '2022-12-15 03:58:50', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `obat_has_stok_in`
+--
+
+CREATE TABLE `obat_has_stok_in` (
+  `obat_idobat` int(11) NOT NULL,
+  `stok_in_idstok_in` int(11) NOT NULL,
+  `jumlah` int(11) DEFAULT NULL,
+  `harga` double DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `obat_has_stok_in`
+--
+
+INSERT INTO `obat_has_stok_in` (`obat_idobat`, `stok_in_idstok_in`, `jumlah`, `harga`) VALUES
+(1, 10, 2, 1),
+(2, 10, 4, 3),
+(3, 10, 6, 5);
 
 -- --------------------------------------------------------
 
@@ -228,7 +252,7 @@ CREATE TABLE `resep_stock_out` (
   `obat_idobat` int(11) NOT NULL,
   `jumlah` int(11) DEFAULT NULL,
   `harga` int(11) DEFAULT NULL,
-  `keterangan` int(11) DEFAULT NULL
+  `keterangan` varchar(45) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -236,8 +260,8 @@ CREATE TABLE `resep_stock_out` (
 --
 
 INSERT INTO `resep_stock_out` (`kunjungan_idkunjungan`, `obat_idobat`, `jumlah`, `harga`, `keterangan`) VALUES
-(1, 1, 3, 3500, 1),
-(1, 2, 2, 7500, 1);
+(3, 1, 1, 10000, '1x1'),
+(3, 2, 2, 25000, '2x1');
 
 -- --------------------------------------------------------
 
@@ -252,18 +276,12 @@ CREATE TABLE `stok_in` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- --------------------------------------------------------
-
 --
--- Struktur dari tabel `stok_in_has_obat`
+-- Dumping data untuk tabel `stok_in`
 --
 
-CREATE TABLE `stok_in_has_obat` (
-  `stok_in_idstok_in` int(11) NOT NULL,
-  `obat_idobat` int(11) NOT NULL,
-  `jumlah` varchar(45) DEFAULT NULL,
-  `harga` varchar(45) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+INSERT INTO `stok_in` (`idstok_in`, `tanggal`, `created_at`, `updated_at`) VALUES
+(10, '2022-12-18', '2022-12-18 02:24:20', '2022-12-18 02:24:20');
 
 -- --------------------------------------------------------
 
@@ -327,6 +345,14 @@ ALTER TABLE `obat`
   ADD PRIMARY KEY (`idobat`);
 
 --
+-- Indeks untuk tabel `obat_has_stok_in`
+--
+ALTER TABLE `obat_has_stok_in`
+  ADD PRIMARY KEY (`obat_idobat`,`stok_in_idstok_in`),
+  ADD KEY `fk_obat_has_stok_in_stok_in1_idx` (`stok_in_idstok_in`),
+  ADD KEY `fk_obat_has_stok_in_obat1_idx` (`obat_idobat`);
+
+--
 -- Indeks untuk tabel `pasien`
 --
 ALTER TABLE `pasien`
@@ -359,14 +385,6 @@ ALTER TABLE `stok_in`
   ADD PRIMARY KEY (`idstok_in`);
 
 --
--- Indeks untuk tabel `stok_in_has_obat`
---
-ALTER TABLE `stok_in_has_obat`
-  ADD PRIMARY KEY (`stok_in_idstok_in`,`obat_idobat`),
-  ADD KEY `fk_stok_in_has_obat_obat1_idx` (`obat_idobat`),
-  ADD KEY `fk_stok_in_has_obat_stok_in1_idx` (`stok_in_idstok_in`);
-
---
 -- Indeks untuk tabel `users`
 --
 ALTER TABLE `users`
@@ -393,7 +411,7 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT untuk tabel `kunjungan`
 --
 ALTER TABLE `kunjungan`
-  MODIFY `idkunjungan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `idkunjungan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT untuk tabel `migrations`
@@ -423,7 +441,7 @@ ALTER TABLE `poli`
 -- AUTO_INCREMENT untuk tabel `stok_in`
 --
 ALTER TABLE `stok_in`
-  MODIFY `idstok_in` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idstok_in` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT untuk tabel `users`
@@ -444,18 +462,18 @@ ALTER TABLE `kunjungan`
   ADD CONSTRAINT `fk_kunjungan_poli1` FOREIGN KEY (`poli_idpoli`) REFERENCES `poli` (`idpoli`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
+-- Ketidakleluasaan untuk tabel `obat_has_stok_in`
+--
+ALTER TABLE `obat_has_stok_in`
+  ADD CONSTRAINT `fk_obat_has_stok_in_obat1` FOREIGN KEY (`obat_idobat`) REFERENCES `obat` (`idobat`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_obat_has_stok_in_stok_in1` FOREIGN KEY (`stok_in_idstok_in`) REFERENCES `stok_in` (`idstok_in`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
 -- Ketidakleluasaan untuk tabel `resep_stock_out`
 --
 ALTER TABLE `resep_stock_out`
   ADD CONSTRAINT `fk_kunjungan_has_obat_kunjungan1` FOREIGN KEY (`kunjungan_idkunjungan`) REFERENCES `kunjungan` (`idkunjungan`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_kunjungan_has_obat_obat1` FOREIGN KEY (`obat_idobat`) REFERENCES `obat` (`idobat`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Ketidakleluasaan untuk tabel `stok_in_has_obat`
---
-ALTER TABLE `stok_in_has_obat`
-  ADD CONSTRAINT `fk_stok_in_has_obat_obat1` FOREIGN KEY (`obat_idobat`) REFERENCES `obat` (`idobat`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_stok_in_has_obat_stok_in1` FOREIGN KEY (`stok_in_idstok_in`) REFERENCES `stok_in` (`idstok_in`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

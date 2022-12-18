@@ -47,8 +47,18 @@
                         </a>
                     </li>
                     <li class="sidebar-list">
-                        <a class="sidebar-link sidebar-title link-nav {{ request()->is('obat*') ? 'active' : '' }}" href="{{route('obat.index')}}">
+                        <a class="sidebar-link sidebar-title link-nav {{ request()->is('obat/index*') ? 'active' : '' }}" href="{{route('obat.index')}}">
                             <i class="fa fa-truck-loading fa-md mx-1"> </i><span>Data Obat</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-list">
+                        <a class="sidebar-link sidebar-title link-nav {{ request()->is('obat/obatmasuk*') ? 'active' : '' }}" href="{{route('obat.obatmasuk')}}">
+                            <i class="fa fa-truck-loading fa-md mx-1"> </i><span>Data Obat Masuk</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-list">
+                        <a class="sidebar-link sidebar-title link-nav {{ request()->is('obat/obatkeluar*') ? 'active' : '' }}" href="{{route('obat.obatkeluar')}}">
+                            <i class="fa fa-truck-loading fa-md mx-1"> </i><span>Data Obat Keluar</span>
                         </a>
                     </li>
                     <li class="sidebar-main-title">

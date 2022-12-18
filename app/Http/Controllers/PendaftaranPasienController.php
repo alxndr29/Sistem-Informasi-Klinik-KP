@@ -23,7 +23,7 @@ class PendaftaranPasienController extends Controller
        
         try{
             $kunjungan = new Kunjungan();
-            $kunjungan->status = null;
+            $kunjungan->status = "Menunggu Pemeriksaan";
             $kunjungan->pasien_idpasien = $request->get('pasien');
             $kunjungan->dokter_iddokter = $request->get('dokter');
             $kunjungan->poli_idpoli = $request->get('poli');

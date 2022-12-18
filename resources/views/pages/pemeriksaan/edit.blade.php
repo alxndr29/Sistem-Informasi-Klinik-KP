@@ -77,7 +77,7 @@
                                     <div class="col">
                                         <div>
                                             <label class="form-label">Diagnosa Dokter</label>
-                                            <textarea class="form-control" rows="3" placeholder="isi diagnosa disini"></textarea>
+                                            <textarea id="hasil_diagnosa" class="form-control" rows="3" placeholder="isi diagnosa disini"></textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -149,56 +149,6 @@
                                             Rp. {{number_format(0)}}
                                         </div>
                                     </div>
-                                    <!-- <div class="d-flex justify-content-between">
-                                        <div>
-                                            Biaya Pemeriksaan
-                                        </div>
-                                        <div>
-                                            Rp. {{number_format(50000)}}
-                                        </div>
-                                    </div>
-                                    <div class="d-flex justify-content-between">
-                                        <div>
-                                            Grand Total
-                                        </div>
-                                        <div>
-                                            Rp. {{number_format(80000)}}
-                                        </div>
-                                    </div>
-                                    <br> -->
-                                    <!-- <div class="row">
-                                        <div class="col-sm-12">
-                                            Metode Pembayaran
-                                        </div>
-                                        <div class="col">
-                                            <div class="m-t-15 m-checkbox-inline custom-radio-ml">
-                                                <div class="m-t-15 m-checkbox-inline custom-radio-ml">
-                                                    <div class="form-check form-check-inline radio radio-primary">
-                                                        <input class="form-check-input" id="radioinline1" type="radio" name="jenis_kelamin" value="Cash" checked>
-                                                        <label class="form-check-label mb-0" for="radioinline1">Cash</label>
-                                                    </div>
-                                                    <div class="form-check form-check-inline radio radio-primary">
-                                                        <input class="form-check-input" id="radioinline2" type="radio" name="jenis_kelamin" value="Kredit">
-                                                        <label class="form-check-label mb-0" for="radioinline2">Kredit</label>
-                                                    </div>
-                                                    <div class="form-check form-check-inline radio radio-primary">
-                                                        <input class="form-check-input" id="radioinline2" type="radio" name="jenis_kelamin" value="Gratis">
-                                                        <label class="form-check-label mb-0" for="radioinline2">Gratis</label>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div> -->
-                                    <!--<br>
-                                     <div class="row">
-                                        <div class="col">
-                                            <div class="mb-3">
-                                                <label class="form-label">Masukan Nominal Pembayaran:</label>
-                                                <input class="form-control" type="number" required>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <br> -->
                                     <br>
                                     <div class="d-flex justify-content-end">
                                         <div>
@@ -270,10 +220,11 @@
     }
 
     function display() {
+        biaya_obat = 0;
         daftar_produk = daftar_produk.filter(Boolean);
         $("#isi-data-obat").empty();
         $.each(daftar_produk, function(i, k) {
-            biaya_obat += k.jumlah * k.harga;
+            biaya_obat = biaya_obat + (k.jumlah * k.harga);
             $("#isi-data-obat").append(
                 '<tr>' +
                 '<td>' + (i + 1) + '</td>' +
@@ -311,11 +262,13 @@
                 '_token': "{{ csrf_token() }}",
                 'daftar_produk': daftar_produk,
                 'id': "{{$id}}",
-                'biaya-obat': biaya_obat
+                'biaya-obat': biaya_obat,
+                'hasil_diagnosa': $("#hasil_diagnosa").val()
             },
             success: function(data) {
                 console.log(data);
-                if (data == "berhasil"){
+                if (data == "berhasil") {
+                    alert(data);
                     
                 }
             },
