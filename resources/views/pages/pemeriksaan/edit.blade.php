@@ -94,7 +94,7 @@
                                             <label>Pilih Obat</label>
                                             <select class="form-select digits" id="select-obat">
                                                 @foreach($obat as $value)
-                                                <option value="{{$value->idobat}}">{{$value->nama}}</option>
+                                                    <option value="{{$value->idobat}}">{{$value->nama}}</option>
                                                 @endforeach
                                             </select>
                                         </div>
@@ -109,7 +109,7 @@
                                         </div>
                                         <div class="p-1">
                                             <label>Pilih Jumlah</label>
-                                            <input class="form-control" id="jumlah" type="number" value="0" placeholder="" data-bs-original-title="" title="">
+                                            <input class="form-control" id="jumlah" type="number" value="1" placeholder="" data-bs-original-title="" title="">
                                         </div>
                                         <div class="p-1">
                                             <label>Tulis Harga</label>
@@ -127,7 +127,7 @@
                                                 <tr>
                                                     <th>No</th>
                                                     <th>Nama Obat</th>
-                                                    <th>Satuan</th>
+                                                    <!-- <th>Satuan</th> -->
                                                     <th>Dosis</th>
                                                     <th>Jumlah</th>
                                                     <th>Harga</th>
@@ -207,16 +207,34 @@
     var biaya_obat = 0;
 
     function tambahProduk() {
-        daftar_produk[counter] = {};
-        daftar_produk[counter].nama = $("#select-obat option:selected").text();
-        daftar_produk[counter].obat_idobat = $("#select-obat option:selected").val();
-        daftar_produk[counter].dosis = $("#select-dosis option:selected").text();
-        daftar_produk[counter].jumlah = $("#jumlah").val();
-        daftar_produk[counter].harga = $("#harga").val();
-        daftar_produk[counter].keterangan = 0;
-        counter++;
-        console.log(daftar_produk);
-        display();
+        if (daftar_produk.length == 0) {
+            daftar_produk[counter] = {};
+            daftar_produk[counter].nama = $("#select-obat option:selected").text();
+            daftar_produk[counter].obat_idobat = $("#select-obat option:selected").val();
+            daftar_produk[counter].dosis = $("#select-dosis option:selected").text();
+            daftar_produk[counter].jumlah = $("#jumlah").val();
+            daftar_produk[counter].harga = $("#harga").val();
+            daftar_produk[counter].keterangan = 0;
+            counter++;
+            display();
+        } else {
+            $.each(daftar_produk, function(i, k) {
+                if (k.obat_idobat == $("#select-obat option:selected").val()) {
+                    alert('obat sudah ada didalam daftar.');
+                    return false;
+                } else {
+                    daftar_produk[counter] = {};
+                    daftar_produk[counter].nama = $("#select-obat option:selected").text();
+                    daftar_produk[counter].obat_idobat = $("#select-obat option:selected").val();
+                    daftar_produk[counter].dosis = $("#select-dosis option:selected").text();
+                    daftar_produk[counter].jumlah = $("#jumlah").val();
+                    daftar_produk[counter].harga = $("#harga").val();
+                    daftar_produk[counter].keterangan = 0;
+                    counter++;
+                    display();
+                }
+            });
+        }
     }
 
     function display() {
@@ -229,7 +247,7 @@
                 '<tr>' +
                 '<td>' + (i + 1) + '</td>' +
                 '<td>' + k.nama + '</td>' +
-                '<td>' + 'NN' + '</td>' +
+                // '<td>' + 'NN' + '</td>' +
                 '<td>' + k.dosis + '</td>' +
                 '<td>' + k.jumlah + '</td>' +
                 '<td>Rp. ' + k.harga + '</td>' +
@@ -246,7 +264,7 @@
     function hapus(id) {
         daftar_produk = daftar_produk.filter(Boolean);
         $.each(daftar_produk, function(i, k) {
-            alert(k.obat_idobat);
+            // alert(k.obat_idobat);
             if (id == k.obat_idobat) {
                 daftar_produk.splice(i, 1);
             }
@@ -255,27 +273,32 @@
     }
 
     function simpanData() {
-        $.ajax({
-            type: 'POST',
-            url: "{{route('pemeriksaan.storedokter')}}",
-            data: {
-                '_token': "{{ csrf_token() }}",
-                'daftar_produk': daftar_produk,
-                'id': "{{$id}}",
-                'biaya-obat': biaya_obat,
-                'hasil_diagnosa': $("#hasil_diagnosa").val()
-            },
-            success: function(data) {
-                console.log(data);
-                if (data == "berhasil") {
-                    alert(data);
-                    
+        if (daftar_produk.length == 0 || $("#hasil_diagnosa").val() == "") {
+            alert('obat dan hasil diagnosa tidak boleh kosong');
+        } else {
+            $.ajax({
+                type: 'POST',
+                url: "{{route('pemeriksaan.storedokter')}}",
+                data: {
+                    '_token': "{{ csrf_token() }}",
+                    'daftar_produk': daftar_produk,
+                    'id': "{{$id}}",
+                    'biaya-obat': biaya_obat,
+                    'hasil_diagnosa': $("#hasil_diagnosa").val()
+                },
+                success: function(data) {
+                    console.log(data);
+                    if (data == "berhasil") {
+                        alert(data);
+
+                    }
+                },
+                error: function(data) {
+                    console.log(data);
                 }
-            },
-            error: function(data) {
-                console.log(data);
-            }
-        });
+            });
+        }
+
     }
 </script>
 

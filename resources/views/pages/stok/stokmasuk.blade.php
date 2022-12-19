@@ -60,16 +60,16 @@
                             </thead>
                             <tbody>
                                 @foreach ($stokin as $key => $value)
-                                @foreach ($value->obat as $obat)
-                                <tr>
-                                    <td>{{$key+1}}</td>
-                                    <td>STKIN-{{$value->idstok_in}}</td>
-                                    <td>{{$obat->nama}}</td>
-                                    <td>{{$obat->satuan}}</td>
-                                    <td>Rp. {{number_format($obat->pivot->harga)}}</td>
-                                    <td>{{number_format($obat->pivot->jumlah)}}</td>
-                                </tr>
-                                @endforeach
+                                    @foreach ($value->obat as $obat)
+                                    <tr>
+                                        <td>{{$key+1}}</td>
+                                        <td>STKIN-{{$value->idstok_in}}</td>
+                                        <td>{{$obat->nama}}</td>
+                                        <td>{{$obat->satuan}}</td>
+                                        <td>Rp. {{number_format($obat->pivot->harga)}}</td>
+                                        <td>{{number_format($obat->pivot->jumlah)}}</td>
+                                    </tr>
+                                    @endforeach
                                 @endforeach
                             </tbody>
                         </table>

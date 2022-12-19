@@ -54,7 +54,7 @@
                                         <td>{{$key+1}}</td>
                                         <td>{{$value->nama}}</td>
                                         <td>{{$value->satuan}}</td>
-                                        <td>{{$value->kunjungan()->sum('jumlah')}}</td>
+                                        <td>{{$value->stokin->sum('pivot.jumlah')}}</td>
                                         <td>
                                             <input class="form-control" type="number" name="daftar_harga[{{$value->idobat}}]" value="0" required>
                                         </td>

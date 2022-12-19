@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Waktu pembuatan: 18 Des 2022 pada 16.18
+-- Waktu pembuatan: 19 Des 2022 pada 14.18
 -- Versi server: 5.7.33
 -- Versi PHP: 8.1.3
 
@@ -92,7 +92,7 @@ CREATE TABLE `kunjungan` (
 --
 
 INSERT INTO `kunjungan` (`idkunjungan`, `status`, `created_at`, `updated_at`, `pasien_idpasien`, `dokter_iddokter`, `poli_idpoli`, `diagnosa_awal`, `hasil_diagnosa`, `tanggal`, `jam_datang`, `jam_selesai`, `tarif_obat`, `status_bayar`, `metode_pembayaran`, `tarif_periksa`) VALUES
-(3, 'Selesai', '2022-12-18 06:55:55', '2022-12-18 08:07:53', 4, 2, 3, 'Tidak Sehat', 'Sehat', '2022-12-18', '02:55:55', '04:07:53', 60000, 0, 'Cash', 50000);
+(3, 'Selesai', '2022-12-18 06:55:55', '2022-12-19 06:12:22', 4, 2, 3, 'Tidak Sehat', 'Sudah sehat bosku', '2022-12-18', '02:55:55', '02:12:22', 26000, 0, 'Cash', 75000);
 
 -- --------------------------------------------------------
 
@@ -163,15 +163,6 @@ CREATE TABLE `obat_has_stok_in` (
   `jumlah` int(11) DEFAULT NULL,
   `harga` double DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data untuk tabel `obat_has_stok_in`
---
-
-INSERT INTO `obat_has_stok_in` (`obat_idobat`, `stok_in_idstok_in`, `jumlah`, `harga`) VALUES
-(1, 10, 2, 1),
-(2, 10, 4, 3),
-(3, 10, 6, 5);
 
 -- --------------------------------------------------------
 
@@ -260,8 +251,8 @@ CREATE TABLE `resep_stock_out` (
 --
 
 INSERT INTO `resep_stock_out` (`kunjungan_idkunjungan`, `obat_idobat`, `jumlah`, `harga`, `keterangan`) VALUES
-(3, 1, 1, 10000, '1x1'),
-(3, 2, 2, 25000, '2x1');
+(3, 1, 2, 2500, '1x1'),
+(3, 2, 3, 7000, '3x1');
 
 -- --------------------------------------------------------
 
@@ -281,7 +272,10 @@ CREATE TABLE `stok_in` (
 --
 
 INSERT INTO `stok_in` (`idstok_in`, `tanggal`, `created_at`, `updated_at`) VALUES
-(10, '2022-12-18', '2022-12-18 02:24:20', '2022-12-18 02:24:20');
+(10, '2022-12-18', '2022-12-18 02:24:20', '2022-12-18 02:24:20'),
+(11, '2022-12-19', '2022-12-19 05:04:47', '2022-12-19 05:04:47'),
+(12, '2022-12-19', '2022-12-19 05:55:20', '2022-12-19 05:55:20'),
+(13, '2022-12-19', '2022-12-19 05:55:32', '2022-12-19 05:55:32');
 
 -- --------------------------------------------------------
 
@@ -441,7 +435,7 @@ ALTER TABLE `poli`
 -- AUTO_INCREMENT untuk tabel `stok_in`
 --
 ALTER TABLE `stok_in`
-  MODIFY `idstok_in` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `idstok_in` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT untuk tabel `users`
