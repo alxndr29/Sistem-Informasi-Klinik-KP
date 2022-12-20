@@ -61,9 +61,14 @@
                             <i class="fa fa-truck-loading fa-md mx-1"> </i><span>Data Obat Keluar</span>
                         </a>
                     </li>
+                    <li class="sidebar-list">
+                        <a class="sidebar-link sidebar-title link-nav {{ request()->is('user/*') ? 'active' : '' }}" href="{{route('user.index')}}">
+                            <i class="fa fa-truck-loading fa-md mx-1"> </i><span>Data User </span>
+                        </a>
+                    </li>
                     <li class="sidebar-main-title">
 
-                    <li class="sidebar-list"><a class="sidebar-link sidebar-title link-nav {{ Route::currentRouteName()=='user.index' ? 'active' : '' }}" href="#"><i data-feather="user"> </i><span>User</span></a></li>
+                        <!-- <li class="sidebar-list"><a class="sidebar-link sidebar-title link-nav {{ request()->is('user/*')  ? 'active' : '' }}" href="#"><i data-feather="user"> </i><span>User</span></a></li> -->
                     <li class="sidebar-list"><a class="sidebar-link sidebar-title link-nav {{ Route::currentRouteName()=='pelanggan.index' ? 'active' : '' }}" href="#"><i data-feather="users"> </i><span>Pelanggan</span></a></li>
                     <li class="sidebar-list"><a class="sidebar-link sidebar-title link-nav {{ Route::currentRouteName()=='supplier.index' ? 'active' : '' }}" href="#"><i data-feather="truck"> </i><span>Supplier</span></a></li> -->
                 </ul>

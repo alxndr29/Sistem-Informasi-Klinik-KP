@@ -10,6 +10,7 @@ use App\Http\Controllers\ObatController;
 use App\Http\Controllers\PemeriksaanPasienController;
 use App\Http\Controllers\PendaftaranPasienController;
 use App\Http\Controllers\PoliController;
+use App\Http\Controllers\UserController;
 
 Route::get('/', function () {
     return redirect('pasien/index');
@@ -132,7 +133,19 @@ Route::middleware(['auth'])->group(function () {
             });
         });
     });
-   
+
+    Route::controller(UserController::class)->group(function () {
+        Route::prefix('user')->group(function () {
+            Route::name('user.')->group(function () {
+                Route::get('index', 'index')->name('index');
+                Route::get('create', 'create')->name('create');
+                Route::get('edit/{id}', 'edit')->name('edit');
+                Route::post('store', 'store')->name('store');
+                Route::put('update/{id}', 'update')->name('update');
+            });
+        });
+    });
+    
 });
 
 Auth::routes();

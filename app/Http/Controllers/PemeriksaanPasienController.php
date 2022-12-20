@@ -8,6 +8,7 @@ use App\Models\Kunjungan;
 use App\Models\Obat;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Carbon;
+use App\Models\Stockin;
 
 class PemeriksaanPasienController extends Controller
 {
@@ -65,6 +66,8 @@ class PemeriksaanPasienController extends Controller
             $kunjungan->save();
             foreach ($request->get('daftar_produk') as $key => $value) {
                 $kunjungan->obat()->attach((int) $value['obat_idobat'], ['jumlah' => $value['jumlah'], 'harga' => $value['harga'], 'keterangan' => $value['dosis']]);
+                $stokin = DB::table('obat_has_stok_in')->where('obat_idobat', (int) $value['obat_idobat'])->get();
+                return $stokin;
             }
             DB::commit();
             return "berhasil";
