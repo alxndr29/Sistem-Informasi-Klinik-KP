@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Waktu pembuatan: 20 Des 2022 pada 16.07
+-- Waktu pembuatan: 21 Des 2022 pada 18.43
 -- Versi server: 5.7.33
 -- Versi PHP: 8.1.3
 
@@ -92,8 +92,9 @@ CREATE TABLE `kunjungan` (
 --
 
 INSERT INTO `kunjungan` (`idkunjungan`, `status`, `created_at`, `updated_at`, `pasien_idpasien`, `dokter_iddokter`, `poli_idpoli`, `diagnosa_awal`, `hasil_diagnosa`, `tanggal`, `jam_datang`, `jam_selesai`, `tarif_obat`, `status_bayar`, `metode_pembayaran`, `tarif_periksa`) VALUES
-(3, 'Selesai', '2022-12-18 06:55:55', '2022-12-19 06:12:22', 4, 2, 3, 'Tidak Sehat', 'Sudah sehat bosku', '2022-12-18', '02:55:55', '02:12:22', 26000, 0, 'Cash', 75000),
-(4, 'Menunggu Pemeriksaan', '2022-12-20 06:34:18', '2022-12-20 06:34:18', 2, 2, 2, 'Gigi Berlubang', NULL, '2022-12-20', '02:34:18', NULL, NULL, 0, NULL, NULL);
+(3, 'Selesai', '2022-12-18 06:55:55', '2022-12-19 06:12:22', 4, 2, 3, 'Tidak Sehat', 'Sudah sehat bosku', '2022-12-18', '02:55:55', '02:12:22', 26000, 1, 'Cash', 75000),
+(4, 'Selesai', '2022-12-20 06:34:18', '2022-12-21 09:40:28', 2, 2, 2, 'Gigi Berlubang', 'sudah sempu, minum ibat ya', '2022-12-20', '02:34:18', '05:26:53', 52500, 1, 'Kredit', 20000),
+(5, 'Menunggu Pemeriksaan', '2022-12-21 09:43:50', '2022-12-21 09:43:50', 2, 2, 2, 'tak tau', NULL, '2022-12-21', '05:43:50', NULL, NULL, 0, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -164,6 +165,18 @@ CREATE TABLE `obat_has_stok_in` (
   `jumlah` int(11) DEFAULT NULL,
   `harga` double DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `obat_has_stok_in`
+--
+
+INSERT INTO `obat_has_stok_in` (`obat_idobat`, `stok_in_idstok_in`, `jumlah`, `harga`) VALUES
+(1, 14, 0, 25000),
+(1, 15, 4, 25000),
+(2, 14, 15, 3500),
+(2, 15, 10, 3500),
+(3, 14, 30, 4500),
+(3, 15, 15, 4500);
 
 -- --------------------------------------------------------
 
@@ -253,7 +266,9 @@ CREATE TABLE `resep_stock_out` (
 
 INSERT INTO `resep_stock_out` (`kunjungan_idkunjungan`, `obat_idobat`, `jumlah`, `harga`, `keterangan`) VALUES
 (3, 1, 2, 2500, '1x1'),
-(3, 2, 3, 7000, '3x1');
+(3, 2, 3, 7000, '3x1'),
+(4, 1, 11, 2500, '3x1'),
+(4, 2, 5, 5000, '3x1');
 
 -- --------------------------------------------------------
 
@@ -276,7 +291,9 @@ INSERT INTO `stok_in` (`idstok_in`, `tanggal`, `created_at`, `updated_at`) VALUE
 (10, '2022-12-18', '2022-12-18 02:24:20', '2022-12-18 02:24:20'),
 (11, '2022-12-19', '2022-12-19 05:04:47', '2022-12-19 05:04:47'),
 (12, '2022-12-19', '2022-12-19 05:55:20', '2022-12-19 05:55:20'),
-(13, '2022-12-19', '2022-12-19 05:55:32', '2022-12-19 05:55:32');
+(13, '2022-12-19', '2022-12-19 05:55:32', '2022-12-19 05:55:32'),
+(14, '2022-12-21', '2022-12-21 09:09:29', '2022-12-21 09:09:29'),
+(15, '2022-12-21', '2022-12-21 09:10:33', '2022-12-21 09:10:33');
 
 -- --------------------------------------------------------
 
@@ -408,7 +425,7 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT untuk tabel `kunjungan`
 --
 ALTER TABLE `kunjungan`
-  MODIFY `idkunjungan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `idkunjungan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT untuk tabel `migrations`
@@ -438,7 +455,7 @@ ALTER TABLE `poli`
 -- AUTO_INCREMENT untuk tabel `stok_in`
 --
 ALTER TABLE `stok_in`
-  MODIFY `idstok_in` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `idstok_in` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT untuk tabel `users`

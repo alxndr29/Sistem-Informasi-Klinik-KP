@@ -31,7 +31,7 @@ class PemeriksaanPasienController extends Controller
     }
     public function bayar($id)
     {
-        $kunjungan = Kunjungan::find($id)->first();
+        $kunjungan = Kunjungan::where('idkunjungan',$id)->first();
         return view('pages.pemeriksaan.bayar', compact('kunjungan', 'id'));
     }
     public function bayarput(Request $request, $id)
@@ -40,8 +40,19 @@ class PemeriksaanPasienController extends Controller
             $kunjungan = Kunjungan::find($id);
             $kunjungan->tarif_periksa = $request->get('nominal_pembayaran');
             $kunjungan->metode_pembayaran = $request->get('metode_pembayaran');
+            if ($request->get('metode_pembayaran') == "Cash") {
+                $kunjungan->status_bayar = 1;
+                $kunjungan->status = "Selesai";
+            }
+            if ($request->get('metode_pembayaran') == "Kredit") {
+                $kunjungan->status_bayar = 0;
+                $kunjungan->status = "Belum Bayar";
+            }
+            if ($request->get('metode_pembayaran') == "Gratis") {
+                $kunjungan->status_bayar = 1;
+                $kunjungan->status = "Selesai";
+            }
             $kunjungan->jam_selesai = date("h:i:sa");
-            $kunjungan->status = "Selesai";
             $kunjungan->save();
             return redirect('pemeriksaan/index')->with('pesan', 'Berhasil Melakukan Pembayaran');
         } catch (\Exception $e) {
@@ -67,7 +78,23 @@ class PemeriksaanPasienController extends Controller
             foreach ($request->get('daftar_produk') as $key => $value) {
                 $kunjungan->obat()->attach((int) $value['obat_idobat'], ['jumlah' => $value['jumlah'], 'harga' => $value['harga'], 'keterangan' => $value['dosis']]);
                 $stokin = DB::table('obat_has_stok_in')->where('obat_idobat', (int) $value['obat_idobat'])->get();
-                return $stokin;
+                $kebutuhan = (int) $value['jumlah'];
+                // return $stokin;
+                foreach ($stokin as $key => $value2) {
+                    $stok = (int) $value2->jumlah;
+                    if ($stok != 0 && ($stok >= $kebutuhan)) {
+                        DB::table('obat_has_stok_in')->where('obat_idobat', (int) $value['obat_idobat'])->where('stok_in_idstok_in', $value2->stok_in_idstok_in)->update([
+                            'jumlah' =>  $stok - $kebutuhan
+                        ]);
+                        $kebutuhan = $stok - $kebutuhan;
+                        break;
+                    } else if ($stok != 0 && ($stok < $kebutuhan)) {
+                        DB::table('obat_has_stok_in')->where('obat_idobat', (int) $value['obat_idobat'])->where('stok_in_idstok_in', $value2->stok_in_idstok_in)->update([
+                            'jumlah' =>  0
+                        ]);
+                        $kebutuhan = $kebutuhan - $stok;
+                    } else { }
+                }
             }
             DB::commit();
             return "berhasil";

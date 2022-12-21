@@ -94,7 +94,7 @@
                                             <label>Pilih Obat</label>
                                             <select class="form-select digits" id="select-obat">
                                                 @foreach($obat as $value)
-                                                    <option value="{{$value->idobat}}">{{$value->nama}}</option>
+                                                <option value="{{$value->idobat}}">{{$value->nama}}</option>
                                                 @endforeach
                                             </select>
                                         </div>
@@ -207,6 +207,7 @@
     var biaya_obat = 0;
 
     function tambahProduk() {
+        console.log(daftar_produk.length);
         if (daftar_produk.length == 0) {
             daftar_produk[counter] = {};
             daftar_produk[counter].nama = $("#select-obat option:selected").text();
@@ -221,7 +222,6 @@
             $.each(daftar_produk, function(i, k) {
                 if (k.obat_idobat == $("#select-obat option:selected").val()) {
                     alert('obat sudah ada didalam daftar.');
-                    return false;
                 } else {
                     daftar_produk[counter] = {};
                     daftar_produk[counter].nama = $("#select-obat option:selected").text();
@@ -262,9 +262,10 @@
     }
 
     function hapus(id) {
-        daftar_produk = daftar_produk.filter(Boolean);
+        // daftar_produk = daftar_produk.filter(Boolean);
+        // console.log(daftar_produk);
         $.each(daftar_produk, function(i, k) {
-            // alert(k.obat_idobat);
+            console.log(k.obat_idobat);
             if (id == k.obat_idobat) {
                 daftar_produk.splice(i, 1);
             }
@@ -290,7 +291,7 @@
                     console.log(data);
                     if (data == "berhasil") {
                         alert(data);
-
+                        location.href = "{{url('pemeriksaan/index')}}";
                     }
                 },
                 error: function(data) {

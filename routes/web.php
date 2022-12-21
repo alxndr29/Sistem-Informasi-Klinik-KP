@@ -9,6 +9,7 @@ use App\Http\Controllers\DokterController;
 use App\Http\Controllers\ObatController;
 use App\Http\Controllers\PemeriksaanPasienController;
 use App\Http\Controllers\PendaftaranPasienController;
+use App\Http\Controllers\PiutangController;
 use App\Http\Controllers\PoliController;
 use App\Http\Controllers\UserController;
 
@@ -145,7 +146,16 @@ Route::middleware(['auth'])->group(function () {
             });
         });
     });
-    
+
+    Route::controller(PiutangController::class)->group(function () {
+        Route::prefix('piutang')->group(function () {
+            Route::name('piutang.')->group(function () {
+                Route::get('index', 'index')->name('index');
+                Route::get('edit/{id}', 'edit')->name('edit');
+                Route::put('update/{id}', 'update')->name('update');
+            });
+        });
+    });
 });
 
 Auth::routes();

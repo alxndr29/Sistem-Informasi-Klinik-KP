@@ -130,54 +130,25 @@
                                         </div>
                                     </div>
                                     <br>
-                                    <form method="post" action="{{route('pemeriksaan.bayarput', $kunjungan->idkunjungan)}}" class="form theme-form">
+                                    <form method="post" action="{{route('piutang.update', $kunjungan->idkunjungan)}}" class="form theme-form">
                                         <div class="row">
-                                            <div class="col-sm-12">
-                                                Metode Pembayaran
+                                            <div class="col">
+                                                Metode Pembayaran:
                                             </div>
                                             @method('put')
                                             @csrf
-                                            <div class="col">
-                                                <div class="m-t-15 m-checkbox-inline custom-radio-ml">
-                                                    <div class="m-t-15 m-checkbox-inline custom-radio-ml">
-                                                        <div class="form-check form-check-inline radio radio-primary">
-                                                            <input class="form-check-input" id="radioinline1" type="radio" name="metode_pembayaran" value="Cash" checked>
-                                                            <label class="form-check-label mb-0" for="radioinline1">Cash</label>
-                                                        </div>
-                                                        <div class="form-check form-check-inline radio radio-primary">
-                                                            <input class="form-check-input" id="radioinline2" type="radio" name="metode_pembayaran" value="Kredit">
-                                                            <label class="form-check-label mb-0" for="radioinline2">Kredit</label>
-                                                        </div>
-                                                        <div class="form-check form-check-inline radio radio-primary">
-                                                            <input class="form-check-input" id="radioinline3" type="radio" name="metode_pembayaran" value="Gratis">
-                                                            <label class="form-check-label mb-0" for="radioinline3">Gratis</label>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                             <div class="col">
+                                                <b>{{$kunjungan->metode_pembayaran}}</b>
                                             </div>
 
                                         </div>
                                         <br>
                                         <div class="row">
                                             <div class="col">
-                                                <div class="mb-3">
-                                                    <label class="form-label">Masukan Nominal Pembayaran (Tarif Pemeriksaan):</label>
-                                                    <input class="form-control" type="number" name="nominal_pembayaran" required>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col">
-                                                <button type="submit" class="btn btn-success">Simpan</button>
+                                                <button type="submit" class="btn btn-success">Sudah Lunas</button>
                                             </div>
                                         </div>
                                     </form>
-                                    <!-- <br>
-                                    <div class="d-flex justify-content-end">
-                                        <div>
-                                            <button type="submit" class="btn btn-success">Simpan</button>
-                                        </div>
-                                    </div> -->
                                 </div>
                             </div>
                         </div>

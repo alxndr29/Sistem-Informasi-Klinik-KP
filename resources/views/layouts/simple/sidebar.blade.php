@@ -62,6 +62,11 @@
                         </a>
                     </li>
                     <li class="sidebar-list">
+                        <a class="sidebar-link sidebar-title link-nav {{ request()->is('piutang/*') ? 'active' : '' }}" href="{{route('piutang.index')}}">
+                            <i class="fa fa-truck-loading fa-md mx-1"> </i><span>Piutang</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-list">
                         <a class="sidebar-link sidebar-title link-nav {{ request()->is('user/*') ? 'active' : '' }}" href="{{route('user.index')}}">
                             <i class="fa fa-truck-loading fa-md mx-1"> </i><span>Data User </span>
                         </a>
