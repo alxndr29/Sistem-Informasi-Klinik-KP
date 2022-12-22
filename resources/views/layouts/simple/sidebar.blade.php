@@ -71,6 +71,11 @@
                             <i class="fa fa-truck-loading fa-md mx-1"> </i><span>Data User </span>
                         </a>
                     </li>
+                    <li class="sidebar-list">
+                        <a class="sidebar-link sidebar-title link-nav {{ request()->is('laporan/*') ? 'active' : '' }}" href="{{route('laporan.index')}}">
+                            <i class="fa fa-truck-loading fa-md mx-1"> </i><span>Laporan</span>
+                        </a>
+                    </li>
                     <li class="sidebar-main-title">
 
                         <!-- <li class="sidebar-list"><a class="sidebar-link sidebar-title link-nav {{ request()->is('user/*')  ? 'active' : '' }}" href="#"><i data-feather="user"> </i><span>User</span></a></li> -->

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Waktu pembuatan: 21 Des 2022 pada 18.43
+-- Waktu pembuatan: 22 Des 2022 pada 13.11
 -- Versi server: 5.7.33
 -- Versi PHP: 8.1.3
 
@@ -318,7 +318,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`, `role`) VALUES
-(1, 'Evan', 'evan@evan.com', NULL, '$2y$10$kG/fE9u0bfYMzesyaHGCbOzlhnEH.Z5DcIFb3qUThltL8BQUlzfDS', NULL, '2022-12-05 03:20:40', '2022-12-05 03:20:40', 'admin'),
+(1, 'Evan', 'evan@evan.com', NULL, '$2y$10$kG/fE9u0bfYMzesyaHGCbOzlhnEH.Z5DcIFb3qUThltL8BQUlzfDS', NULL, '2022-12-05 03:20:40', '2022-12-05 03:20:40', 'dokter'),
 (2, 'gusti edit', 'gustediti@gusti.com', NULL, '$2y$10$m5wXhresWJzC5tGl4o6m1uIwIH9/sCH9Cthw/cCeMfMIJLiovswbm', NULL, '2022-12-20 07:40:38', '2022-12-20 07:48:53', 'admin');
 
 --

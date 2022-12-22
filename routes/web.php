@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PasienController;
 use App\Http\Controllers\DokterController;
+use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\ObatController;
 use App\Http\Controllers\PemeriksaanPasienController;
 use App\Http\Controllers\PendaftaranPasienController;
@@ -108,7 +109,7 @@ Route::middleware(['auth'])->group(function () {
         Route::prefix('pemeriksaan')->group(function () {
             Route::name('pemeriksaan.')->group(function () {
                 Route::get('index', 'index')->name('index');
-                Route::get('edit/{id}', 'edit')->name('edit');
+                Route::get('edit/{id}', 'edit')->name('edit')->middleware('doktercheck');
                 Route::get('bayar/{id}', 'bayar')->name('bayar');
                 Route::put('bayarput/{id}', 'bayarput')->name('bayarput');
                 Route::post('store', 'storeDokter')->name('storedokter');
@@ -153,6 +154,15 @@ Route::middleware(['auth'])->group(function () {
                 Route::get('index', 'index')->name('index');
                 Route::get('edit/{id}', 'edit')->name('edit');
                 Route::put('update/{id}', 'update')->name('update');
+            });
+        });
+    });
+
+    Route::controller(LaporanController::class)->group(function () {
+        Route::prefix('laporan')->group(function () {
+            Route::name('laporan.')->group(function () {
+                Route::get('index/{bulan?}/{tahun?}', 'indexLaporanKeungan')->name('index');
+                Route::get('show/{id}', 'showDetailLaporanKeuangan')->name('edit');
             });
         });
     });

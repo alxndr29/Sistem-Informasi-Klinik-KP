@@ -81,6 +81,12 @@
                                         </div>
                                     </div>
                                 </div>
+                                <br>
+                                <div class="row">
+                                    <div class="col">
+                                        <a href="{{route('pasien.show',$kunjungan->pasien_idpasien)}}" class="btn btn-primary">Lihat Riwayat Berobat</a>
+                                    </div>
+                                </div>
                             </form>
                         </div>
                         <div class="col">
