@@ -60,7 +60,7 @@
                         </div>
                     </div>
                     <div class="text-center">
-                        Total Pendapatan: 0
+                        Total Pendapatan: Rp. {{number_format($total)}}
                     </div>
                 </div>
                 <div class="card-body">
@@ -69,12 +69,28 @@
                             <thead>
                                 <tr>
                                     <th>No</th>
-                                    <th>Nama Lengkap</th>
-                                    <th>Edit</th>
+                                    <th>Nomor Kunjungan</th>
+                                    <th>Tanggal Kunjungan</th>
+                                    <th>Poliklinik</th>
+                                    <th>Tipe Pembayaran</th>
+                                    <th>Tarif Obat</th>
+                                    <th>Tarif Periksa</th>
+                                    <th>Total</th>
                                 </tr>
                             </thead>
                             <tbody>
-
+                                @foreach ($kunjungan as $key => $kunjungan)
+                                <tr>
+                                    <td>{{$key+1}}</td>
+                                    <td>{{$kunjungan->idkunjungan}}</td>
+                                    <td>{{$kunjungan->tanggal}}</td>
+                                    <td>{{$kunjungan->poli->nama_lengkap}}</td>
+                                    <td>{{$kunjungan->metode_pembayaran}}</td>
+                                    <td>Rp. {{number_format($kunjungan->tarif_obat)}}</td>
+                                    <td>Rp. {{number_format($kunjungan->tarif_periksa)}}</td>
+                                    <td>Rp. {{number_format($kunjungan->tarif_obat + $kunjungan->tarif_periksa)}}</td>
+                                </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
