@@ -129,6 +129,14 @@
                                             Rp. {{number_format($kunjungan->tarif_obat)}}
                                         </div>
                                     </div>
+                                    <div class="d-flex justify-content-between">
+                                        <div>
+                                            Biaya Pemeriksaan
+                                        </div>
+                                        <div id="biaya-obat">
+                                            Rp. {{number_format($kunjungan->tarif_periksa)}}
+                                        </div>
+                                    </div>
                                     <br>
                                     <form method="post" action="{{route('piutang.update', $kunjungan->idkunjungan)}}" class="form theme-form">
                                         <div class="row">
@@ -137,7 +145,7 @@
                                             </div>
                                             @method('put')
                                             @csrf
-                                             <div class="col">
+                                            <div class="col">
                                                 <b>{{$kunjungan->metode_pembayaran}}</b>
                                             </div>
 

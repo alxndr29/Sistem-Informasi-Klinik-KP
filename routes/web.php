@@ -161,7 +161,7 @@ Route::middleware(['auth'])->group(function () {
     Route::controller(LaporanController::class)->group(function () {
         Route::prefix('laporan')->group(function () {
             Route::name('laporan.')->group(function () {
-                Route::get('index/{bulan?}/{tahun?}', 'indexLaporanKeungan')->name('index');
+                Route::get('index/{tahun?}/{bulan?}', 'indexLaporanKeungan')->name('index');
                 Route::get('show/{id}', 'showDetailLaporanKeuangan')->name('edit');
             });
         });

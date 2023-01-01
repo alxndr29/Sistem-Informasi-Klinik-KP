@@ -54,7 +54,7 @@ class PemeriksaanPasienController extends Controller
             }
             $kunjungan->jam_selesai = date("h:i:sa");
             $kunjungan->save();
-            return redirect('pemeriksaan/index')->with('pesan', 'Berhasil Melakukan Pembayaran');
+            return redirect('pemeriksaan/index')->with('pesan', 'Berhasil');
         } catch (\Exception $e) {
             return $e->getMessage();
         }
