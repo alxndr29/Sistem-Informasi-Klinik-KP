@@ -25,16 +25,19 @@
             <img class="b-r-10" src="{{asset('assets/images/dashboard/profile.jpg')}}" alt="">
             <div class="media-body">
               <span>{{Auth::user()->name}}</span>
-              <p class="mb-0 font-roboto">{{Auth::user()->role}} <i class="middle fa fa-angle-down"></i></p>
+                <p class="mb-0 font-roboto fw-bold text-success mt-2">Active<i class="middle me-2 fa fa-angle-down"></i></p>
             </div>
           </div>
           <ul class="profile-dropdown onhover-show-div">
             <li>
-              <a href="{{ route('logout') }}" onclick="event.preventDefault();
-                document.getElementById('logout-form').submit();">
-                
-                <i data-feather="log-in"> </i><span>Log Out</span>
-              </a>
+                <a href="{{ route('logout') }}" onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                    {{ __('Logout') }}
+                </a>
+
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                    @csrf
+                </form>
             </li>
           </ul>
         </li>

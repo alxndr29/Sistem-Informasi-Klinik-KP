@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/cuba_starter_kit.iml" filepath="$PROJECT_DIR$/.idea/cuba_starter_kit.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/SI-Klinik-KP.iml" filepath="$PROJECT_DIR$/.idea/SI-Klinik-KP.iml" />
     </modules>
   </component>
 </project>

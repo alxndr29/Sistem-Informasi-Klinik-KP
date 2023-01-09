@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\KeuanganController;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Session;
@@ -13,9 +14,11 @@ use App\Http\Controllers\PendaftaranPasienController;
 use App\Http\Controllers\PiutangController;
 use App\Http\Controllers\PoliController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\HomeController;
+
 
 Route::get('/', function () {
-    return redirect('pasien/index');
+    return redirect()->route('dashboard.index');
 })->name('/');
 
 //Language Change
@@ -54,10 +57,22 @@ Route::get('/clear-cache', function () {
 
 
 Route::middleware(['auth'])->group(function () {
+    Route::resource('dashboard',HomeController::class);
+    Route::prefix('pelayanan')->group(function () {
+        Route::resource('pasien',PasienController::class);
+        Route::get('pendaftaran-pasien',[PasienController::class,'index'])->name('pendaftaran-pasien');
+        Route::get('pemeriksaan-pasien',[PasienController::class,'index'])->name('pemeriksaan-pasien');
+    });
+    Route::prefix('laporan')->group(function (){
+        Route::get('keuangan',[KeuanganController::class, ['laporanKeuangan']])->name('keuangan');
+        Route::get('piutang',[KeuanganController::class, ['piutang']])->name('piutang');
+        Route::get('cashflow',[KeuanganController::class, ['cashflow']])->name('cashflow');
+
+    });
     Route::controller(PasienController::class)->group(function () {
         Route::prefix('pasien')->group(function () {
             Route::name('pasien.')->group(function () {
-                Route::get('index', 'index')->name('index');
+                Route::get('daftar-pasien', 'index')->name('index');
                 Route::get('add', 'create')->name('create');
                 Route::get('show/{id}', 'show')->name('show');
                 Route::get('edit/{id}', 'edit')->name('edit');
@@ -169,5 +184,5 @@ Route::middleware(['auth'])->group(function () {
 });
 
 Auth::routes();
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware('auth');
+
 
