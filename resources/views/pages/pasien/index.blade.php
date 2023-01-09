@@ -26,10 +26,10 @@
     <div class="row">
         <div class="col">
             <div class="card">
-                <div class="card-header">
+                <div class="card-header p-4">
                     <div class="d-flex justify-content-between">
-                        <div class="">
-                            <h3>Daftar Data Pasien<h3>
+                        <div>
+                            <h5>Daftar Pasien<h5>
                         </div>
                         <div class="">
                             <a class="btn btn-primary" href="{{route('pasien.create')}}">Tambah Data Pasien</a>
@@ -50,8 +50,7 @@
                                     <th>Alamat</th>
                                     <th>Pekerjaan</th>
                                     <th>Agama</th>
-                                    <th>Detail</th>
-                                    <th>Edit</th>
+                                    <th>Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -67,12 +66,10 @@
                                     <td>{{$value->pekerjaan}}</td>
                                     <td>{{$value->agama}}</td>
                                     <td>
-                                        <a class="btn btn-success" href="{{route('pasien.show',$value->idpasien)}}">
+                                        <a class="btn btn-primary btn-sm me-2" href="{{route('pasien.show',$value->idpasien)}}">
                                             Detail
                                         </a>
-                                    </td>
-                                    <td>
-                                        <a class="btn btn-warning" href="{{route('pasien.edit',$value->idpasien)}}">
+                                        <a class="btn btn-warning btn-sm text-dark" href="{{route('pasien.edit',$value->idpasien)}}">
                                             Edit
                                         </a>
                                     </td>

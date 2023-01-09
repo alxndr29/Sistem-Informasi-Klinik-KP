@@ -150,7 +150,15 @@
                                     <td>{{$value->pasien->nama_lengkap}}</td>
                                     <td>{{$value->poli->nama_lengkap}}</td>
                                     <td>{{$value->dokter->nama_lengkap}}</td>
-                                    <td>{{$value->status}}</td>
+                                    <td>
+                                        @if($value->status == "Menunggu Pemeriksaan")
+                                            <span class="badge badge-warning">Menunggu Pemeriksaan</span>
+                                        @elseif($value->status == "Menunggu Pembayaran")
+                                            <span class="badge badge-warning">Menunggu Pembayaran</span>
+                                        @else
+                                            <span class="badge badge-success">Selesai</span>
+                                        @endif
+                                    </td>
                                     <td>{{$value->jam_datang}}</td>
                                     @if ($value->jam_selesai == null)
                                     <td></td>

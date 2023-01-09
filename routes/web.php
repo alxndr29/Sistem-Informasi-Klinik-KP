@@ -1,6 +1,9 @@
 <?php
 
+use App\Http\Controllers\Api\ProductController;
+use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\KeuanganController;
+use App\Http\Controllers\TindakanController;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Session;
@@ -58,6 +61,11 @@ Route::get('/clear-cache', function () {
 
 Route::middleware(['auth'])->group(function () {
     Route::resource('dashboard',HomeController::class);
+    Route::prefix('manajemen-klinik')->group(function () {
+        Route::resource('tindakan',HomeController::class);
+        Route::resource('poli',PoliController::class);
+    });
+
     Route::prefix('pelayanan')->group(function () {
         Route::resource('pasien',PasienController::class);
         Route::get('pendaftaran-pasien',[PasienController::class,'index'])->name('pendaftaran-pasien');
@@ -67,8 +75,13 @@ Route::middleware(['auth'])->group(function () {
         Route::get('keuangan',[KeuanganController::class, ['laporanKeuangan']])->name('keuangan');
         Route::get('piutang',[KeuanganController::class, ['piutang']])->name('piutang');
         Route::get('cashflow',[KeuanganController::class, ['cashflow']])->name('cashflow');
-
     });
+    Route::prefix('produk')->group(function (){
+        Route::resource('daftar-produk',ObatController::class);
+        Route::resource('kategori', KategoriController::class);
+        Route::get('cashflow',[KeuanganController::class, ['cashflow']])->name('cashflow');
+    });
+
     Route::controller(PasienController::class)->group(function () {
         Route::prefix('pasien')->group(function () {
             Route::name('pasien.')->group(function () {
@@ -96,20 +109,22 @@ Route::middleware(['auth'])->group(function () {
             });
         });
     });
+    Route::resource('dokter',DokterController::class);
 
-    Route::controller(PoliController::class)->group(function () {
-        Route::prefix('poli')->group(function () {
-            Route::name('poli.')->group(function () {
-                Route::get('index', 'index')->name('index');
-                Route::get('add', 'create')->name('create');
-                Route::get('show/{id}', 'show')->name('show');
-                Route::get('edit/{id}', 'edit')->name('edit');
-                Route::post('store', 'store')->name('store');
-                Route::put('update/{id}', 'update')->name('update');
-                Route::delete('delete/{id}', 'delete')->name('delete');
-            });
-        });
-    });
+
+//    Route::controller(PoliController::class)->group(function () {
+//        Route::prefix('poli')->group(function () {
+//            Route::name('poli.')->group(function () {
+//                Route::get('index', 'index')->name('index');
+//                Route::get('add', 'create')->name('create');
+//                Route::get('show/{id}', 'show')->name('show');
+//                Route::get('edit/{id}', 'edit')->name('edit');
+//                Route::post('store', 'store')->name('store');
+//                Route::put('update/{id}', 'update')->name('update');
+//                Route::delete('delete/{id}', 'delete')->name('delete');
+//            });
+//        });
+//    });
 
     Route::controller(PendaftaranPasienController::class)->group(function () {
         Route::prefix('pendaftaran')->group(function () {
