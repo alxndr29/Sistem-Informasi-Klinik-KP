@@ -30,7 +30,7 @@
                             <h5>Form Ubah Data Poli</h5>
                         </div>
                         <div class="">
-                            <form method="post" action="{{route('poli.delete',$poli->idpoli)}}">
+                            <form method="post" action="{{route('poli.destroy',$poli->idpoli)}}">
                                 @csrf
                                 @method('delete')
                                 <button type="submit" class="btn btn-danger">Hapus</button>

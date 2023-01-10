@@ -26,7 +26,7 @@ class PoliController extends Controller
             $poli = new poli();
             $poli->nama_lengkap = $request->get('nama_lengkap');
             $poli->save();
-            return redirect('poli/index')->with('pesan', 'Berhasil Tambah Data poli');
+            return redirect('manajemen-klinik/poli')->with('pesan', 'Berhasil Tambah Data poli');
         } catch (\Exception $e) {
             return $e->getMessage();
         }
@@ -42,18 +42,18 @@ class PoliController extends Controller
             $poli = Poli::find($id);
             $poli->nama_lengkap = $request->get('nama_lengkap');
             $poli->save();
-            return redirect('poli/index')->with('pesan', 'Berhasil Ubah Data poli');
+            return redirect('manajemen-klinik/poli')->with('pesan', 'Berhasil Ubah Data poli');
         } catch (\Exception $e) {
             return $e->getMessage();
         }
     }
     public function show($id)
     { }
-    public function delete($id)
+    public function destroy($id)
     {
         try {
             Poli::where('idpoli', $id)->delete();
-            return redirect('poli/index')->with('pesan', 'Berhasil Hapus Data poli');
+            return redirect('manajemen-klinik/poli')->with('pesan', 'Berhasil Hapus Data poli');
         } catch (\Exception $e) {
             return $e->getMessage();
         }

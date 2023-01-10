@@ -25,7 +25,7 @@
         <div class="col-sm-12">
             <div class="card">
                 <div class="card-header">
-                    <h5>Form Data User Baru</h5>
+                    <h5>Form Edit User</h5>
                 </div>
                 <form method="post" action="{{route('user.update',$user->id)}}" class="form theme-form">
                     @csrf

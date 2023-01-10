@@ -74,7 +74,7 @@ class PasienController extends Controller
     {
         try {
             Pasien::where('idpasien', $id)->delete();
-            return redirect()->back()->with('pesan', 'Berhasil Hapus Data Pasien');
+            return redirect('pasien/daftar-pasien')->with('pesan', 'Berhasil Hapus Data Pasien');
         } catch (\Exception $e) {
             return $e->getMessage();
         }
