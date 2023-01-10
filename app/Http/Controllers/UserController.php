@@ -39,7 +39,7 @@ class UserController extends Controller
     }
     public function update(Request $request, $id)
     {
-      
+
         try {
             $user = User::find($id);
             $user->name = $request->get('nama');

@@ -16,7 +16,7 @@
 <li class="breadcrumb-item">
     Transaksi
 </li>
-<li class="breadcrumb-item">Pembelian</li>
+<li class="breadcrumb-item">Daf</li>
 <li class="breadcrumb-item active">Buat Transaksi</li>
 @endsection
 
@@ -42,9 +42,9 @@
                             <thead>
                                 <tr>
                                     <th>No</th>
+                                    <th>Jabatan</th>
                                     <th>Nama</th>
                                     <th>email</th>
-                                    <th>role</th>
                                     <th>edit</th>
                                 </tr>
                             </thead>
@@ -52,10 +52,12 @@
                                 @foreach ($user as $key => $value)
                                 <tr>
                                     <td>{{$key+1}}</td>
+                                    <td><span class="badge badge-{{$value->role == 'Dokter' ? 'primary' : 'secondary'}}">{{$value->role}}</span></td>
                                     <td>{{$value->name}}</td>
                                     <td>{{$value->email}}</td>
-                                    <td>{{$value->role}}</td>
-                                    <td><a href="{{route('user.edit',$value->id)}}" class="btn brn-primary">Edit</a></td>
+                                    <td><a href="{{route('user.edit',$value->id)}}" class="btn btn-outline-warning me-2">Edit</a>
+                                        <a href="{{route('user.edit',$value->id)}}" class="btn btn-outline-danger">Delete</a>
+                                    </td>
                                 </tr>
                                 @endforeach
                             </tbody>

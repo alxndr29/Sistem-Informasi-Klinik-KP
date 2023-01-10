@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\ProductController;
+use App\Http\Controllers\FarmasiController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\KeuanganController;
 use App\Http\Controllers\TindakanController;
@@ -72,16 +73,23 @@ Route::middleware(['auth'])->group(function () {
         Route::get('pemeriksaan-pasien',[PasienController::class,'index'])->name('pemeriksaan-pasien');
     });
     Route::prefix('laporan')->group(function (){
-        Route::get('keuangan',[KeuanganController::class, ['laporanKeuangan']])->name('keuangan');
-        Route::get('piutang',[KeuanganController::class, ['piutang']])->name('piutang');
-        Route::get('cashflow',[KeuanganController::class, ['cashflow']])->name('cashflow');
+        Route::get('keuangan',[LaporanController::class,'keuangan'])->name('keuangan');
+        Route::get('piutang',[LaporanController::class,'piutang'])->name('piutang');
+        Route::get('cashflow',[LaporanController::class, 'cashflow'])->name('cashflow');
     });
     Route::prefix('produk')->group(function (){
         Route::resource('daftar-produk',ObatController::class);
         Route::resource('kategori', KategoriController::class);
-        Route::get('cashflow',[KeuanganController::class, ['cashflow']])->name('cashflow');
     });
-
+    Route::prefix('manajemen-user')->group(function (){
+        Route::resource('user-pengguna',UserController::class);
+        Route::resource('daftar-dokter',DokterController::class);
+    });
+    Route::prefix('farmasi')->group(function (){
+        Route::get('stok-barang',[FarmasiController::class,'stokBarang'])->name('stok-barang');
+        Route::get('obat-masuk',[FarmasiController::class,'obatMasuk'])->name('obat-masuk');
+        Route::get('obat-keluar',[FarmasiController::class, 'obatKeluar'])->name('obat-keluar');
+    });
     Route::controller(PasienController::class)->group(function () {
         Route::prefix('pasien')->group(function () {
             Route::name('pasien.')->group(function () {
@@ -109,7 +117,6 @@ Route::middleware(['auth'])->group(function () {
             });
         });
     });
-    Route::resource('dokter',DokterController::class);
 
 
 //    Route::controller(PoliController::class)->group(function () {

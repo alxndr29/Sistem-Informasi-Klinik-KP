@@ -8,15 +8,15 @@
 @endsection
 
 @section('breadcrumb-title')
-    <h3>Daftar Kategori Produk</h3>
+    <h3>Daftar Tindakan</h3>
 @endsection
 
 @section('breadcrumb-items')
     <li class="breadcrumb-item">
-        Konfigurasi
+        Dashboard
     </li>
-    <li class="breadcrumb-item">Produk</li>
-    <li class="breadcrumb-item active">Daftar Kategori Produk</li>
+    <li class="breadcrumb-item">Manajemen Klinik</li>
+    <li class="breadcrumb-item active">Daftar Tindakan</li>
 @endsection
 
 @section('content')
@@ -51,9 +51,7 @@
                                 <thead>
                                 <tr>
                                     <th>No</th>
-                                    <th>Kategori</th>
-                                    <th>Tanggal Ditambahkan</th>
-                                    <th>Tanggal Diubah Terakhir</th>
+                                    <th>Nama Tindakan</th>
                                     <th>Aksi</th>
                                 </tr>
                                 </thead>
@@ -61,17 +59,17 @@
                                 @php
                                     $i = 0;
                                 @endphp
-                                @foreach($categories as $category)
+                                @foreach($tindakans as $tindakan)
                                     <tr>
                                         <td>{{$i += 1}}</td>
-                                        <td>{{$category->name}}</td>
-                                        <td>{{$category->created_at}}</td>
-                                        <td>{{$category->updated_at}}</td>
+                                        <td>{{$tindakan->name}}</td>
+                                        <td>{{$tindakan->created_at}}</td>
+                                        <td>{{$tindakan->updated_at}}</td>
                                         <td>
                                             <form onsubmit="return confirm('Apakah Anda Yakin ?');"
-                                                  action="{{ route('kategori.destroy', $category->id) }}"
+                                                  action="{{ route('kategori-produk.destroy', $tindakan->id) }}"
                                                   method="POST">
-                                                <a href="{{route('kategori.edit', $category->id)}}"
+                                                <a href="{{route('kategori-produk.edit', $tindakan->id)}}"
                                                    class="btn btn-warning btn-xl me-2">Edit</a>
                                                 @csrf
                                                 @method('DELETE')
@@ -93,12 +91,21 @@
     </div>
     </div>
     <x-modal-large title="Kategori Produk">
-        <form method="POST" action="{{route('kategori.store')}}">
+        <form method="POST" action="{{route('kategori-produk.store')}}">
             @csrf
             <div class="modal-body">
                 <div class="row gy-4">
                     <div class="col-xl-12">
-                        <label class="form-label" for="Kategori">Nama Kategori</label>
+                        <label class="form-label" for="Kategori">Kategori Produk</label>
+                        <select class="form-select digits" id="exampleFormControlSelect9" name="jenis">
+                            @foreach($productType as $item)
+                                <option
+                                    value="{{$item->id}}">{{$item->name}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="col-xl-12">
+                        <label class="form-label" for="Kategori">Kategori Produk</label>
                         <input class="form-control form-control-lg" id="Kategori"
                                placeholder="Masukan Kategori Produk" name="name">
                     </div>

@@ -40,4 +40,18 @@ class LaporanController extends Controller
     }
     public function showDetailLaporanKeuangan()
     { }
+
+    public function cashflow()
+    {
+        return view('pages.laporan.cashflow');
+    }
+
+    public function piutang()
+    {
+        return view('pages.laporan.cashflow');
+    }
+    public function keuangan()
+    {
+        return view('pages.laporan.keuangan');
+    }
 }

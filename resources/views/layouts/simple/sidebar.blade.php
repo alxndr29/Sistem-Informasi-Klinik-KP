@@ -32,6 +32,14 @@
 {{--                    <li class="sidebar-list"><a class="sidebar-link sidebar-title link-nav {{ Route::currentRouteName()=='pemeriksaan.index' ? 'active' : '' }}" href="{{route('pemeriksaan.index')}}"><i class="fa-solid fa-money-bill-wave-alt"></i><span class="px-3">Pembayaran</span></a></li>--}}
                     <li class="sidebar-main-title">
                         <div>
+                            <h6>Farmasi</h6>
+                        </div>
+                    </li>
+                    <li class="sidebar-list"><a class="sidebar-link sidebar-title link-nav {{ Route::currentRouteName()=='stok-barang' ? 'active' : '' }}" href="{{route('stok-barang')}}"><i class="fa fa-warehouse fa-md mx-1"> </i><span>Stok Barang</span></a></li>
+                    <li class="sidebar-list"><a class="sidebar-link sidebar-title link-nav {{ Route::currentRouteName()=='obat-masuk' ? 'active' : '' }}" href="{{route('obat-masuk')}}"><i class="fa fa-truck-loading fa-md mx-1"> </i><span>Obat Masuk</span></a></li>
+                    <li class="sidebar-list"><a class="sidebar-link sidebar-title link-nav {{ Route::currentRouteName()=='obat-keluar' ? 'active' : '' }}" href="{{route('obat-keluar')}}"><i class="fa fa-dolly-flatbed fa-md mx-1"> </i><span>Obat Keluar</span></a></li>
+                    <li class="sidebar-main-title">
+                        <div>
                             <h6>Laporan</h6>
                         </div>
                     </li>
@@ -62,14 +70,14 @@
                         </ul>
                     </li>
                     <li class="sidebar-list">
-                        <a class="sidebar-link sidebar-title {{request()->route()->getPrefix() == 'pasien/daftar' ? 'active' : '' }}" href="#"><i class="fa fa-users fa-md mx-1">
+                        <a class="sidebar-link sidebar-title {{request()->route()->getPrefix() == '/manajemen-user' ? 'active' : '' }}" href="#"><i class="fa fa-users fa-md mx-1">
 
                             </i><span>Manajemen User</span>
-                            <div class="according-menu"><i class="fa fa-angle-{{request()->route()->getPrefix() == 'transaksi/pembelian' ? 'down' : 'right' }}"></i></div>
+                            <div class="according-menu"><i class="fa fa-angle-{{request()->route()->getPrefix() == '/manajemen-user' ? 'down' : 'right' }}"></i></div>
                         </a>
                         <ul class="sidebar-submenu" style="display: {{ request()->route()->getPrefix() == 'pelayanan' ? 'block;' : 'none;' }}">
-                            <li><a class="lan-4 {{ Route::currentRouteName()=='pendaftaran-pasien' ? 'active' : '' }}" href="{{route('pendaftaran-pasien')}}">User Pengguna</a></li>
-                            <li><a class="lan-4 {{ Route::currentRouteName()=='pendaftaran-pasien' ? 'active' : '' }}" href="{{route('pendaftaran-pasien')}}">Jabatan </a></li>
+                            <li><a class="lan-4 {{ Route::currentRouteName()=='user.index' ? 'active' : '' }}" href="{{route('user.index')}}">User Pengguna</a></li>
+                            <li><a class="lan-4 {{ Route::currentRouteName()=='dokter.index' ? 'active' : '' }}" href="{{route('dokter.index')}}">Dokter </a></li>
                         </ul>
                     </li>
                     <li class="sidebar-list">

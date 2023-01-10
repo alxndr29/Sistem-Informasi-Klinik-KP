@@ -71,11 +71,13 @@
                                                     <td class="text-center">
                                                         {{$data_pasien->tanggal_lahir}}</td>
                                                     <td>
-                                                        <button class="btn btn-primary" type="button"
+                                                        <button class="btn btn-primary" type="button" onclick=""
                                                                 data-bs-toggle="modal" data-original-title="test"
                                                                 data-bs-target="#exampleModal" data-bs-original-title=""
                                                                 title="">Daftar
                                                         </button>
+                                                        // Tertuju kehalaman Pemeriksaan Pasien
+                                                        // Tampilkan Notifikasi Pasin berhasil terdaftar pada antrian
                                                     </td>
 
 
@@ -358,6 +360,21 @@
             $('#poli').select2();
             $('#dokter').select2();
         });
+
+        {{--function daftar(id){--}}
+        {{--    $.ajax({--}}
+        {{--        type: 'POST',--}}
+        {{--        url: '{{route("pasien.show")}}',--}}
+        {{--        data: {--}}
+        {{--            '_token': '<?php echo csrf_token() ?>',--}}
+        {{--            'id': id,--}}
+        {{--        },--}}
+        {{--        success: function(v) {--}}
+        {{--            $('#sales').html(v.sales_order)--}}
+        {{--            $('#detail_so').html(v.detail_sales)--}}
+        {{--        }--}}
+        {{--    });--}}
+        {{--}--}}
     </script>
 
 @endsection
