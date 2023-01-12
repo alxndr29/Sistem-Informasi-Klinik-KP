@@ -52,26 +52,26 @@
 
                                 </thead>
                                 <tbody>
-                                @foreach ($kunjungan as $key => $value)
-                                    <tr>
-                                        <td>{{$key+1}}</td>
-                                        <td>{{$value->pasien->nama_lengkap}}</td>
-                                        <td>{{$value->poli->nama_lengkap}}</td>
-                                        <td>{{$value->dokter->nama_lengkap}}</td>
-                                        <td>{{$value->status}}</td>
-                                        <td>{{$value->jam_datang}}</td>
-                                        @if ($value->jam_selesai == null)
-                                            <td></td>
-                                        @else
-                                            <td>{{$value->jam_selesai}}</td>
-                                        @endif
-                                        <td>Rp. {{number_format($value->tarif_obat)}}</td>
-                                        <td>Rp. {{number_format($value->tarif_periksa)}}</td>
-                                        <td>
-                                            <a href="{{route('piutang.edit',$value->idkunjungan)}}" class="btn btn-primary">Detail</a>
-                                        </td>
-                                    </tr>
-                                @endforeach
+{{--                                @foreach ($kunjungan as $key => $value)--}}
+{{--                                    <tr>--}}
+{{--                                        <td>{{$key+1}}</td>--}}
+{{--                                        <td>{{$value->pasien->nama_lengkap}}</td>--}}
+{{--                                        <td>{{$value->poli->nama_lengkap}}</td>--}}
+{{--                                        <td>{{$value->dokter->nama_lengkap}}</td>--}}
+{{--                                        <td>{{$value->status}}</td>--}}
+{{--                                        <td>{{$value->jam_datang}}</td>--}}
+{{--                                        @if ($value->jam_selesai == null)--}}
+{{--                                            <td></td>--}}
+{{--                                        @else--}}
+{{--                                            <td>{{$value->jam_selesai}}</td>--}}
+{{--                                        @endif--}}
+{{--                                        <td>Rp. {{number_format($value->tarif_obat)}}</td>--}}
+{{--                                        <td>Rp. {{number_format($value->tarif_periksa)}}</td>--}}
+{{--                                        <td>--}}
+{{--                                            <a href="{{route('piutang.edit',$value->idkunjungan)}}" class="btn btn-primary">Detail</a>--}}
+{{--                                        </td>--}}
+{{--                                    </tr>--}}
+{{--                                @endforeach--}}
 
                                 </tbody>
                             </table>

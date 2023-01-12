@@ -1,5 +1,5 @@
 @extends('layouts.simple.master')
-@section('title', 'Satuan Produk')
+@section('title', 'Daftar Dokter')
 
 @section('css')
 <link rel="stylesheet" type="text/css" href="{{asset('assets/css/vendors/datatables.css')}}">
@@ -14,27 +14,29 @@
 
 @section('breadcrumb-items')
 <li class="breadcrumb-item">
-    Transaksi
+    Dashboard
 </li>
-<li class="breadcrumb-item">Pembelian</li>
-<li class="breadcrumb-item active">Buat Transaksi</li>
+<li class="breadcrumb-item">Manajemen User</li>
+<li class="breadcrumb-item active">Daftar Dokter</li>
 @endsection
 
 @section('content')
 
 <div class="container-fluid">
+
     <div class="row">
+        <div class="col-12">
+            @if ($message = Session::get('success'))
+                <div class="alert alert-success dark alert-dismissible fade show" role="alert">
+                    <strong>Berhasil</strong> {{$message}}
+                    <button class="btn-close" type="button" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            @endif
+        </div>
         <div class="col">
             <div class="card">
                 <div class="card-header">
-                    <div class="d-flex justify-content-between">
-                        <div class="">
-                            <h3>Daftar Data Dokter<h3>
-                        </div>
-                        <div class="">
-                            <a class="btn btn-primary" href="{{route('dokter.create')}}">Tambah Data Dokter</a>
-                        </div>
-                    </div>
+                    <a class="btn btn-primary" href="{{route('daftar-dokter.create')}}">Tambah Dokter Baru</a>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
@@ -42,35 +44,45 @@
                             <thead>
                                 <tr>
                                     <th>No</th>
-                                   
                                     <th>Nama Lengkap</th>
                                     <th>TTL</th>
                                     <th>Jenis Kelamin</th>
                                     <th>Alamat</th>
-                                    
-                                    <th>Detail</th>
-                                    <th>Edit</th>
+                                    <th>Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($dokter as $key => $value)
                                 <tr>
                                     <td>{{$key+1}}</td>
-                                  
+
                                     <td>{{$value->nama_lengkap}}</td>
                                     <td>{{$value->tempat_lahir}}, {{$value->tanggal_lahir}}</td>
+                                    <td><span class="badge badge-{{$value->jenis_kelamin == "Laki-laki" ? 'primary' : 'secondary'}}">{{$value->jenis_kelamin}}</span></td>
                                     <td>{{$value->alamat}}</td>
-                                    <td>{{$value->jenis_kelamin}}</td>
-                                
                                     <td>
-                                        <a class="btn btn-success" href="{{route('dokter.show',$value->iddokter)}}">
-                                            Detail
-                                        </a>
-                                    </td>
-                                    <td>
-                                        <a class="btn btn-warning" href="{{route('dokter.edit',$value->iddokter)}}">
-                                            Edit
-                                        </a>
+                                        <form onsubmit="return confirm('Apakah Anda Yakin ?');"
+                                              action="{{ route('daftar-dokter.destroy', $value->iddokter) }}"
+                                              method="POST">
+                                            <a href="{{route('daftar-dokter.show', $value->iddokter)}}"
+                                               class="btn btn-info btn-xl me-2">Detail</a>
+                                            <a href="{{route('daftar-dokter.edit', $value->iddokter)}}"
+                                               class="btn btn-warning btn-xl me-2">Edit</a>
+                                            @csrf
+                                            @method('DELETE')
+                                            <button class="btn btn-danger btn-xl" type="submit">
+                                                Delete
+                                            </button>
+                                        </form>
+{{--                                        <a class="btn btn-success me-2" href="{{route('dokter.show',$value->iddokter)}}">--}}
+{{--                                            Detail--}}
+{{--                                        </a>--}}
+{{--                                        <a class="btn btn-warning me-2" href="{{route('dokter.edit',$value->iddokter)}}">--}}
+{{--                                            Edit--}}
+{{--                                        </a>--}}
+{{--                                        <a class="btn btn-danger" href="{{route('dokter.edit',$value->iddokter)}}">--}}
+{{--                                            Delete--}}
+{{--                                        </a>--}}
                                     </td>
                                 </tr>
                                 @endforeach

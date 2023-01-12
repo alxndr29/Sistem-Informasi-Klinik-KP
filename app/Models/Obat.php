@@ -29,4 +29,5 @@ class Obat extends Model
     public function stokkeluar(){
         return $this->kunjungan()->sum('jumlah');
     }
+
 }

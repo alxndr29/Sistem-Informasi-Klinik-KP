@@ -17,7 +17,7 @@
         </fileTransfer>
       </webServer>
       <webServer id="a450ea98-59fc-4660-85d3-d6803320de73" name="Inotive - Manggar" url="http://inotive.id">
-        <fileTransfer host="inotive.id" port="21">
+        <fileTransfer rootFolder="/domains/inotive.id/public_html/tpa-manggar-new" host="inotive.id" port="21">
           <advancedOptions>
             <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
           </advancedOptions>

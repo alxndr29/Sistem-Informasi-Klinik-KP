@@ -1,9 +1,9 @@
 <div class="sidebar-wrapper">
     <div>
         <div class="logo-wrapper">
-            <a href="#"><img class="img-fluid for-light" src="{{asset('assets/images/logo/logo.png')}}" alt=""><img class="img-fluid for-dark" src="{{asset('assets/images/logo/logo_dark.png')}}" alt=""></a>
-            <div class="back-btn"><i class="fa fa-angle-left"></i></div>
-            <div class="toggle-sidebar"><i class="status_toggle middle sidebar-toggle" data-feather="grid"> </i></div>
+            <a href="{{route('dashboard.index')}}" class="fw-bold f-16">Klinik PMB Asy-Syifa </a>
+            {{--			<div class="back-btn"><i class="fa fa-angle-left"></i></div>--}}
+            {{--			<div class="toggle-sidebar"><i class="status_toggle middle sidebar-toggle" data-feather="grid"> </i></div>--}}
         </div>
         <div class="logo-icon-wrapper"><a href="#"><img class="img-fluid" src="{{asset('assets/images/logo/logo-icon.png')}}" alt=""></a></div>
         <nav class="sidebar-main">
@@ -27,8 +27,8 @@
                         </div>
                     </li>
                     <li class="sidebar-list"><a class="sidebar-link sidebar-title link-nav {{ Route::currentRouteName()=='pasien.index' ? 'active' : '' }}" href="{{route('pasien.index')}}"><i data-feather="users"> </i><span>Daftar Pasien</span></a></li>
-                    <li class="sidebar-list"><a class="sidebar-link sidebar-title link-nav {{ Route::currentRouteName()=='pendaftaran.index' ? 'active' : '' }}" href="{{route('pendaftaran.index')}}"><i data-feather="user-plus"> </i><span>Pendaftaran Pasien</span></a></li>
-                    <li class="sidebar-list"><a class="sidebar-link sidebar-title link-nav {{ Route::currentRouteName()=='pemeriksaan.index' ? 'active' : '' }}" href="{{route('pemeriksaan.index')}}"><i data-feather="user-check"> </i><span>Pemeriksaan Pasien</span></a></li>
+                    <li class="sidebar-list"><a class="sidebar-link sidebar-title link-nav {{ Route::currentRouteName()=='pendaftaran-pasien.index' ? 'active' : '' }}" href="{{route('pendaftaran-pasien.index')}}"><i data-feather="user-plus"> </i><span>Pendaftaran Pasien</span></a></li>
+                    <li class="sidebar-list"><a class="sidebar-link sidebar-title link-nav {{ Route::currentRouteName()=='pemeriksaan-pasien.index' ? 'active' : '' }}" href="{{route('pemeriksaan-pasien.index')}}"><i data-feather="user-check"> </i><span>Pemeriksaan Pasien</span></a></li>
 {{--                    <li class="sidebar-list"><a class="sidebar-link sidebar-title link-nav {{ Route::currentRouteName()=='pemeriksaan.index' ? 'active' : '' }}" href="{{route('pemeriksaan.index')}}"><i class="fa-solid fa-money-bill-wave-alt"></i><span class="px-3">Pembayaran</span></a></li>--}}
                     <li class="sidebar-main-title">
                         <div>
@@ -46,50 +46,61 @@
                     <li class="sidebar-list"><a class="sidebar-link sidebar-title link-nav {{ Route::currentRouteName()=='keuangan' ? 'active' : '' }}" href="{{route('keuangan')}}"><i class="fa-solid fa-receipt fa-lg mx-1"> </i><span>Keuangan</span></a></li>
                     <li class="sidebar-list"><a class="sidebar-link sidebar-title link-nav {{ Route::currentRouteName()=='piutang' ? 'active' : '' }}" href="{{route('piutang')}}"><i class="fa-solid fa-comments-dollar fa-md mx-1"> </i><span>Piutang</span></a></li>
                     <li class="sidebar-list"><a class="sidebar-link sidebar-title link-nav {{ Route::currentRouteName()=='cashflow' ? 'active' : '' }}" href="{{route('cashflow')}}"><i class="fa-solid fa-right-left fa-md mx-1"> </i><span>Cashflow</span></a></li>
-                    <li class="sidebar-main-title">
-                        <div>
-                            <h6>Konfigurasi</h6>
-                        </div>
-                    </li>
-                    <li class="sidebar-list">
-                        <a class="sidebar-link sidebar-title {{request()->route()->getPrefix() == '/manajemen-klinik' ? 'active' : '' }}" href="#"><i class="fa fa-clinic-medical fa-md mx-1"></i><span>Manajemen Klinik</span>
-                            <div class="according-menu"><i class="fa fa-angle-{{request()->route()->getPrefix() == '/manajemen-klinik' ? 'down' : 'right' }}"></i></div>
-                        </a>
-                        <ul class="sidebar-submenu" style="display: {{ request()->route()->getPrefix() == '/manajemen-klinik' ? 'block;' : 'none;' }}">
-                            <li><a class="lan-4 {{ Route::currentRouteName()== 'tindakan.index' ? 'active' : '' }}" href="{{route('tindakan.index')}}">Tindakan</a></li>
-                            <li><a class="lan-4 {{ Route::currentRouteName()=='poli.index' ? 'active' : '' }}" href="{{route('poli.index')}}">Poli</a></li>
-                        </ul>
-                    </li>
-                    <li class="sidebar-list">
-                        <a class="sidebar-link sidebar-title {{request()->route()->getPrefix() == '/produk' ? 'active' : '' }}" href="#"><i class="fa fa-boxes fa-md mx-1"></i><span>Produk</span>
-                            <div class="according-menu"><i class="fa fa-angle-{{request()->route()->getPrefix() == '/produk' ? 'down' : 'right' }}"></i></div>
-                        </a>
-                        <ul class="sidebar-submenu" style="display: {{ request()->route()->getPrefix() == '/produk' ? 'block;' : 'none;' }}">
-                            <li><a class="lan-4 {{ Route::currentRouteName()=='daftar-produk.index' ? 'active' : '' }}" href="{{route('daftar-produk.index')}}">Daftar Produk</a></li>
-                            <li><a class="lan-4 {{ Route::currentRouteName()=='kategori.index' ? 'active' : '' }}" href="{{route('kategori.index')}}">Kategori</a></li>
-                        </ul>
-                    </li>
+                    @if(Auth::user()->role == "Admin")
+                        <li class="sidebar-main-title">
+                            <div>
+                                <h6>Konfigurasi</h6>
+                            </div>
+                        </li>
+                        <li class="sidebar-list">
+                            <a class="sidebar-link sidebar-title {{request()->route()->getPrefix() == '/manajemen-klinik' ? 'active' : '' }}" href="#"><i class="fa fa-clinic-medical fa-md mx-1"></i><span>Manajemen Klinik</span>
+                                <div class="according-menu"><i class="fa fa-angle-{{request()->route()->getPrefix() == '/manajemen-klinik' ? 'down' : 'right' }}"></i></div>
+                            </a>
+                            <ul class="sidebar-submenu" style="display: {{ request()->route()->getPrefix() == '/manajemen-klinik' ? 'block;' : 'none;' }}">
+                                <li><a class="lan-4 {{ Route::currentRouteName()== 'tindakan.index' ? 'active' : '' }}" href="{{route('tindakan.index')}}">Tindakan</a></li>
+                                <li><a class="lan-4 {{ Route::currentRouteName()=='poli.index' ? 'active' : '' }}" href="{{route('poli.index')}}">Poli</a></li>
+                            </ul>
+                        </li>
+                        <li class="sidebar-list">
+                            <a class="sidebar-link sidebar-title {{request()->route()->getPrefix() == '/produk' ? 'active' : '' }}" href="#"><i class="fa fa-boxes fa-md mx-1"></i><span>Produk</span>
+                                <div class="according-menu"><i class="fa fa-angle-{{request()->route()->getPrefix() == '/produk' ? 'down' : 'right' }}"></i></div>
+                            </a>
+                            <ul class="sidebar-submenu" style="display: {{ request()->route()->getPrefix() == '/produk' ? 'block;' : 'none;' }}">
+                                <li><a class="lan-4 {{ Route::currentRouteName()=='daftar-produk.index' ? 'active' : '' }}" href="{{route('daftar-produk.index')}}">Daftar Produk</a></li>
+                                <li><a class="lan-4 {{ Route::currentRouteName()=='kategori.index' ? 'active' : '' }}" href="{{route('kategori.index')}}">Kategori</a></li>
+                            </ul>
+                        </li>
+
                     <li class="sidebar-list">
                         <a class="sidebar-link sidebar-title {{request()->route()->getPrefix() == '/manajemen-user' ? 'active' : '' }}" href="#"><i class="fa fa-users fa-md mx-1">
 
                             </i><span>Manajemen User</span>
                             <div class="according-menu"><i class="fa fa-angle-{{request()->route()->getPrefix() == '/manajemen-user' ? 'down' : 'right' }}"></i></div>
                         </a>
-                        <ul class="sidebar-submenu" style="display: {{ request()->route()->getPrefix() == 'pelayanan' ? 'block;' : 'none;' }}">
-                            <li><a class="lan-4 {{ Route::currentRouteName()=='user.index' ? 'active' : '' }}" href="{{route('user.index')}}">User Pengguna</a></li>
-                            <li><a class="lan-4 {{ Route::currentRouteName()=='dokter.index' ? 'active' : '' }}" href="{{route('dokter.index')}}">Dokter </a></li>
+                        <ul class="sidebar-submenu" style="display: {{ request()->route()->getPrefix() == '/manajemen-user' ? 'block;' : 'none;' }}">
+                            <li><a class="lan-4 {{ Route::currentRouteName()=='user-pengguna.index' ? 'active' : '' }}" href="{{route('user-pengguna.index')}}">User Pengguna</a></li>
+                            <li><a class="lan-4 {{ Route::currentRouteName()=='daftar-dokter.index' ? 'active' : '' }}" href="{{route('daftar-dokter.index')}}">Dokter </a></li>
                         </ul>
                     </li>
-                    <li class="sidebar-list">
-                        <a class="sidebar-link sidebar-title link-nav {{ request()->is('dokter*') ? 'active' : '' }}" href="{{route('dokter.index')}}">
-                            <i class="fa fa-warehouse fa-md mx-1"> </i><span>Data Dokter</span>
-                        </a>
+
+                    @endif
+
+                    <li class="sidebar-main-title">
+                        <div>
+                            <h6>develop</h6>
+                        </div>
                     </li>
                     <li class="sidebar-list">
                         <a class="sidebar-link sidebar-title link-nav {{ request()->is('dokter*') ? 'active' : '' }}" href="{{route('dokter.index')}}">
                             <i class="fa fa-warehouse fa-md mx-1"> </i><span>Data Dokter</span>
                         </a>
                     </li>
+                    <li class="sidebar-list">
+                        <a class="sidebar-link sidebar-title link-nav {{ request()->is('dokter*') ? 'active' : '' }}" href="{{route('dokter.index')}}">
+                            <i class="fa fa-warehouse fa-md mx-1"> </i><span>Data Dokter</span>
+                        </a>
+                    </li>
+
                     <li class="sidebar-list">
                         <a class="sidebar-link sidebar-title link-nav {{ request()->is('pasien*') ? 'active' : '' }}" href="{{route('pasien.index')}}">
                             <i class="fa fa-truck-loading fa-md mx-1"> </i><span>Data Pasien</span>

@@ -62,7 +62,7 @@
                                     <td>{{$value->nama_lengkap}}</td>
                                     <td>{{$value->tempat_lahir}}, {{$value->tanggal_lahir}}</td>
                                     <td>{{$value->alamat}}</td>
-                                    <td>{{$value->jenis_kelamin}}</td>
+                                    <td><span class="badge badge-{{$value->jenis_kelamin == "Laki-laki" ? 'primary' : 'secondary'}}">{{$value->jenis_kelamin}}</span></td>
                                     <td>{{$value->pekerjaan}}</td>
                                     <td>{{$value->agama}}</td>
                                     <td>

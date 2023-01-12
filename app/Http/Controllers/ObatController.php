@@ -16,7 +16,8 @@ class ObatController extends Controller
     public function index()
     {
         $obat = Obat::all();
-        return view('pages.obat.index', compact('obat'));
+        $kategori = DB::table('kategori')->get();
+        return view('pages.obat.index', compact('obat','kategori'));
     }
     public function create()
     {
@@ -32,7 +33,7 @@ class ObatController extends Controller
             $obat->satuan = $request->get('satuan');
             $obat->harga = $request->get('harga');
             $obat->save();
-            return redirect('obat/index')->with('pesan', 'Berhasil Tambah Data obat');
+            return redirect('obat/index')->with('success', 'Berhasil Tambah Data obat');
         } catch (\Exception $e) {
             return $e->getMessage();
         }
@@ -52,7 +53,7 @@ class ObatController extends Controller
             $obat->satuan = $request->get('satuan');
             $obat->harga = $request->get('harga');
             $obat->save();
-            return redirect('obat/index')->with('pesan', 'Berhasil Ubah Data obat');
+            return redirect('obat/index')->with('success', 'Berhasil Ubah Data obat');
         } catch (\Exception $e) {
             return $e->getMessage();
         }
@@ -66,7 +67,7 @@ class ObatController extends Controller
     {
         try {
             Obat::where('idobat', $id)->delete();
-            return redirect('obat/index')->with('pesan', 'Berhasil Hapus Data obat');
+            return redirect('obat/index')->with('success', 'Berhasil Hapus Data obat');
         } catch (\Exception $e) {
             return $e->getMessage();
         }
@@ -103,7 +104,7 @@ class ObatController extends Controller
     {
         if ($awal == null && $akhir == null) {
             $stokin = Stockin::all();
-          
+
         } else {
             $stokin = Stockin::where('tanggal', '', $awal)->where('tanggal', '', $akhir)->get();
         }
