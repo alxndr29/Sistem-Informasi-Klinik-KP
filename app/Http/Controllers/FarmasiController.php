@@ -3,21 +3,32 @@
 namespace App\Http\Controllers;
 
 use App\Models\Obat;
-
+use App\Models\Kunjungan;
+use App\Models\Stockin;
 class FarmasiController extends Controller
 {
-    public function stokBarang()
+    public function stokBarang($bulan = null)
     {
-
-        return view('pages.farmasi.stok-barang');
+        $obat = Obat::all();
+        return view('pages.farmasi.stok-barang', compact('obat'));
     }
-    public function obatMasuk()
+    public function obatMasuk($awal = null, $akhir = null)
     {
         $obats = Obat::all();
-        return view('pages.farmasi.stok-masuk',compact('obats'));
+        if ($awal == null && $akhir == null) {
+            $stokin = Stockin::all();
+        } else {
+            $stokin = Stockin::where('tanggal', '', $awal)->where('tanggal', '', $akhir)->get();
+        }
+        return view('pages.farmasi.stok-masuk', compact('stokin','obats'));
     }
-    public function obatKeluar()
+    public function obatKeluar($awal = null, $akhir = null)
     {
-        return view('pages.farmasi.stok-keluar');
+        if ($awal == null && $akhir == null) {
+            $kunjungan = Kunjungan::all();
+        } else {
+            $kunjungan = Kunjungan::where('tanggal', '', $awal)->where('tanggal', '', $akhir)->get();
+        }
+        return view('pages.farmasi.stok-keluar', compact('kunjungan'));
     }
 }

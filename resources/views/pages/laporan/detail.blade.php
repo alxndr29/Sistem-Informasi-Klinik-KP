@@ -31,7 +31,7 @@
                         <div class="mr-auto p-2">
                             <h3>Laporan</h3>
                         </div>
-                        <div class="p-2">
+                        <!-- <div class="p-2">
                             <select class="form-select digits" id="tahun">
                                 <option selected value="2022">2022</option>
                                 <option value="2021">2021</option>
@@ -54,7 +54,7 @@
                                 <option value="11">November</option>
                                 <option value="12">Desember</option>
                             </select>
-                        </div>
+                        </div> -->
                         <div class="p-2">
                             <button type="button" class="btn btn-primary" onClick="cari()">Cari Data</button>
                         </div>

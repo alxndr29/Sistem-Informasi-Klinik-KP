@@ -52,6 +52,8 @@ class LaporanController extends Controller
     }
     public function keuangan()
     {
-        return view('pages.laporan.keuangan');
+        // $kunjungan = Kunjungan::all();
+        // return view('pages.laporan.keuangan', compact('kunjungan'));
+        return redirect('laporan/index');
     }
 }

@@ -16,9 +16,17 @@ class Obat extends Model
 
     public function kunjungan()
     {
-        return $this->belongsToMany(Kunjungan::class, 'resep_stock_out', 'obat_idobat', 'kunjungan_idkunjungan')->withPivot('harga', 'jumlah', 'keterangan');
+        return $this->belongsToMany(Kunjungan::class, 'resep_stock_out', 'obat_idobat', 'kunjungan_idkunjungan')
+        ->withPivot('harga', 'jumlah', 'keterangan');
     }
     public function stokin(){
-        return $this->belongsToMany(Stockin::class, 'obat_has_stok_in', 'obat_idobat', 'stok_in_idstok_in')->withPivot('jumlah','harga');
+        return $this->belongsToMany(Stockin::class, 'obat_has_stok_in', 'obat_idobat', 'stok_in_idstok_in')
+        ->withPivot('jumlah','harga');
+    }
+    public function stokmasuk(){
+        return $this->stokin()->sum('jumlah');
+    }
+    public function stokkeluar(){
+        return $this->kunjungan()->sum('jumlah');
     }
 }

@@ -15,12 +15,13 @@ class PendaftaranPasienController extends Controller
     public function index()
     {
         $pasien = Pasien::all();
+        // return $pasien;
         $poli = Poli::all();
         $dokter = Dokter::all();
         return view('pages.pendaftaran.index', compact('pasien', 'poli', 'dokter'));
     }
     public function store(Request $request){
-
+        // return $request->all();
         try{
             $kunjungan = new Kunjungan();
             $kunjungan->status = "Menunggu Pemeriksaan";
@@ -33,7 +34,7 @@ class PendaftaranPasienController extends Controller
             $kunjungan->jam_selesai = null;
             $kunjungan->hasil_diagnosa = null;
             $kunjungan->save();
-            return redirect('pendaftaran/index')->with('pesan', 'Berhasil Melakukan Pendaftaran Pasien');
+            return redirect('pemeriksaan/index')->with('pesan', 'Berhasil Melakukan Pendaftaran Pasien. Pasien sudah ada di daftar antrian.');
         }catch(\Exception $e){
             return $e->getMessage();
         }

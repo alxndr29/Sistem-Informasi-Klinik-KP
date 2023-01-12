@@ -9,7 +9,7 @@ use App\Models\Obat;
 use App\Models\Stockin;
 use PhpParser\Node\Stmt\Catch_;
 use Illuminate\Support\Facades\DB;
-
+use App\Models\Kategori;
 class ObatController extends Controller
 {
     //
@@ -20,13 +20,17 @@ class ObatController extends Controller
     }
     public function create()
     {
-        return view('pages.obat.add');
+        $kategori = Kategori::all();
+        return view('pages.obat.add', compact('kategori'));
     }
     public function store(Request $request)
     {
         try {
             $obat = new Obat();
             $obat->nama = $request->get('nama');
+            $obat->kategori = $request->get('kategori');
+            $obat->satuan = $request->get('satuan');
+            $obat->harga = $request->get('harga');
             $obat->save();
             return redirect('obat/index')->with('pesan', 'Berhasil Tambah Data obat');
         } catch (\Exception $e) {
@@ -36,13 +40,17 @@ class ObatController extends Controller
     public function edit($id)
     {
         $obat = Obat::where('idobat', $id)->first();
-        return view('pages.obat.edit', compact('obat'));
+        $kategori = Kategori::all();
+        return view('pages.obat.edit', compact('obat','kategori'));
     }
     public function update(Request $request, $id)
     {
         try {
             $obat = Obat::find($id);
             $obat->nama = $request->get('nama');
+            $obat->kategori = $request->get('kategori');
+            $obat->satuan = $request->get('satuan');
+            $obat->harga = $request->get('harga');
             $obat->save();
             return redirect('obat/index')->with('pesan', 'Berhasil Ubah Data obat');
         } catch (\Exception $e) {
@@ -85,7 +93,7 @@ class ObatController extends Controller
                 }
             }
             DB::commit();
-            return redirect('obat/index')->with('pesan', 'Berhasil Tambah Stok Obat');
+            return redirect('farmasi/obat-masuk')->with('pesan', 'Berhasil Tambah Stok Obat');
         } catch (\Exception $e) {
             DB::rollBack();
             return $e->getMessage();

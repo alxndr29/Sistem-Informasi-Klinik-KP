@@ -38,6 +38,38 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="col">
+                                <div class="mb-3">
+                                    <label class="form-label">Harga</label>
+                                    <input class="form-control" type="number" placeholder="Masukan Harga Obat" data-bs-original-title="" title="" name="harga" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <div class="mb-3">
+                                    <label class="form-label">Kategori</label>
+                                    <select class="form-select" aria-label="Default select example" name="kategori">
+                                        @foreach ($kategori as $value)
+                                        <option value="{{$value->name}}">{{$value->name}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <div class="mb-3">
+                                    <label class="form-label">Satuan</label>
+                                    <select class="form-select" aria-label="Default select example" name="satuan">
+                                        <option value="Strip" selected>Strip</option>
+                                        <option value="Tablet">Tablet</option>
+                                        <option value="Sirup">Sirup</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="card-footer text-end">
                         <button class="btn btn-primary" type="submit" data-bs-original-title="" title="">Submit</button>

@@ -146,7 +146,7 @@ Route::middleware(['auth'])->group(function () {
         Route::prefix('pemeriksaan')->group(function () {
             Route::name('pemeriksaan.')->group(function () {
                 Route::get('index', 'index')->name('index');
-                Route::get('edit/{id}', 'edit')->name('edit')->middleware('doktercheck');
+                Route::get('edit/{id}', 'edit')->name('edit');//->middleware('doktercheck');
                 Route::get('bayar/{id}', 'bayar')->name('bayar');
                 Route::put('bayarput/{id}', 'bayarput')->name('bayarput');
                 Route::post('store', 'storeDokter')->name('storedokter');

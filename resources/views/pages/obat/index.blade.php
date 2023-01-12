@@ -44,6 +44,8 @@
                                 <tr>
                                     <th>No</th>
                                     <th>Nama</th>
+                                    <th>Kategori</th>
+                                    <th>Harga</th>
                                     <th>Edit</th>
                                 </tr>
                             </thead>
@@ -52,6 +54,8 @@
                                 <tr>
                                     <td>{{$key+1}}</td>
                                     <td>{{$value->nama}}</td>
+                                    <td>{{$value->kategori}}</td>
+                                    <td>Rp. {{number_format($value->harga)}}</td>
                                     <th>
                                         <a class="btn btn-primary" href="{{route('obat.edit',$value->idobat)}}">Edit</a>
                                     </th>

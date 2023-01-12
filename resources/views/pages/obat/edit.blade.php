@@ -9,7 +9,7 @@
 @endsection
 
 @section('breadcrumb-title')
-<h3>Ubah Data Pasien</h3>
+<h3>Ubah Data Obat</h3>
 @endsection
 
 @section('breadcrumb-items')
@@ -48,6 +48,43 @@
                                 <div class="mb-3">
                                     <label class="form-label">Nama</label>
                                     <input value="{{$obat->nama}}" class="form-control" type="text" placeholder="Masukan Nama" data-bs-original-title="" title="" name="nama" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <div class="mb-3">
+                                    <label class="form-label">Harga</label>
+                                    <input class="form-control" value="{{$obat->harga}}"type="number" placeholder="Masukan Harga Obat" data-bs-original-title="" title="" name="harga" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <div class="mb-3">
+                                    <label class="form-label">Kategori</label>
+                                    <select class="form-select" aria-label="Default select example" name="kategori">
+                                        @foreach ($kategori as $value)
+
+                                        @if ($value->name == $obat->kategori)
+                                        <option value="{{$value->name}}" selected>{{$value->name}}</option>
+                                        @endif
+                                        <option value="{{$value->name}}">{{$value->name}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <div class="mb-3">
+                                    <label class="form-label">Satuan</label>
+                                    <select class="form-select" aria-label="Default select example" name="satuan">
+                                        <option value="{{$obat->satuan}}}">{{$obat->satuan}}</option>
+                                        <option value="Strip">Strip</option>
+                                        <option value="Tablet">Tablet</option>
+                                        <option value="Sirup">Sirup</option>
+                                    </select>
                                 </div>
                             </div>
                         </div>

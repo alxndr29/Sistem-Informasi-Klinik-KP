@@ -33,10 +33,18 @@
                                                     href="#info-home" role="tab" aria-controls="info-home"
                                                     aria-selected="true" data-bs-original-title="" title=""><i
                                         class="icofont icofont-search"></i>Cari Pasien</a></li>
-                            <li class="nav-item"><a class="nav-link" id="profile-info-tab" data-bs-toggle="tab"
+                            <!-- <li class="nav-item">
+                                <a class="nav-link" id="profile-info-tab" data-bs-toggle="tab"
                                                     href="#info-profile" role="tab" aria-controls="info-profile"
                                                     aria-selected="false" data-bs-original-title="" title=""><i
-                                        class="icofont icofont-users"></i>Pendaftaran Pasien Baru</a></li>
+                                        class="icofont icofont-users"></i>Pendaftaran Pasien Baru
+                                    </a>
+                                    </li>
+                                    <li class="nav-item"> -->
+                                <a class="nav-link" href="{{url('pasien/add')}}" target="_blank"><i
+                                        class="icofont icofont-users"></i>Pendaftaran Pasien Baru
+                                    </a>
+                                </li>
                         </ul>
                         <div class="tab-content" id="info-tabContent">
                             <div class="tab-pane fade active show" id="info-home" role="tabpanel"
@@ -60,11 +68,10 @@
                                             @endphp
                                             @foreach($pasien as $data_pasien)
                                                 <tr>
-
                                                     <td>{{$i++}}</td>
                                                     <td class="text-center">{{$data_pasien->nama_lengkap}}</td>
                                                     <td class="text-center">
-                                                        23 Tahun
+                                                        {{\Carbon\Carbon::parse($data_pasien->tanggal_lahir)->age}} Tahun
                                                     </td>
                                                     <td class="text-center"><span
                                                             class="badge badge-{{$data_pasien->jenis_kelamin == 'Laki-laki' ? 'primary' : 'secondary'}}">{{$data_pasien->jenis_kelamin}}</span></td>
@@ -73,14 +80,12 @@
                                                     <td>
                                                         <button class="btn btn-primary" type="button" onclick=""
                                                                 data-bs-toggle="modal" data-original-title="test"
-                                                                data-bs-target="#exampleModal" data-bs-original-title=""
+                                                                data-bs-target="#exampleModal-{{$data_pasien->idpasien}}" data-bs-original-title=""
                                                                 title="">Daftar
                                                         </button>
-                                                        // Tertuju kehalaman Pemeriksaan Pasien
-                                                        // Tampilkan Notifikasi Pasin berhasil terdaftar pada antrian
+                                                        <!-- // Tertuju kehalaman Pemeriksaan Pasien
+                                                        // Tampilkan Notifikasi Pasin berhasil terdaftar pada antrian -->
                                                     </td>
-
-
                                                 </tr>
                                             @endforeach
                                             </tbody>
@@ -263,7 +268,6 @@
                                     Ipsum</p>
                             </div>
                         </div>
-
                     </div>
                     <div class="card-footer">
 
@@ -272,14 +276,16 @@
             </div>
         </div>
     </div>
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" style="display: none;"
+    @foreach($pasien as $data_pasien)
+    <div class="modal fade" id="exampleModal-{{$data_pasien->idpasien}}" tabindex="-1" aria-labelledby="exampleModalLabel" style="display: none;"
          aria-hidden="true">
         <div class="modal-dialog modal-xl" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Pendaftaran Pasien</h5>
                     <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"
-                            data-bs-original-title="" title=""></button>
+                            data-bs-original-title="" title="">
+                    </button>
                 </div>
                 <div class="modal-body">
                     <form method="post" action="{{route('pendaftaran.store')}}" class="form theme-form">
@@ -288,18 +294,17 @@
                             <div class="col-6">
                                 <label class="form-label" for="Pasien">Nama Pasien</label>
                                 <input class="form-control form-control-lg" disabled id="Pasien" type="email"
-                                       placeholder="name@example.com">
+                                       placeholder="name@example.com" value="{{$data_pasien->nama_lengkap}}">
                             </div>
                             <div class="col-6">
                                 <label class="form-label" for="exampleFormControlInput1">Jenis Kelamin</label>
                                 <input class="form-control form-control-lg" disabled id="exampleFormControlInput1"
                                        type="email"
-                                       placeholder="name@example.com">
+                                       placeholder="name@example.com" value="{{$data_pasien->jenis_kelamin}}">
                             </div>
                             <div class="col-12">
                                 <label class="form-label">Pilih Dokter</label>
                                 <select class="form-select digits" name="dokter" id="dokter" required>
-                                    <!-- <option value="" selected>-- Pilih Dokter --</option> -->
                                     @foreach ($dokter as $value)
                                         <option
                                             value="{{$value->iddokter}}">{{$value->nama_lengkap}}</option>
@@ -308,19 +313,24 @@
                             </div>
                             <div class="col-12">
                                 <label class="form-label">Pilih Poliklinik</label>
-                                <select class="form-select digits" name="dokter" id="dokter" required>
-                                    <!-- <option value="" selected>-- Pilih Dokter --</option> -->
+                                <select class="form-select digits" name="poli" id="poli" required>
                                     @foreach ($poli as $item)
                                         <option
-                                            value="{{$item->idpoli}}">{{$item->nama_lengkap}}</option>
+                                            value="{{$item->idpoli}}">{{$item->nama_lengkap}}
+                                        </option>
                                     @endforeach
                                 </select>
                             </div>
+                            <input type="hidden" name="pasien" value="{{$data_pasien->idpasien}}">
                             <div class="col-12">
                                 <label class="form-label">Keluhan / Diagnosa Awal</label>
-                                <textarea class="form-control" rows="3" name="diagnosa_awal"
-                                          required></textarea>
+                                <textarea class="form-control" rows="3" name="diagnosa_awal" required></textarea>
                             </div>
+                            <div class="col-6 w-50">
+                                <button class="btn btn-primary" type="submit" data-bs-original-title="" title="">
+                                    Daftar
+                                </button>
+                        </div>
                         </div>
                     </form>
                 </div>
@@ -332,15 +342,14 @@
                                     title="">Close
                             </button>
                         </div>
-                        <div class="col-6 w-50">
-                            <button class="btn btn-primary" type="button" data-bs-original-title="" title="">Daftar
-                            </button>
-                        </div>
+                        
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    @endforeach
+   
 @endsection
 
 @section('script')
@@ -360,21 +369,6 @@
             $('#poli').select2();
             $('#dokter').select2();
         });
-
-        {{--function daftar(id){--}}
-        {{--    $.ajax({--}}
-        {{--        type: 'POST',--}}
-        {{--        url: '{{route("pasien.show")}}',--}}
-        {{--        data: {--}}
-        {{--            '_token': '<?php echo csrf_token() ?>',--}}
-        {{--            'id': id,--}}
-        {{--        },--}}
-        {{--        success: function(v) {--}}
-        {{--            $('#sales').html(v.sales_order)--}}
-        {{--            $('#detail_so').html(v.detail_sales)--}}
-        {{--        }--}}
-        {{--    });--}}
-        {{--}--}}
     </script>
 
 @endsection

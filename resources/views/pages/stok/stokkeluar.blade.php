@@ -50,14 +50,21 @@
                         <table class="display" id="basic-1">
                             <thead>
                                 <tr>
-                                    <th>No</th>
+                                    <!-- <th>No</th>
                                     <th>ID Kunjungan</th>
                                     <th>Tanggal</th>
                                     <th>Nama</th>
                                     <th>Satuan</th>
                                     <th>Harga</th>
-                                    <th>Jumlah</th>
-
+                                    <th>Jumlah</th> -->
+                                    <th class="text-center">No</th>
+                                    <th class="text-center">Waktu dan Jam</th>
+                                    <th class="text-center">Produk</th>
+                                    <th class="text-center">Kategori</th>
+                                    <th class="text-center">Pasien</th>
+                                    <th class="text-center">Jumlah Stok Dikeluarkan</th>
+                                    <th class="text-center">Harga</th>
+                                    <th class="text-center">Grand Total</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -65,12 +72,13 @@
                                 @foreach ($value->obat as $obat)
                                 <tr>
                                     <td>{{$key+1}}</td>
-                                    <td>KJNG-{{$value->idkunjungan}}</td>
-                                    <td>{{$value->tanggal}}</td>
+                                    <td>{{$value->created_at}}</td>
                                     <td>{{$obat->nama}}</td>
-                                    <td>{{$obat->satuan}}</td>
-                                    <td>Rp. {{number_format($obat->pivot->harga)}}</td>
+                                    <td>{{$obat->kategori}}</td>
+                                    <td>{{$value->pasien->nama_lengkap}}</td>
                                     <td>{{$obat->pivot->jumlah}}</td>
+                                    <td>Rp. {{number_format($obat->pivot->harga)}}</td>
+                                    <td>Rp. {{number_format($obat->pivot->harga * $obat->pivot->jumlah)}}</td>
                                 </tr>
                                 @endforeach
                                 @endforeach

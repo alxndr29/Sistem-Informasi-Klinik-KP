@@ -61,7 +61,18 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @php
+                                @foreach ($obat as $key => $value )
+                                <tr>
+                                    <td class="text-center">{{$key+1}}</td>
+                                    <td class="text-center">{{$value->nama}}</td>
+                                    <td class="text-center">Rp.{{$value->harga}}</td>
+                                    <td class="text-center"><span class="badge badge-danger">{{$value->stokkeluar()}}</span></td>
+                                    <td class="text-center"><span class="badge badge-primary">{{$value->stokmasuk()}}</span></td>
+                                    <td class="text-center"><span class="badge badge-success">{{$value->stokmasuk() - $value->stokkeluar()}}</span></td>
+                                    <td class="text-center fw-bold">Rp.{{($value->stokmasuk() - $value->stokkeluar()) * $value->harga}}</td>
+                                </tr>
+                                @endforeach
+                                <!-- @php
                                 $i = 1;
                                 @endphp
                                 @for($i =0; $i <100;$i++)
@@ -75,20 +86,21 @@
                                         <td class="text-center fw-bold">Rp.{{number_format(random_int(50000,75000),0,',','.') }}</td>
                                     </tr>
                                 @endfor
-{{--                                @foreach($stockProduct as $items)--}}
-{{--                                <tr>--}}
-{{--                                    <td>{{$i++}}</td>--}}
-{{--                                    <td><a href="" class="fw-bold text-primary">{{$items->nama}}</a></td>--}}
-{{--                                    <td>{{$items->stok_awal ?? '0'}}</td>--}}
-{{--                                    <td>{{$items->stok_masuk ?? '0'}}</td>--}}
-{{--                                    <td>{{$items->stok_masuk + $items->stok_awal}}</td>--}}
-{{--                                    <td class="text-danger fw-bold">{{$items->stok_keluar ?? '0'}}</td>--}}
-{{--                                    <td style="text-align:right">{{number_format($items->harga,0,',','.') }}</td>--}}
-{{--                                    <td class="fw-bold text-success" style="text-align:right">{{number_format($items->harga * $items->stok_keluar,0,',','.') }}</td>--}}
-{{--                                    <td>{{$items->stok_awal + $items->stok_masuk - $items->stok_keluar }}</td>--}}
-{{--                                    <td class="fw-bold" style="text-align:right">{{number_format(($items->stok_awal + $items->stok_masuk - $items->stok_keluar) * $items->harga,0,',','.') }}</td>--}}
-{{--                                </tr>--}}
-{{--                                @endforeach--}}
+                                 -->
+                                {{-- @foreach($stockProduct as $items)--}}
+                                {{-- <tr>--}}
+                                {{-- <td>{{$i++}}</td>--}}
+                                {{-- <td><a href="" class="fw-bold text-primary">{{$items->nama}}</a></td>--}}
+                                {{-- <td>{{$items->stok_awal ?? '0'}}</td>--}}
+                                {{-- <td>{{$items->stok_masuk ?? '0'}}</td>--}}
+                                {{-- <td>{{$items->stok_masuk + $items->stok_awal}}</td>--}}
+                                {{-- <td class="text-danger fw-bold">{{$items->stok_keluar ?? '0'}}</td>--}}
+                                {{-- <td style="text-align:right">{{number_format($items->harga,0,',','.') }}</td>--}}
+                                {{-- <td class="fw-bold text-success" style="text-align:right">{{number_format($items->harga * $items->stok_keluar,0,',','.') }}</td>--}}
+                                {{-- <td>{{$items->stok_awal + $items->stok_masuk - $items->stok_keluar }}</td>--}}
+                                {{-- <td class="fw-bold" style="text-align:right">{{number_format(($items->stok_awal + $items->stok_masuk - $items->stok_keluar) * $items->harga,0,',','.') }}</td>--}}
+                                {{-- </tr>--}}
+                                {{-- @endforeach--}}
                                 {{-- @for($i = 1; $i<100; $i++)--}}
                                 {{-- <tr>--}}
                                 {{-- <td>{{$i}}</td>--}}
