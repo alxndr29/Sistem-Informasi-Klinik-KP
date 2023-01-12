@@ -26,20 +26,21 @@
     <div class="row">
         <div class="col-12">
             @if ($message = Session::get('success'))
-                <div class="alert alert-success dark alert-dismissible fade show" role="alert">
-                    <strong>Berhasil</strong> {{$message}}
-                    <button class="btn-close" type="button" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
+            <div class="alert alert-success dark alert-dismissible fade show" role="alert">
+                <strong>Berhasil</strong> {{$message}}
+                <button class="btn-close" type="button" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
             @endif
         </div>
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <button class="btn btn-primary" type="button" onclick=""
+                    <!-- <button class="btn btn-primary" type="button" onclick=""
                             data-bs-toggle="modal" data-original-title="test"
                             data-bs-target="#example-modal" data-bs-original-title=""
                             title="">Tambah Data Obat
-                    </button>
+                    </button> -->
+                    <a class="btn btn-secondary m-1" href="{{url('obat/index/add')}}">Tambah Data Obat</a>
                     <a class="btn btn-secondary m-1" href="{{route('obat.tambahstok')}}">Tambah Stok Obat</a>
                 </div>
                 <div class="card-body">
@@ -84,18 +85,16 @@
             <div class="row gy-4">
                 <div class="col-xl-12">
                     <label class="form-label" for="Kategori">Nama Obat</label>
-                    <input class="form-control" id="Kategori"
-                           placeholder="Masukan Kategori Produk" name="nama">
+                    <input class="form-control" id="Kategori" placeholder="Masukan Kategori Produk" name="nama">
                 </div>
                 <div class="col-12">
-                        <label class="form-label">Kategori</label>
-                        <select class="form-select digits" name="kategori" id="kategori" required>
-                            <!-- <option value="" selected>-- Pilih Dokter --</option> -->
-                            @foreach ($kategori as $value)
-                                <option
-                                    value="{{$value->name}}">{{$value->name}}</option>
-                            @endforeach
-                        </select>
+                    <label class="form-label">Kategori</label>
+                    <select class="form-select digits" name="kategori" id="kategori" required>
+                        <!-- <option value="" selected>-- Pilih Dokter --</option> -->
+                        @foreach ($kategori as $value)
+                        <option value="{{$value->name}}">{{$value->name}}</option>
+                        @endforeach
+                    </select>
                 </div>
             </div>
         </div>

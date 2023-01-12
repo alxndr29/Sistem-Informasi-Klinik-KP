@@ -113,17 +113,37 @@
                             <thead>
                                 <tr>
                                     <th>No</th>
-                                    <th>Nama</th>
-                                    <th>Poli Tujuan</th>
+                                    <th>Tanggal</th>
                                     <th>Jam Datang</th>
                                     <th>Jam Selesai</th>
-                                    <th>Tarif Obat</th>
-                                    <th>Tarif Periksa</th>
+                                    <th>Pasien</th>
+                                    <th>Poli</th>
+                                    <th>Hasil Diagnsoa</th>
+                                    <th>Tarif Berobat</th>
                                     <th>Status</th>
                                 </tr>
                             </thead>
                             <tbody>
+                                @foreach($dokter->kunjungan as $key => $value)
                                 <tr>
+                                    <td>{{$key+1}}</td>
+                                    <td>{{$value->tanggal}}</td>
+                                    <td>{{$value->jam_datang}}</td>
+                                    <td>{{$value->jam_selesai}}</td>
+                                    <td>{{$value->pasien->nama_lengkap}}</td>
+                                    <td>{{$value->poli->nama_lengkap}}</td>
+                                    <td>{{$value->hasil_diagnosa}}</td>
+                                    @if ($value->tarif_obat == null)
+                                    <td>Rp. {{$value->tarif_obat}}</td>
+                                    @else
+                                    <td>Belum Ada</td>
+                                    @endif
+
+                                    <!-- <td>{{$value->status}}</td> -->
+                                    <td><span class="badge badge-success">{{$value->status}}</span></td>
+                                </tr>
+                                @endforeach
+                                <!-- <tr>
                                     <td>No</td>
                                     <td>Nama</td>
                                     <td>Poli Tujuan</td>
@@ -132,7 +152,7 @@
                                     <td>Tarif Obat</td>
                                     <td>Tarif Periksa</td>
                                     <td><span class="badge badge-success"></span></td>
-                                </tr>
+                                </tr> -->
                             </tbody>
                         </table>
                     </div>

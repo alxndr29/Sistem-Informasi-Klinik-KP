@@ -33,7 +33,7 @@ class ObatController extends Controller
             $obat->satuan = $request->get('satuan');
             $obat->harga = $request->get('harga');
             $obat->save();
-            return redirect('obat/index')->with('success', 'Berhasil Tambah Data obat');
+            return redirect('produk/daftar-produk')->with('success', 'Berhasil Tambah Data obat');
         } catch (\Exception $e) {
             return $e->getMessage();
         }
@@ -53,7 +53,7 @@ class ObatController extends Controller
             $obat->satuan = $request->get('satuan');
             $obat->harga = $request->get('harga');
             $obat->save();
-            return redirect('obat/index')->with('success', 'Berhasil Ubah Data obat');
+            return redirect('produk/daftar-produk')->with('success', 'Berhasil Ubah Data obat');
         } catch (\Exception $e) {
             return $e->getMessage();
         }
@@ -67,7 +67,7 @@ class ObatController extends Controller
     {
         try {
             Obat::where('idobat', $id)->delete();
-            return redirect('obat/index')->with('success', 'Berhasil Hapus Data obat');
+            return redirect('produk/daftar-produk')->with('success', 'Berhasil Hapus Data obat');
         } catch (\Exception $e) {
             return $e->getMessage();
         }

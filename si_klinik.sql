@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.3
+-- version 5.1.2
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Waktu pembuatan: 12 Jan 2023 pada 14.28
+-- Waktu pembuatan: 12 Jan 2023 pada 15.27
 -- Versi server: 5.7.33
--- Versi PHP: 8.1.11
+-- Versi PHP: 8.1.3
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -45,7 +45,7 @@ CREATE TABLE `dokter` (
 --
 
 INSERT INTO `dokter` (`iddokter`, `nama_lengkap`, `created_at`, `updated_at`, `deleted_at`, `jenis_kelamin`, `tempat_lahir`, `tanggal_lahir`, `alamat`, `status`) VALUES
-(2, 'Dr DoLittle Edit', '2022-12-12 05:27:36', '2022-12-12 05:30:12', NULL, 'Perempuan', 'Jakarta Edit', '2023-12-12', 'Kokos Edit', 1);
+(1, 'Dr Strange', '2023-01-12 06:59:24', '2023-01-12 06:59:48', NULL, 'Perempuan', 'New York', '1965-02-12', 'Jln. Tenggilis X', 1);
 
 -- --------------------------------------------------------
 
@@ -82,8 +82,8 @@ CREATE TABLE `kategori` (
 --
 
 INSERT INTO `kategori` (`id`, `name`, `created_at`, `updated_at`, `deleted_at`, `deskripsi`) VALUES
-(1, 'Kategori baru', '2023-01-12 04:32:29', '2023-01-12 04:34:31', NULL, 'mantap'),
-(2, 'kategori lama jelek', '2023-01-12 04:46:55', '2023-01-12 04:47:42', NULL, 'tidak mantap jelek');
+(1, 'Obat Batuk Pilek', '2023-01-12 07:06:17', '2023-01-12 07:06:17', NULL, 'Deskripsi untuk obat batuk pilek'),
+(2, 'Obat Demam', '2023-01-12 07:06:28', '2023-01-12 07:06:28', NULL, 'Deskripsi untuk obat demam');
 
 -- --------------------------------------------------------
 
@@ -115,9 +115,7 @@ CREATE TABLE `kunjungan` (
 --
 
 INSERT INTO `kunjungan` (`idkunjungan`, `status`, `created_at`, `updated_at`, `pasien_idpasien`, `dokter_iddokter`, `poli_idpoli`, `diagnosa_awal`, `hasil_diagnosa`, `tanggal`, `jam_datang`, `jam_selesai`, `tarif_obat`, `status_bayar`, `metode_pembayaran`, `tarif_periksa`) VALUES
-(3, 'Selesai', '2022-12-18 06:55:55', '2022-12-19 06:12:22', 4, 2, 3, 'Tidak Sehat', 'Sudah sehat bosku', '2022-12-18', '02:55:55', '02:12:22', 26000, 0, 'Cash', 75000),
-(4, 'Menunggu Pemeriksaan', '2022-12-21 05:21:09', '2022-12-21 05:21:09', 2, 2, 2, 'tes', NULL, '2022-12-21', '01:21:09', NULL, NULL, 0, NULL, NULL),
-(5, 'Menunggu Pemeriksaan', '2023-01-11 21:25:56', '2023-01-11 21:25:56', 4, 2, 2, ',', NULL, '2023-01-12', '05:25:56', NULL, NULL, 0, NULL, NULL);
+(1, 'Selesai', '2023-01-12 07:01:45', '2023-01-12 07:15:27', 1, 1, 1, 'Tidak Bisa Melihat', 'Sudah sembuh bosku', '2023-01-12', '03:01:45', '03:15:27', 30000, 1, 'Cash', 10000);
 
 -- --------------------------------------------------------
 
@@ -130,27 +128,6 @@ CREATE TABLE `migrations` (
   `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `batch` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data untuk tabel `migrations`
---
-
-INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
-(1, '2014_10_12_000000_create_users_table', 1),
-(2, '2014_10_12_100000_create_password_resets_table', 1),
-(3, '2019_08_19_000000_create_failed_jobs_table', 1),
-(4, '2022_10_06_215330_create_customers_table', 2),
-(5, '2022_10_07_094114_create_suppliers_table', 2),
-(6, '2022_10_07_094406_create_product_uoms_table', 2),
-(7, '2022_10_07_114126_create_product_types_table', 2),
-(8, '2022_10_07_120544_create_product_categories_table', 2),
-(9, '2022_10_07_120825_create_purchases_order_table', 2),
-(10, '2022_10_07_121030_create_sales_order_table', 2),
-(11, '2022_10_08_094224_create_products_table', 2),
-(12, '2022_10_12_213850_create_stock_in_table', 2),
-(13, '2022_10_12_214317_create_stock_out_table', 2),
-(14, '2022_10_24_221910_create_stock_opnames_table', 2),
-(15, '2022_10_24_222025_create_detail_stock_opname', 2);
 
 -- --------------------------------------------------------
 
@@ -174,10 +151,8 @@ CREATE TABLE `obat` (
 --
 
 INSERT INTO `obat` (`idobat`, `nama`, `kategori`, `satuan`, `created_at`, `updated_at`, `deleted_at`, `harga`) VALUES
-(1, 'Paracetamol', 'Kategori baru', '', '2022-12-13 05:46:02', '2023-01-12 05:56:59', NULL, 50000),
-(2, 'Neozep Forte', 'Kategori baru', '', '2022-12-15 03:58:34', '2023-01-12 05:57:09', NULL, 60000),
-(3, 'Neuremacil', 'kategori lama jelek', '', '2022-12-15 03:58:50', '2023-01-12 05:57:18', NULL, 70000),
-(4, 'Bintang 7 Masuk Angin', 'kategori lama jelek', 'Tablet', '2023-01-12 05:57:41', '2023-01-12 05:57:41', NULL, 2500);
+(1, 'Sanmol 250Mg', 'Obat Demam', 'Strip', '2023-01-12 07:06:52', '2023-01-12 07:11:04', NULL, 7500),
+(2, 'Neozep Forte 250mg', 'Obat Batuk Pilek', 'Strip', '2023-01-12 07:10:54', '2023-01-12 07:10:54', NULL, 5000);
 
 -- --------------------------------------------------------
 
@@ -197,9 +172,9 @@ CREATE TABLE `obat_has_stok_in` (
 --
 
 INSERT INTO `obat_has_stok_in` (`obat_idobat`, `stok_in_idstok_in`, `jumlah`, `harga`) VALUES
-(1, 14, 2, 3000),
-(2, 14, 2, 4000),
-(3, 14, 2, 5000);
+(1, 1, 8, 2000),
+(1, 2, 12, 2000),
+(2, 1, 13, 2000);
 
 -- --------------------------------------------------------
 
@@ -230,9 +205,7 @@ CREATE TABLE `pasien` (
 --
 
 INSERT INTO `pasien` (`idpasien`, `tanggal`, `nik`, `no_bpjs`, `nama_lengkap`, `tempat_lahir`, `tanggal_lahir`, `jenis_kelamin`, `alamat`, `pekerjaan`, `agama`, `created_at`, `updated_at`, `deleted_at`, `status`) VALUES
-(2, '2022-12-06', '5308745689450002', '1111', 'Alexander', 'Maumere', '2000-10-29', 'Perempuan', 'Jln. Kokos Raya No 35', 'WIRASWASTA', 'ISLAM', '2022-12-05 04:47:42', '2022-12-06 05:51:12', NULL, 1),
-(3, '2022-12-06', '5816516161615', '8795416464', 'Richardo', 'Mataram', '2012-04-02', 'Perempuan', 'RMS V No 3', 'WIRASWASTA', 'BUDHA', '2022-12-05 07:18:55', '2022-12-06 06:06:56', NULL, 1),
-(4, '2022-12-06', '123', '456', 'Marianus', 'Ende', '1962-12-21', 'Laki-laki', 'Jln. Sultan Hassanudin', 'PNS', 'KATOLIK', '2022-12-06 05:53:11', '2022-12-06 05:53:11', NULL, 1);
+(1, '2023-01-12', '12345678', '123123', 'Gusti Bagus', 'Balikpapan', '1999-10-29', 'Laki-laki', 'Jln. Perumnas No 32', 'WIRASWASTA', 'BUDHA', '2023-01-12 06:57:38', '2023-01-12 06:58:04', NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -265,9 +238,7 @@ CREATE TABLE `poli` (
 --
 
 INSERT INTO `poli` (`idpoli`, `nama_lengkap`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 'Polikarbonat', '2022-12-12 06:13:08', '2022-12-12 06:14:21', '2022-12-12 06:14:21'),
-(2, 'Poli Gigi', '2022-12-12 06:14:33', '2022-12-12 06:14:33', NULL),
-(3, 'Poli Umum', '2022-12-12 06:14:40', '2022-12-12 06:14:40', NULL);
+(1, 'Poli Mata Batin', '2023-01-12 07:01:25', '2023-01-12 07:01:34', NULL);
 
 -- --------------------------------------------------------
 
@@ -288,8 +259,8 @@ CREATE TABLE `resep_stock_out` (
 --
 
 INSERT INTO `resep_stock_out` (`kunjungan_idkunjungan`, `obat_idobat`, `jumlah`, `harga`, `keterangan`) VALUES
-(3, 1, 2, 2500, '1x1'),
-(3, 2, 1, 7000, '3x1');
+(1, 1, 2, 10000, '1x1'),
+(1, 2, 2, 5000, '3x1');
 
 -- --------------------------------------------------------
 
@@ -309,12 +280,8 @@ CREATE TABLE `stok_in` (
 --
 
 INSERT INTO `stok_in` (`idstok_in`, `tanggal`, `created_at`, `updated_at`) VALUES
-(10, '2022-12-18', '2022-12-18 02:24:20', '2022-12-18 02:24:20'),
-(11, '2022-12-19', '2022-12-19 05:04:47', '2022-12-19 05:04:47'),
-(12, '2022-12-19', '2022-12-19 05:55:20', '2022-12-19 05:55:20'),
-(13, '2022-12-19', '2022-12-19 05:55:32', '2022-12-19 05:55:32'),
-(14, '2023-01-12', '2023-01-11 21:01:23', '2023-01-11 21:01:23'),
-(15, '2023-01-12', '2023-01-11 21:36:40', '2023-01-11 21:36:40');
+(1, '2023-01-12', '2023-01-12 07:11:34', '2023-01-12 07:11:34'),
+(2, '2023-01-12', '2023-01-12 07:21:52', '2023-01-12 07:21:52');
 
 -- --------------------------------------------------------
 
@@ -340,7 +307,8 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `role`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
 (1, 'Admin', 'Evan', 'evan@evan.com', NULL, '$2y$10$kG/fE9u0bfYMzesyaHGCbOzlhnEH.Z5DcIFb3qUThltL8BQUlzfDS', NULL, '2022-12-05 03:20:40', '2022-12-05 03:20:40'),
-(2, 'Dokter', 'Gusti Bagus', 'qwe@gmail.com', NULL, '$2y$10$TjiR1ifocjVoUpWoRa/Xw.ZOrbO6mReC9n8PhmS5A/wbLQekXC9ze', NULL, '2022-12-21 05:20:19', '2022-12-21 05:20:19');
+(2, 'Dokter', 'Gusti Bagus', 'qwe@gmail.com', NULL, '$2y$10$TjiR1ifocjVoUpWoRa/Xw.ZOrbO6mReC9n8PhmS5A/wbLQekXC9ze', NULL, '2022-12-21 05:20:19', '2022-12-21 05:20:19'),
+(3, 'Dokter', 'Dr Strange', 'strange@strange.com', NULL, '$2y$10$65rGQiBgcNtQlOE4fq1im.0F9rvXJerMoge5hhOqHnfB5r9RGoZvy', NULL, '2023-01-12 06:59:24', '2023-01-12 06:59:48');
 
 --
 -- Indexes for dumped tables
@@ -440,7 +408,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT untuk tabel `dokter`
 --
 ALTER TABLE `dokter`
-  MODIFY `iddokter` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `iddokter` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT untuk tabel `failed_jobs`
@@ -458,43 +426,43 @@ ALTER TABLE `kategori`
 -- AUTO_INCREMENT untuk tabel `kunjungan`
 --
 ALTER TABLE `kunjungan`
-  MODIFY `idkunjungan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `idkunjungan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT untuk tabel `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT untuk tabel `obat`
 --
 ALTER TABLE `obat`
-  MODIFY `idobat` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `idobat` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT untuk tabel `pasien`
 --
 ALTER TABLE `pasien`
-  MODIFY `idpasien` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `idpasien` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT untuk tabel `poli`
 --
 ALTER TABLE `poli`
-  MODIFY `idpoli` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `idpoli` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT untuk tabel `stok_in`
 --
 ALTER TABLE `stok_in`
-  MODIFY `idstok_in` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `idstok_in` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT untuk tabel `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)

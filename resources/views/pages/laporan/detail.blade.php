@@ -54,10 +54,11 @@
                                 <option value="11">November</option>
                                 <option value="12">Desember</option>
                             </select>
-                        </div> -->
+                        </div>
                         <div class="p-2">
                             <button type="button" class="btn btn-primary" onClick="cari()">Cari Data</button>
                         </div>
+                         -->
                     </div>
                     <div class="text-center">
                         Total Pendapatan: Rp. {{number_format($total)}}
