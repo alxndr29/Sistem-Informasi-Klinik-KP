@@ -1,5 +1,5 @@
 @extends('layouts.simple.master')
-@section('title', 'Satuan Produk')
+@section('title', 'Detail Dokter')
 
 @section('css')
 <link rel="stylesheet" type="text/css" href="{{asset('assets/css/vendors/datatables.css')}}">
@@ -29,7 +29,7 @@
                     <h5>Data Diri Dokter</h5>
                 </div>
                 <div class="card-body">
-                    
+
                     <div class="row">
                         <div class="col">
                             <div class="mb-3">
@@ -100,7 +100,7 @@
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
                         <div class="">
-                            <h3>Riwayat Berobat Pasien<h3>
+                            <h3>Riwayat Penanganan Pasien<h3>
                         </div>
                         <div class="">
 
@@ -113,19 +113,26 @@
                             <thead>
                                 <tr>
                                     <th>No</th>
-                                    <th>NIK</th>
-                                    <th>BPJS No</th>
                                     <th>Nama</th>
-                                    <th>TTL</th>
-                                    <th>Jenis Kelamin</th>
-                                    <th>Alamat</th>
-                                    <th>Pekerjaan</th>
-                                    <th>Agama</th>
-                                    <th>Detail</th>
-                                    <th>Edit</th>
+                                    <th>Poli Tujuan</th>
+                                    <th>Jam Datang</th>
+                                    <th>Jam Selesai</th>
+                                    <th>Tarif Obat</th>
+                                    <th>Tarif Periksa</th>
+                                    <th>Status</th>
                                 </tr>
                             </thead>
                             <tbody>
+                                <tr>
+                                    <td>No</td>
+                                    <td>Nama</td>
+                                    <td>Poli Tujuan</td>
+                                    <td>Jam Datang</td>
+                                    <td>Jam Selesai</td>
+                                    <td>Tarif Obat</td>
+                                    <td>Tarif Periksa</td>
+                                    <td><span class="badge badge-success"></span></td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>

@@ -13,7 +13,7 @@ class Dokter extends Model
     protected $dates = ['deleted_at'];
     protected $table = 'dokter';
     protected $primaryKey = 'iddokter';
-
+    protected $fillable = ['nama_lengkap','jenis_kelamin','tempat_lahir','tanggal_lahir','alamat'];
     public function kunjungan(){
         return $this->hasMany(Kunjungan::class);
     }

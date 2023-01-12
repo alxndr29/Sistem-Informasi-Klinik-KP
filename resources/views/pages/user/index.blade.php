@@ -1,5 +1,5 @@
 @extends('layouts.simple.master')
-@section('title', 'Satuan Produk')
+@section('title', 'Daftar Dokter')
 
 @section('css')
 <link rel="stylesheet" type="text/css" href="{{asset('assets/css/vendors/datatables.css')}}">
@@ -14,27 +14,27 @@
 
 @section('breadcrumb-items')
 <li class="breadcrumb-item">
-    Transaksi
+    Manajemen User
 </li>
-<li class="breadcrumb-item">Daf</li>
-<li class="breadcrumb-item active">Buat Transaksi</li>
+<li class="breadcrumb-item active">Daftar User</li>
 @endsection
 
 @section('content')
 
 <div class="container-fluid">
     <div class="row">
+        <div class="row">
+            @if ($message = Session::get('success'))
+                <div class="alert alert-success dark alert-dismissible fade show" role="alert">
+                    <strong>Berhasil</strong> {{$message}}
+                    <button class="btn-close" type="button" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            @endif
+        </div>
         <div class="col">
             <div class="card">
                 <div class="card-header">
-                    <div class="d-flex justify-content-between">
-                        <div class="">
-                            <h3>Daftar Data User<h3>
-                        </div>
-                        <div class="">
-                            <a class="btn btn-primary" href="{{route('user.create')}}">Tambah Data User</a>
-                        </div>
-                    </div>
+                    <a class="btn btn-primary" href="{{route('user.create')}}">Tambah Data User</a>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
@@ -45,7 +45,7 @@
                                     <th>Jabatan</th>
                                     <th>Nama</th>
                                     <th>email</th>
-                                    <th>edit</th>
+                                    <th>Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -55,8 +55,18 @@
                                     <td><span class="badge badge-{{$value->role == 'Dokter' ? 'primary' : 'secondary'}}">{{$value->role}}</span></td>
                                     <td>{{$value->name}}</td>
                                     <td>{{$value->email}}</td>
-                                    <td><a href="{{route('user.edit',$value->id)}}" class="btn btn-outline-warning me-2">Edit</a>
-                                        <a href="{{route('user.edit',$value->id)}}" class="btn btn-outline-danger">Delete</a>
+                                    <td>
+                                        <form onsubmit="return confirm('Apakah Anda Yakin ?');"
+                                              action="{{ route('user-pengguna.destroy', $value->id) }}"
+                                              method="POST">
+                                            <a href="{{route('user-pengguna.edit', $value->id)}}"
+                                               class="btn btn-warning btn-xl me-2">Edit</a>
+                                            @csrf
+                                            @method('DELETE')
+                                            <button class="btn btn-danger btn-xs" type="submit">
+                                                Delete
+                                            </button>
+                                        </form>
                                     </td>
                                 </tr>
                                 @endforeach

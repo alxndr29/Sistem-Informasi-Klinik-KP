@@ -9,15 +9,16 @@
 @endsection
 
 @section('breadcrumb-title')
-<h3>Tambah Data User Baru</h3>
+<h3>Edit User - {{$user->name}}</h3>
 @endsection
 
 @section('breadcrumb-items')
 <li class="breadcrumb-item">
-    Pelayanan
+    Dashboard
 </li>
-<li class="breadcrumb-item">Pelayanan</li>
-<li class="breadcrumb-item active">Tambah User</li>
+<li class="breadcrumb-item">Manajemen User</li>
+<li class="breadcrumb-item"><a href="{{ route('user-pengguna.index') }}">Daftar User</a></li>
+<li class="breadcrumb-item active">Edit User</li>
 @endsection
 @section('content')
 <div class="container-fluid">

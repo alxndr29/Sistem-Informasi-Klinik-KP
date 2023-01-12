@@ -2,21 +2,31 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2ea64314-2dd2-4b21-9338-cb52a29c32ea" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/resources/views/pages/farmasi/stok-barang.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/pages/farmasi/stok-keluar.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/pages/farmasi/stok-masuk.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/pages/tindakan/edit.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/pages/tindakan/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/webServers.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/webServers.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/DokterController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/DokterController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/KategoriController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/KategoriController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/LaporanController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/LaporanController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/TindakanController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/TindakanController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ObatController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ObatController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/Dokter.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Dokter.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/Obat.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Obat.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/components/modal-large.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/components/modal-large.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/dashboard/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/dashboard/index.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/layouts/simple/sidebar.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/simple/sidebar.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/pages/dokter/add.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pages/dokter/add.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/pages/dokter/edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pages/dokter/edit.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/pages/dokter/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pages/dokter/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/pages/dokter/show.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pages/dokter/show.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/pages/farmasi/stok-masuk.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pages/farmasi/stok-masuk.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/pages/kategori/edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pages/kategori/edit.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/pages/kategori/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pages/kategori/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/pages/laporan/cashflow.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pages/laporan/cashflow.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/pages/pendaftaran/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pages/pendaftaran/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/pages/laporan/keuangan.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pages/laporan/keuangan.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/pages/obat/edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pages/obat/edit.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/pages/obat/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pages/obat/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/pages/pasien/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pages/pasien/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/pages/pemeriksaan/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pages/pemeriksaan/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/pages/user/add.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pages/user/add.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/pages/user/edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pages/user/edit.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/pages/user/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pages/user/index.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
@@ -169,7 +179,7 @@
     "WebServerToolWindowPanel.toolwindow.show.size": "false",
     "last_opened_file_path": "C:/Users/gusba/Desktop/SI-Klinik-KP/resources/views/pages/farmasi",
     "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "settings.editor.selected.configurable": "editor.preferences.fonts.default",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -212,7 +222,10 @@
       <workItem from="1673345716105" duration="598000" />
       <workItem from="1673350808108" duration="975000" />
       <workItem from="1673351980992" duration="10000" />
-      <workItem from="1673352003795" duration="7501000" />
+      <workItem from="1673352003795" duration="13653000" />
+      <workItem from="1673490928860" duration="1068000" />
+      <workItem from="1673492040691" duration="660000" />
+      <workItem from="1673492805246" duration="16648000" />
     </task>
     <servers />
   </component>

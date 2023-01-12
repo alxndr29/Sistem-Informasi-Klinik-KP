@@ -21,4 +21,5 @@ class Obat extends Model
     public function stokin(){
         return $this->belongsToMany(Stockin::class, 'obat_has_stok_in', 'obat_idobat', 'stok_in_idstok_in')->withPivot('jumlah','harga');
     }
+
 }

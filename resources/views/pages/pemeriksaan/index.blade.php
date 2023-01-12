@@ -123,6 +123,7 @@
                         <div>
                             <h3>Data Pemeriksaan Pasien<h3>
                         </div>
+                        <a href="" class="btn btn-primary">Refresh Data</a>
                     </div>
                 </div>
                 <div class="card-body">
@@ -152,9 +153,9 @@
                                     <td>{{$value->dokter->nama_lengkap}}</td>
                                     <td>
                                         @if($value->status == "Menunggu Pemeriksaan")
-                                            <span class="badge badge-warning">Menunggu Pemeriksaan</span>
+                                            <span class="badge badge-warning text-dark">Menunggu Pemeriksaan</span>
                                         @elseif($value->status == "Menunggu Pembayaran")
-                                            <span class="badge badge-warning">Menunggu Pembayaran</span>
+                                            <span class="badge badge-warning text-dark">Menunggu Pembayaran</span>
                                         @else
                                             <span class="badge badge-success">Selesai</span>
                                         @endif

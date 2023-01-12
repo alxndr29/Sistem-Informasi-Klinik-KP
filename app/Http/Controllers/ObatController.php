@@ -16,7 +16,8 @@ class ObatController extends Controller
     public function index()
     {
         $obat = Obat::all();
-        return view('pages.obat.index', compact('obat'));
+        $kategori = DB::table('kategori')->get();
+        return view('pages.obat.index', compact('obat','kategori'));
     }
     public function create()
     {
@@ -27,8 +28,9 @@ class ObatController extends Controller
         try {
             $obat = new Obat();
             $obat->nama = $request->get('nama');
+            $obat->kategori = $request->get('kategori');
             $obat->save();
-            return redirect('obat/index')->with('pesan', 'Berhasil Tambah Data obat');
+            return redirect('obat/index')->with('success', 'Berhasil Tambah Data obat');
         } catch (\Exception $e) {
             return $e->getMessage();
         }
@@ -36,15 +38,17 @@ class ObatController extends Controller
     public function edit($id)
     {
         $obat = Obat::where('idobat', $id)->first();
-        return view('pages.obat.edit', compact('obat'));
+        $kategori = DB::table('kategori')->get();
+        return view('pages.obat.edit', compact('obat','kategori'));
     }
     public function update(Request $request, $id)
     {
         try {
             $obat = Obat::find($id);
             $obat->nama = $request->get('nama');
+            $obat->kategori = $request->get('kategori');
             $obat->save();
-            return redirect('obat/index')->with('pesan', 'Berhasil Ubah Data obat');
+            return redirect('obat/index')->with('success', 'Berhasil Ubah Data obat');
         } catch (\Exception $e) {
             return $e->getMessage();
         }
@@ -58,7 +62,7 @@ class ObatController extends Controller
     {
         try {
             Obat::where('idobat', $id)->delete();
-            return redirect('obat/index')->with('pesan', 'Berhasil Hapus Data obat');
+            return redirect('obat/index')->with('success', 'Berhasil Hapus Data obat');
         } catch (\Exception $e) {
             return $e->getMessage();
         }
@@ -85,7 +89,7 @@ class ObatController extends Controller
                 }
             }
             DB::commit();
-            return redirect('obat/index')->with('pesan', 'Berhasil Tambah Stok Obat');
+            return redirect('obat/index')->with('success', 'Berhasil Tambah Stok Obat');
         } catch (\Exception $e) {
             DB::rollBack();
             return $e->getMessage();
@@ -95,7 +99,7 @@ class ObatController extends Controller
     {
         if ($awal == null && $akhir == null) {
             $stokin = Stockin::all();
-          
+
         } else {
             $stokin = Stockin::where('tanggal', '', $awal)->where('tanggal', '', $akhir)->get();
         }

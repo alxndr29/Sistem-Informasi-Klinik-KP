@@ -1,5 +1,5 @@
 @extends('layouts.simple.master')
-@section('title', 'Form Tambah Pasien')
+@section('title', 'Edit Dokter')
 
 @section('css')
 <link rel="stylesheet" type="text/css" href="{{asset('assets/css/vendors/datatables.css')}}">
@@ -9,14 +9,12 @@
 @endsection
 
 @section('breadcrumb-title')
-<h3>Ubah Data Pasien</h3>
+<h3>Edit Data Dokter - {{$dokter->nama_lengkap}}</h3>
 @endsection
 
 @section('breadcrumb-items')
-<li class="breadcrumb-item">
-    Pelayanan
-</li>
-<li class="breadcrumb-item">Pelayanan</li>
+<li class="breadcrumb-item">Manajemen User</li>
+<li class="breadcrumb-item"><a href="{{route('daftar-dokter.index')}}">Daftar Dokter</a></li>
 <li class="breadcrumb-item active">Edit Dokter</li>
 @endsection
 @section('content')
@@ -28,13 +26,6 @@
                     <div class="d-flex justify-content-between">
                         <div class="">
                             <h5>Form Ubah Data Dokter</h5>
-                        </div>
-                        <div class="">
-                            <form method="post" action="{{route('dokter.delete',$dokter->iddokter)}}">
-                                @csrf
-                                @method('delete')
-                                <button type="submit" class="btn btn-danger">Hapus</button>
-                            </form>
                         </div>
                     </div>
                 </div>
@@ -74,7 +65,7 @@
                                 </div>
                             </div>
                         </div>
-                       
+
                         <div class="row">
                             <div class="col">
                                 <label class="form-label">Jenis Kelamin</label>

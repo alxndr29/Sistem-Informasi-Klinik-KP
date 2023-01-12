@@ -48,7 +48,7 @@
             <div class="col-3">
                 <div class="card">
                     <div class="card-body">
-                        <h6 class="mb-4">J</h6>
+                        <h6 class="mb-4">Jumlah Obat Di Miliki</h6>
                         <h3 class="mb-4">Rp. 15.000.000</h3>
                     </div>
                 </div>
@@ -57,29 +57,43 @@
         <div class="row">
             <div class="col-12">
                 <div class="card">
-                    <div class="card-header">
+                    <div class="card-header d-flex justify-content-between">
                         <h5>Daftar Kunjungan Pasien Hari Ini</h5>
+                        <div>
+                            @php
+                                setlocale(LC_TIME, 'id_ID');
+                                \Carbon\Carbon::setLocale('id');
+                            @endphp
+                            <h5>{{\Carbon\Carbon::now()->formatLocalized("%A, %d %B %Y");}} <span id="jam-terkini"></span></h5>
+
+                        </div>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="display" id="table-1">
+                            <table class="display" id="basic-1">
                                 <thead>
-                                    <tr>
-                                        <th>1</th>
-                                        <th>2</th>
-                                        <th>3</th>
-                                        <th>4</th>
-                                        <th>5</th>
-                                    </tr>
+                                <tr>
+                                    <th class="text-center">No.Antrian</th>
+                                    <th class="text-center">Jam</th>
+                                    <th class="text-center">Nama Pasien</th>
+                                    <th class="text-center">Total Biaya</th>
+                                    <th class="text-center">Status</th>
+                                </tr>
                                 </thead>
                                 <tbody>
+                                @for($i = 1; $i <100; $i++)
                                     <tr>
-                                        <td>1</td>
-                                        <td>5</td>
-                                        <td>2</td>
-                                        <td>3</td>
-                                        <td>4</td>
+                                        <td class="text-center">Antrian - {{$i}}</td>
+                                        <td class="text-center">10:00</td>
+                                        <td class="text-center">Pasien {{$i}}</td>
+                                        <td class="text-center">
+                                            Rp.{{number_format(random_int(50000,75000),0,',','.') }}</td>
+                                        <td class="text-center"><span
+                                                class="badge badge-warning text-dark">Menunggu Pemeriksaan</span>
+                                            <span class="badge badge-success">Selesai di tangani</span>
+                                        </td>
                                     </tr>
+                                @endfor
                                 </tbody>
                             </table>
                         </div>
@@ -237,4 +251,11 @@
 @section('script')
     <script src="{{asset('assets/js/datatable/datatables/jquery.dataTables.min.js')}}"></script>
     <script src="{{asset('assets/js/datatable/datatables/datatable.custom.js')}}"></script>
+    <script>
+        let myVar = setInterval(myTimer ,1000);
+        function myTimer() {
+            const d = new Date();
+            document.getElementById("jam-terkini").innerHTML = d.toLocaleTimeString();
+        }
+    </script>
 @endsection

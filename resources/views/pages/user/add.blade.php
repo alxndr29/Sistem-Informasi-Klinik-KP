@@ -14,9 +14,9 @@
 
 @section('breadcrumb-items')
 <li class="breadcrumb-item">
-    Pelayanan
+    Dashboard
 </li>
-<li class="breadcrumb-item">Pelayanan</li>
+<li class="breadcrumb-item"><a href="{{route('user-pengguna.index')}}">Daftar User</a></li>
 <li class="breadcrumb-item active">Tambah User</li>
 @endsection
 @section('content')
@@ -24,7 +24,7 @@
     <div class="row">
         <div class="col-sm-12">
             <div class="card">
-                <div class="card-header">
+                <div class="card-header p-4">
                     <h5>Form Data User Baru</h5>
                 </div>
                 <form method="post" action="{{route('user.store')}}" class="form theme-form">
@@ -42,7 +42,7 @@
                             <div class="col">
                                 <div class="mb-3">
                                     <label class="form-label">Email</label>
-                                    <input class="form-control" type="email" placeholder="Masukan Nama Lengkap" data-bs-original-title="" title="" name="email" required>
+                                    <input class="form-control" type="email" placeholder="Masukan Email Untuk Login" data-bs-original-title="" title="" name="email" required>
                                 </div>
                             </div>
                         </div>
@@ -50,7 +50,7 @@
                             <div class="col">
                                 <div class="mb-3">
                                     <label class="form-label">Password</label>
-                                    <input class="form-control" type="password" placeholder="Masukan Nama Lengkap" data-bs-original-title="" title="" name="password" required>
+                                    <input class="form-control" type="password" placeholder="Masukan Password" data-bs-original-title="" title="" name="password" required>
                                 </div>
                             </div>
                         </div>
@@ -59,8 +59,8 @@
                                 <div class="mb-3">
                                     <label class="form-label">Role</label>
                                     <select class="form-select digits" name="role">
-                                        <option value="admin">admin</option>
-                                        <option value="dokter" selected>dokter</option>
+                                        <option value="Admin">Admin</option>
+                                        <option value="Dokter" selected>Dokter</option>
                                     </select>
                                 </div>
                             </div>

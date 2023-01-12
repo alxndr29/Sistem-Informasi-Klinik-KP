@@ -24,36 +24,53 @@
 
 <div class="container-fluid">
     <div class="row">
-        <div class="col">
+        <div class="col-12">
+            @if ($message = Session::get('success'))
+                <div class="alert alert-success dark alert-dismissible fade show" role="alert">
+                    <strong>Berhasil</strong> {{$message}}
+                    <button class="btn-close" type="button" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            @endif
+        </div>
+        <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <div class="d-flex justify-content-between">
-                        <div class="">
-                            <h3>Daftar Data Obat<h3>
-                        </div>
-                        <div class="">
-                            <a class="btn btn-primary m-1" href="{{route('obat.create')}}">Tambah Data Obat</a>
-                            <a class="btn btn-primary m-1" href="{{route('obat.tambahstok')}}">Tambah Stok Obat</a>
-                        </div>
-                    </div>
+                    <button class="btn btn-primary" type="button" onclick=""
+                            data-bs-toggle="modal" data-original-title="test"
+                            data-bs-target="#example-modal" data-bs-original-title=""
+                            title="">Tambah Data Obat
+                    </button>
+                    <a class="btn btn-secondary m-1" href="{{route('obat.tambahstok')}}">Tambah Stok Obat</a>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
                         <table class="display" id="basic-1">
                             <thead>
                                 <tr>
-                                    <th>No</th>
-                                    <th>Nama</th>
-                                    <th>Edit</th>
+                                    <th class="text-center">No</th>
+                                    <th class="text-center">Kategori Obat</th>
+                                    <th class="text-center">Nama</th>
+                                    <th class="text-center">Edit</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($obat as $key => $value)
                                 <tr>
-                                    <td>{{$key+1}}</td>
-                                    <td>{{$value->nama}}</td>
-                                    <th>
-                                        <a class="btn btn-primary" href="{{route('obat.edit',$value->idobat)}}">Edit</a>
+                                    <td class="text-center" >{{$key+1}}</td>
+                                    <td class="text-center"><span class="badge badge-info">{{$value->kategori}}</span></td>
+                                    <td class="text-center">{{$value->nama}}</td>
+                                    <th class="text-center">
+                                        <form onsubmit="return confirm('Apakah Anda Yakin ?');"
+                                              action="{{ route('obat.delete', $value->idobat) }}"
+                                              method="POST">
+                                            <a href="{{route('obat.edit', $value->idobat)}}"
+                                               class="btn btn-warning btn-xl me-2">Edit</a>
+                                            @csrf
+                                            @method('DELETE')
+                                            <button class="btn btn-danger btn-xs" type="submit">
+                                                Delete
+                                            </button>
+                                        </form>
                                     </th>
                                 </tr>
                                 @endforeach
@@ -68,6 +85,34 @@
         </div>
     </div>
 </div>
+<x-modal-large title="Obat ">
+    <form method="POST" action="{{route('daftar-produk.store')}}">
+        @csrf
+        <div class="modal-body">
+            <div class="row gy-4">
+                <div class="col-xl-12">
+                    <label class="form-label" for="Kategori">Nama Obat</label>
+                    <input class="form-control" id="Kategori"
+                           placeholder="Masukan Kategori Produk" name="nama">
+                </div>
+                <div class="col-12">
+                        <label class="form-label">Kategori</label>
+                        <select class="form-select digits" name="kategori" id="kategori" required>
+                            <!-- <option value="" selected>-- Pilih Dokter --</option> -->
+                            @foreach ($kategori as $value)
+                                <option
+                                    value="{{$value->name}}">{{$value->name}}</option>
+                            @endforeach
+                        </select>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Close</button>
+            <button class="btn btn-primary" type="submit">Simpan</button>
+        </div>
+    </form>
+</x-modal-large>
 @endsection
 
 @section('script')

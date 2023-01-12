@@ -9,14 +9,11 @@
 @endsection
 
 @section('breadcrumb-title')
-<h3>Ubah Data Pasien</h3>
+<h3>Ubah Data Obat</h3>
 @endsection
 
 @section('breadcrumb-items')
-<li class="breadcrumb-item">
-    Pelayanan
-</li>
-<li class="breadcrumb-item">Pelayanan</li>
+<li class="breadcrumb-item"><a href="{{route('obat.index')}}">Daftar Obat</a></li>
 <li class="breadcrumb-item active">Edit Pasien</li>
 @endsection
 @section('content')
@@ -44,11 +41,21 @@
                     @method('put')
                     <div class="card-body">
                         <div class="row">
-                            <div class="col">
+                            <div class="col-12">
                                 <div class="mb-3">
                                     <label class="form-label">Nama</label>
                                     <input value="{{$obat->nama}}" class="form-control" type="text" placeholder="Masukan Nama" data-bs-original-title="" title="" name="nama" required>
                                 </div>
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label">Kategori</label>
+                                <select class="form-select digits" name="kategori" id="kategori" required>
+                                    <!-- <option value="" selected>-- Pilih Dokter --</option> -->
+                                    @foreach ($kategori as $value)
+                                        <option
+                                            value="{{$value->name}}" {{$value->name == $obat->kategori ? 'selected' : ''}}>{{$value->name}}</option>
+                                    @endforeach
+                                </select>
                             </div>
                         </div>
                     </div>

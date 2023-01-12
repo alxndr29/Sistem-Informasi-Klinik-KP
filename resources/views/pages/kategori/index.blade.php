@@ -8,33 +8,19 @@
 @endsection
 
 @section('breadcrumb-title')
-    <h3>Daftar Kategori Produk</h3>
+    <h3>Master Kategori</h3>
 @endsection
 
 @section('breadcrumb-items')
     <li class="breadcrumb-item">
         Konfigurasi
     </li>
-    <li class="breadcrumb-item">Produk</li>
     <li class="breadcrumb-item active">Daftar Kategori Produk</li>
 @endsection
 
 @section('content')
 
     <div class="container-fluid">
-        <div class="row">
-            <div class="col-sm-12">
-                <div class="card p-4">
-                    <div class="row">
-                        <div class="col">
-                            <button class="btn btn-primary" type="button" data-bs-toggle="modal"
-                                    data-bs-target=".bd-example-modal-lg">Create
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
         <div class="row">
             @if ($message = Session::get('success'))
                 <div class="alert alert-success dark alert-dismissible fade show" role="alert">
@@ -45,6 +31,11 @@
             <!-- Zero Configuration  Starts-->
             <div class="col-sm-12">
                 <div class="card">
+                    <div class="card-header p-4">
+                        <button class="btn btn-primary" type="button" data-bs-toggle="modal"
+                                data-bs-target=".bd-example-modal-lg">Tambah Data Kategori
+                        </button>
+                    </div>
                     <div class="card-body">
                         <div class="table-responsive">
                             <table class="display" id="basic-1">
@@ -102,11 +93,6 @@
                         <input class="form-control form-control-lg" id="Kategori"
                                placeholder="Masukan Kategori Produk" name="name">
                     </div>
-                    <div class="col-12">
-                        <label class="form-label" for="deskripsi">Deskripsi</label>
-                        <textarea class="form-control form-control-lg" id="deskripsi" name="deskripsi"
-                                  rows="3" placeholder="Masukan deskripsi produk"></textarea>
-                    </div>
                 </div>
             </div>
             <div class="modal-footer">
@@ -115,6 +101,7 @@
             </div>
         </form>
     </x-modal-large>
+
 @endsection
 
 @section('script')

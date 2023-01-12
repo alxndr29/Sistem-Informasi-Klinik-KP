@@ -69,8 +69,8 @@ Route::middleware(['auth'])->group(function () {
 
     Route::prefix('pelayanan')->group(function () {
         Route::resource('pasien',PasienController::class);
-        Route::get('pendaftaran-pasien',[PasienController::class,'index'])->name('pendaftaran-pasien');
-        Route::get('pemeriksaan-pasien',[PasienController::class,'index'])->name('pemeriksaan-pasien');
+        Route::resource('pendaftaran-pasien',PendaftaranPasienController::class);
+        Route::resource('pemeriksaan-pasien',PemeriksaanPasienController::class);
     });
     Route::prefix('laporan')->group(function (){
         Route::get('keuangan',[LaporanController::class,'keuangan'])->name('keuangan');

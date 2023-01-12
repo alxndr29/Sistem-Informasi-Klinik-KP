@@ -33,7 +33,8 @@
                     </button>
                 </div>
                 <div class="card-body">
-                    <div class="table-responsive">
+                    <div class="table-responsive">nn
+
                         <table class="display" id="basic-1">
                             <thead>
                                 <tr>
