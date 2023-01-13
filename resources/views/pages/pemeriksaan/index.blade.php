@@ -140,6 +140,7 @@
                                     <th>Jam Selesai</th>
                                     <th>Tarif Obat</th>
                                     <th>Tarif Periksa</th>
+                                    <th>Status Bayar</th>
                                     <th>Aksi</th>
                                 </tr>
 
@@ -153,11 +154,11 @@
                                     <td>{{$value->dokter->nama_lengkap}}</td>
                                     <td>
                                         @if($value->status == "Menunggu Pemeriksaan")
-                                            <span class="badge badge-warning text-dark">Menunggu Pemeriksaan</span>
+                                        <span class="badge badge-warning text-dark">Menunggu Pemeriksaan</span>
                                         @elseif($value->status == "Menunggu Pembayaran")
-                                            <span class="badge badge-warning text-dark">Menunggu Pembayaran</span>
+                                        <span class="badge badge-warning text-dark">Menunggu Pembayaran</span>
                                         @else
-                                            <span class="badge badge-success">Selesai</span>
+                                        <span class="badge badge-success">Selesai</span>
                                         @endif
                                     </td>
                                     <td>{{$value->jam_datang}}</td>
@@ -168,6 +169,13 @@
                                     @endif
                                     <td>Rp. {{number_format($value->tarif_obat)}}</td>
                                     <td>Rp. {{number_format($value->tarif_periksa)}}</td>
+                                    <th>
+                                        @if($value->status_bayar == 0)
+                                        <span class="badge badge-warning text-dark">Belum</span>
+                                        @else
+                                        <span class="badge badge-success">Sudah</span>
+                                        @endif
+                                    </th>
                                     <td>
                                         @if ($value->status == "Menunggu Pemeriksaan")
                                         <a href="{{route('pemeriksaan.edit',$value->idkunjungan)}}" class="btn btn-primary">Detail</a>

@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.2
+-- version 5.1.3
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Waktu pembuatan: 12 Jan 2023 pada 15.27
+-- Waktu pembuatan: 13 Jan 2023 pada 01.47
 -- Versi server: 5.7.33
--- Versi PHP: 8.1.3
+-- Versi PHP: 8.1.11
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -115,7 +115,9 @@ CREATE TABLE `kunjungan` (
 --
 
 INSERT INTO `kunjungan` (`idkunjungan`, `status`, `created_at`, `updated_at`, `pasien_idpasien`, `dokter_iddokter`, `poli_idpoli`, `diagnosa_awal`, `hasil_diagnosa`, `tanggal`, `jam_datang`, `jam_selesai`, `tarif_obat`, `status_bayar`, `metode_pembayaran`, `tarif_periksa`) VALUES
-(1, 'Selesai', '2023-01-12 07:01:45', '2023-01-12 07:15:27', 1, 1, 1, 'Tidak Bisa Melihat', 'Sudah sembuh bosku', '2023-01-12', '03:01:45', '03:15:27', 30000, 1, 'Cash', 10000);
+(1, 'Selesai', '2023-01-12 07:01:45', '2023-01-12 07:15:27', 1, 1, 1, 'Tidak Bisa Melihat', 'Sudah sembuh bosku', '2023-01-12', '03:01:45', '03:15:27', 30000, 1, 'Cash', 10000),
+(2, 'Selesai', '2023-01-12 17:01:27', '2023-01-12 17:10:57', 2, 1, 1, 'Tidak bisa melihat jauh', 'pake kacamata minus', '2023-01-13', '01:01:27', '01:06:03', 2500, 1, 'Kredit', 8000),
+(3, 'Selesai', '2023-01-12 17:46:24', '2023-01-12 17:47:37', 1, 1, 1, 'Tidak sehat kembali', 'sdh sehat kembali', '2023-01-13', '01:46:24', '01:46:53', 1000, 1, 'Kredit', 1000);
 
 -- --------------------------------------------------------
 
@@ -172,7 +174,7 @@ CREATE TABLE `obat_has_stok_in` (
 --
 
 INSERT INTO `obat_has_stok_in` (`obat_idobat`, `stok_in_idstok_in`, `jumlah`, `harga`) VALUES
-(1, 1, 8, 2000),
+(1, 1, 6, 2000),
 (1, 2, 12, 2000),
 (2, 1, 13, 2000);
 
@@ -205,7 +207,8 @@ CREATE TABLE `pasien` (
 --
 
 INSERT INTO `pasien` (`idpasien`, `tanggal`, `nik`, `no_bpjs`, `nama_lengkap`, `tempat_lahir`, `tanggal_lahir`, `jenis_kelamin`, `alamat`, `pekerjaan`, `agama`, `created_at`, `updated_at`, `deleted_at`, `status`) VALUES
-(1, '2023-01-12', '12345678', '123123', 'Gusti Bagus', 'Balikpapan', '1999-10-29', 'Laki-laki', 'Jln. Perumnas No 32', 'WIRASWASTA', 'BUDHA', '2023-01-12 06:57:38', '2023-01-12 06:58:04', NULL, 1);
+(1, '2023-01-12', '12345678', '123123', 'Gusti Bagus', 'Balikpapan', '1999-10-29', 'Laki-laki', 'Jln. Perumnas No 32', 'WIRASWASTA', 'BUDHA', '2023-01-12 06:57:38', '2023-01-12 06:58:04', NULL, 1),
+(2, '2023-01-13', '78910', '4321', 'Alexander Evan', 'Ende', '2010-10-10', 'Laki-laki', 'Jln. Sultan Hassanudin', 'WIRASWASTA', 'KATOLIK', '2023-01-12 17:01:07', '2023-01-12 17:01:07', NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -260,7 +263,9 @@ CREATE TABLE `resep_stock_out` (
 
 INSERT INTO `resep_stock_out` (`kunjungan_idkunjungan`, `obat_idobat`, `jumlah`, `harga`, `keterangan`) VALUES
 (1, 1, 2, 10000, '1x1'),
-(1, 2, 2, 5000, '3x1');
+(1, 2, 2, 5000, '3x1'),
+(2, 1, 1, 2500, '1x1'),
+(3, 1, 1, 1000, '1x1');
 
 -- --------------------------------------------------------
 
@@ -426,7 +431,7 @@ ALTER TABLE `kategori`
 -- AUTO_INCREMENT untuk tabel `kunjungan`
 --
 ALTER TABLE `kunjungan`
-  MODIFY `idkunjungan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `idkunjungan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT untuk tabel `migrations`
@@ -444,7 +449,7 @@ ALTER TABLE `obat`
 -- AUTO_INCREMENT untuk tabel `pasien`
 --
 ALTER TABLE `pasien`
-  MODIFY `idpasien` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `idpasien` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT untuk tabel `poli`

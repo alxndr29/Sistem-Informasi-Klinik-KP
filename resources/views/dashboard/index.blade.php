@@ -102,7 +102,6 @@
                                     </td>
                                     @else
                                     <td class="text-center">
-                                       
                                         <span class="badge badge-success">Selesai di tangani</span>
                                     </td>
                                     @endif
