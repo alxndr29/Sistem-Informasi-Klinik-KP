@@ -22,7 +22,16 @@ class PendaftaranPasienController extends Controller
     }
     public function store(Request $request){
         // return $request->all();
+        $checkKunjungan = Kunjungan::
+        where('pasien_idpasien', $request->pasien)->where('status','Menunggu Pemeriksaan')->orWhere('status', 'Menunggu Pembayaran')->get();
+
+        if (count($checkKunjungan) > 0)
+        {
+            return redirect()->route('pemeriksaan.index')->with('fail', 'Pasien Masih Terdaftar Pada Antrian');
+        }
+
         try{
+
             $kunjungan = new Kunjungan();
             $kunjungan->status = "Menunggu Pemeriksaan";
             $kunjungan->pasien_idpasien = $request->get('pasien');
@@ -34,10 +43,41 @@ class PendaftaranPasienController extends Controller
             $kunjungan->jam_selesai = null;
             $kunjungan->hasil_diagnosa = null;
             $kunjungan->save();
-            return redirect('pemeriksaan/index')->with('pesan', 'Berhasil Melakukan Pendaftaran Pasien. Pasien sudah ada di daftar antrian.');
+            return redirect()->route('pemeriksaan.index')->with('success', 'Pasien Berhasil Terdaftar Pada Antrian');
         }catch(\Exception $e){
             return $e->getMessage();
         }
+    }
+
+    public function pendaftaranPasienBaru(Request $request)
+    {
+
+        $pasien = Pasien::updateOrCreate([
+            'nama_lengkap' => $request->get('nama_lengkap'),
+            'jenis_kelamin' => $request->get('jenis_kelamin'),
+            'umur' => $request->get('umur'),
+            'no_telp' => $request->get('no_telp'),
+        ]);
+
+//        $pasien = new Pasien();
+//        $pasien->nama_lengkap = $request->get('nama_lengkap');
+//        $pasien->jenis_kelamin = $request->get('jenis_kelamin');
+//        $pasien->umur = $request->get('umur');
+//        $pasien->no_telp = $request->get('no_telp');
+//        $pasien->save();
+        $kunjungan = new Kunjungan();
+        $kunjungan->status = "Menunggu Pemeriksaan";
+        $kunjungan->pasien_idpasien = $pasien->idpasien;
+        $kunjungan->dokter_iddokter = $request->get('dokter');
+        $kunjungan->poli_idpoli = $request->get('poliklinik');
+        $kunjungan->diagnosa_awal = $request->get('diagnosa_awal');
+        $kunjungan->jam_datang = date("h:i:sa");
+        $kunjungan->tanggal = date("Y-m-d");
+        $kunjungan->jam_selesai = null;
+        $kunjungan->hasil_diagnosa = null;
+        $kunjungan->save();
+
+        return redirect()->route('pemeriksaan.index')->with('success', 'Pasien Atas Nama' . $request->nama_lengkap .'Berhasil Terdaftar Pada Antrian');
     }
     public function storePasienBaru($method, $parameters)
     {
@@ -53,7 +93,7 @@ class PendaftaranPasienController extends Controller
             $kunjungan->jam_selesai = null;
             $kunjungan->hasil_diagnosa = null;
             $kunjungan->save();
-            return redirect('pendaftaran/index')->with('pesan', 'Berhasil Melakukan Pendaftaran Pasien');
+            return redirect()->route('pemeriksaan.index')->with('success', 'Pasien Atas Nama' . $request->nama_lengkap .'Berhasil Terdaftar Pada Antrian');
         }catch(\Exception $e){
             return $e->getMessage();
         }

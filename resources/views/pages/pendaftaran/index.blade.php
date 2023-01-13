@@ -33,18 +33,18 @@
                                                     href="#info-home" role="tab" aria-controls="info-home"
                                                     aria-selected="true" data-bs-original-title="" title=""><i
                                         class="icofont icofont-search"></i>Cari Pasien</a></li>
-                            <!-- <li class="nav-item">
+                           <li class="nav-item">
                                 <a class="nav-link" id="profile-info-tab" data-bs-toggle="tab"
                                                     href="#info-profile" role="tab" aria-controls="info-profile"
                                                     aria-selected="false" data-bs-original-title="" title=""><i
                                         class="icofont icofont-users"></i>Pendaftaran Pasien Baru
                                     </a>
                                     </li>
-                                    <li class="nav-item"> -->
-                                <a class="nav-link" href="{{url('pasien/add')}}" target="_blank"><i
-                                        class="icofont icofont-users"></i>Pendaftaran Pasien Baru
-                                    </a>
-                                </li>
+                                    <li class="nav-item">
+{{--                                <a class="nav-link" href="{{url('pasien/add')}}" target="_blank"><i--}}
+{{--                                        class="icofont icofont-users"></i>Pendaftaran Pasien Baru--}}
+{{--                                    </a>--}}
+{{--                                </li>--}}
                         </ul>
                         <div class="tab-content" id="info-tabContent">
                             <div class="tab-pane fade active show" id="info-home" role="tabpanel"
@@ -172,14 +172,14 @@
                                 {{--                                               data-bs-original-title="" title="">--}}
                                 {{--                                    </div>--}}
                                 {{--                                </form>--}}
-                                <form method="post" action="{{route('pendaftaran.store')}}" class="form theme-form">
+                                <form method="post" action="{{route('pendaftaran-pasien-baru')}}" class="form theme-form">
                                     @csrf
                                     <div class="row gy-4">
                                         <div class="col-6">
                                             <label class="form-label" for="exampleFormControlInput1">Nama
                                                 Pasien</label>
-                                            <input class="form-control form-control-lg"
-                                                   id="exampleFormControlInput1" type="name"
+                                            <input class="form-control form-control-lg" name="nama_lengkap"
+                                                   id="exampleFormControlInput1" type="text"
                                                    placeholder="Masukan nama pasien">
                                         </div>
                                         <div class="col-6">
@@ -188,7 +188,7 @@
                                                     <div class="col-6">
                                                         <div class="card mb-0 p-4">
                                                             <div class="form-check form-check-inline radio radio-primary">
-                                                                <input class="form-check-input" id="radioinline1" type="radio" name="radio1" value="option1">
+                                                                <input class="form-check-input" id="radioinline1" type="radio" name="jenis_kelamin" value="Laki-laki">
                                                                 <label class="form-check-label mb-0 f-14" for="radioinline1">Laki-laki</label>
                                                             </div>
                                                         </div>
@@ -196,7 +196,7 @@
                                                     <div class="col-6">
                                                         <div class="card mb-0 p-4">
                                                             <div class="form-check form-check-inline radio radio-primary">
-                                                                <input class="form-check-input" id="radioinline2" type="radio" name="radio1" value="option1">
+                                                                <input class="form-check-input" id="radioinline2" type="radio" name="jenis_kelamin" value="Perempuan">
                                                                 <label class="form-check-label mb-0" for="radioinline2">Perempuan</label>
                                                             </div>
                                                         </div>
@@ -206,19 +206,19 @@
                                         </div>
                                         <div class="col-6">
                                             <label class="form-label" for="exampleFormControlInput1">Umur Pasien</label>
-                                            <input class="form-control form-control-lg"
-                                                   id="exampleFormControlInput1" type="name"
+                                            <input class="form-control form-control-lg" name="umur"
+                                                   id="exampleFormControlInput1" type="text"
                                                    placeholder="Masukan nama pasien">
                                         </div>
                                         <div class="col-6">
                                             <label class="form-label" for="exampleFormControlInput1">Nomor Telefon</label>
-                                            <input class="form-control form-control-lg"
-                                                   id="exampleFormControlInput1" type="name"
+                                            <input class="form-control form-control-lg" name="no_telp"
+                                                   id="exampleFormControlInput1" type="text"
                                                    placeholder="Masukan nama pasien">
                                         </div>
                                         <div class="col-6">
                                             <label class="form-label" for="exampleFormControlSelect9">Poliklinik</label>
-                                            <select class="form-select form-control-lg digits" id="exampleFormControlSelect9">
+                                            <select class="form-select form-control-lg digits" name="poliklinik" id="exampleFormControlSelect9">
                                                 <option value="">Pilih Poliklinik</option>
                                                 @foreach ($poli as $value)
                                                     <option
@@ -342,14 +342,14 @@
                                     title="">Close
                             </button>
                         </div>
-                        
+
                     </div>
                 </div>
             </div>
         </div>
     </div>
     @endforeach
-   
+
 @endsection
 
 @section('script')

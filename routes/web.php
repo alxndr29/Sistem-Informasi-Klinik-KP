@@ -70,7 +70,10 @@ Route::middleware(['auth'])->group(function () {
     Route::prefix('pelayanan')->group(function () {
         Route::resource('pasien',PasienController::class);
         Route::resource('pendaftaran-pasien',PendaftaranPasienController::class);
+        Route::post('pendaftaran-pasien/pendaftaranPasienBaru',[PendaftaranPasienController::class, 'pendaftaranPasienBaru'])->name('pendaftaran-pasien-baru');
+
         Route::resource('pemeriksaan-pasien',PemeriksaanPasienController::class);
+        Route::post('pemeriksaan-pasien/pembatalan-pasien',[PemeriksaanPasienController::class, 'pembatalanPasien'])->name('pembatalanPasien');
     });
     Route::prefix('laporan')->group(function (){
         Route::get('keuangan',[LaporanController::class,'keuangan'])->name('keuangan');
@@ -147,7 +150,7 @@ Route::middleware(['auth'])->group(function () {
             Route::name('pemeriksaan.')->group(function () {
                 Route::get('index', 'index')->name('index');
                 Route::get('edit/{id}', 'edit')->name('edit');//->middleware('doktercheck');
-                Route::get('bayar/{id}', 'bayar')->name('bayar');
+                Route::post('bayar', 'bayar')->name('bayar');
                 Route::put('bayarput/{id}', 'bayarput')->name('bayarput');
                 Route::post('store', 'storeDokter')->name('storedokter');
                 Route::get('editadmin/{id}', 'editAdmin')->name('editadmin');

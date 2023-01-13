@@ -116,6 +116,17 @@
         </div>
     </div>
     <div class="row">
+        @if ($message = Session::get('success'))
+            <div class="alert alert-success dark alert-dismissible fade show" role="alert">
+                <strong>Berhasil</strong> {{$message}}
+                <button class="btn-close" type="button" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @elseif($message = Session::get('fail'))
+            <div class="alert alert-danger dark alert-dismissible fade show" role="alert">
+                <strong>Gagal</strong> {{$message}}
+                <button class="btn-close" type="button" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @endif
         <div class="col">
             <div class="card">
                 <div class="card-header">
@@ -157,6 +168,8 @@
                                         <span class="badge badge-warning text-dark">Menunggu Pemeriksaan</span>
                                         @elseif($value->status == "Menunggu Pembayaran")
                                         <span class="badge badge-warning text-dark">Menunggu Pembayaran</span>
+                                        @elseif($value->status == "Batal")
+                                            <span class="badge badge-danger">Batal</span>
                                         @else
                                         <span class="badge badge-success">Selesai</span>
                                         @endif
@@ -171,17 +184,36 @@
                                     <td>Rp. {{number_format($value->tarif_periksa)}}</td>
                                     <th>
                                         @if($value->status_bayar == 0)
-                                        <span class="badge badge-warning text-dark">Belum</span>
+                                        <span class="badge badge-warning text-dark">Belum Lunas</span>
+                                        @elseif($value->status_bayar == 3)
+                                            <span class="badge badge-danger">Batal</span>
                                         @else
-                                        <span class="badge badge-success">Sudah</span>
+                                        <span class="badge badge-success">Lunas</span>
                                         @endif
                                     </th>
                                     <td>
                                         @if ($value->status == "Menunggu Pemeriksaan")
-                                        <a href="{{route('pemeriksaan.edit',$value->idkunjungan)}}" class="btn btn-primary">Detail</a>
-                                        @endif
-                                        @if ($value->status == "Menunggu Pembayaran")
-                                        <a href="{{route('pemeriksaan.bayar',$value->idkunjungan)}}" class="btn btn-primary">Detail</a>
+                                            @if(Auth::user()->role == 'Dokter')
+                                                <a href="{{route('pemeriksaan.edit',$value->idkunjungan)}}" class="btn btn-warning text-dark">{{Auth::user()->role == 'Dokter' ? 'Periksa Pasien' : 'Detail' }}</a>
+                                            @endif
+                                            <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="{{ route('pembatalanPasien') }}" method="POST">
+                                                @csrf
+                                                <input type="hidden" name="id" value="{{$value->idkunjungan }}">
+                                                <button class="btn btn-danger btn-xs" type="submit">
+                                                    Batal
+                                                </button>
+                                            </form>
+                                        @elseif($value->status == "Menunggu Pembayaran")
+                                            <button class="btn btn-primary" type="button" onclick="pembayaranPasien({{$value->idkunjungan}})" data-bs-toggle="modal" data-original-title="test" data-bs-target="#example-modal" data-bs-original-title="" title="">
+                                                Pembayaran
+                                            </button>
+                                            <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="{{ route('pembatalanPasien') }}" method="POST">
+                                                @csrf
+                                                <input type="hidden" name="id" value="{{$value->idkunjungan }}">
+                                                <button class="btn btn-danger btn-xs" type="submit">
+                                                    Batal
+                                                </button>
+                                            </form>
                                         @endif
                                     </td>
                                 </tr>
@@ -195,6 +227,24 @@
 
                 </div>
             </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade bd-example-modal-lg" id="example-modal"  tabindex="9999" role="dialog" aria-labelledby="myLargeModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myLargeModalLabel">Pembayaran Pasien</h4>
+                <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body modal-xl">
+                <div class="row" id="data-pasien">
+
+
+                </div>
+            </div>
+
         </div>
     </div>
 </div>
@@ -217,6 +267,20 @@
         $('#poli').select2();
         $('#dokter').select2();
     });
+    function pembayaranPasien(id_kunjungan) {
+        $.ajax({
+            type: 'POST',
+            url: '{{route("pemeriksaan.bayar")}}',
+            data: {
+                '_token': '<?php echo csrf_token() ?>',
+                'id': id_kunjungan
+            },
+            success: function(v) {
+                console.log(v);
+                $('#data-pasien').html(v.data);
+            }
+        });
+    }
 </script>
 
 @endsection

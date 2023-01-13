@@ -45,14 +45,14 @@ class KategoriController extends Controller
             $kategori->name = $request->get('name');
             $kategori->deskripsi = $request->get('deskripsi');
             $kategori->save();
-            return redirect()->back()->with('pesan', 'Berhasil Ubah Kategori');;
+            return redirect()->back()->with('pesan', 'Berhasil Ubah Kategori');
         } catch (\Exception $e) {
             return $e->getMessage();
         }
     }
 
     public function destroy($id)
-    { 
+    {
         try {
             $kategori = Kategori::find($id);
             $kategori->delete();

@@ -12,7 +12,7 @@ class Pasien extends Model
     protected $dates = ['deleted_at'];
     protected $table = 'pasien';
     protected $primaryKey = 'idpasien';
-
+    protected $fillable = ['nama_lengkap','tempat_lahir','umur','jenis_kelamin','no_telp'];
     public function kunjungan()
     {
         return $this->hasMany(Kunjungan::class);

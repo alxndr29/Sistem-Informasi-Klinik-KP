@@ -32,7 +32,7 @@
                     </a>
                 </div>
                 <div class="card-body">
-                    <div class="table-responsive">nn
+                    <div class="table-responsive">
 
                         <table class="display" id="basic-1">
                             <thead>
@@ -50,7 +50,7 @@
                                 @foreach ($stokin as $key => $value)
                                 @foreach ($value->obat as $obat)
                                 <tr>
-                                   <td class="text-center">{{$key+1}}</td>
+                                   <td class="text-center">B-00{{$key+1}}</td>
                                    <td class="text-center">{{$value->created_at}}</td>
                                    <td class="text-center">{{$obat->nama}}</td>
                                    <td class="text-center"><span class="badge badge-info">{{$obat->kategori}}</span></td>

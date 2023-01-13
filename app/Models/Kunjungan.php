@@ -10,7 +10,7 @@ class Kunjungan extends Model
     use HasFactory;
     protected $table = 'kunjungan';
     protected $primaryKey = 'idkunjungan';
-
+    protected $fillable = ['status_bayar'];
     public function pasien(){
         return $this->belongsTo(Pasien::class, 'pasien_idpasien');
     }

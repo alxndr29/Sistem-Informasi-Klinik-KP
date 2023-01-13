@@ -1,7 +1,7 @@
 @props(['title'])
 <div class="modal fade bd-example-modal-lg" id="example-modal"  tabindex="9999" role="dialog" aria-labelledby="myLargeModalLabel"
      aria-hidden="true">
-    <div class="modal-dialog modal-lg">
+    <div class="modal-dialog modal-xl">
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title" id="myLargeModalLabel">Tambah Data {{ $title  }}</h4>
@@ -13,5 +13,7 @@
         </div>
     </div>
 </div>
+
+
 
 

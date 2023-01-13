@@ -29,10 +29,14 @@ class PemeriksaanPasienController extends Controller
         $obat = Obat::all();
         return view('pages.pemeriksaan.edit', compact('kunjungan', 'obat', 'id'));
     }
-    public function bayar($id)
+    public function bayar(Request $request)
     {
-        $kunjungan = Kunjungan::where('idkunjungan',$id)->first();
-        return view('pages.pemeriksaan.bayar', compact('kunjungan', 'id'));
+        $kunjungan = Kunjungan::where('idkunjungan',$request->id)->first();
+
+
+        return response()->json([
+            'data' => view('pages.pemeriksaan.bayar',compact('kunjungan'))->render()
+        ]);
     }
     public function bayarput(Request $request, $id)
     {
@@ -65,6 +69,15 @@ class PemeriksaanPasienController extends Controller
         foreach ($kunjungan->obat as $value) {
             return $value->pivot->harga;
         }
+    }
+    public function pembatalanPasien(Request $request)
+    {
+        $kunjungan = Kunjungan::find($request->get('id'));
+        $kunjungan->status_bayar = 3;
+        $kunjungan->status = "Batal";
+        $kunjungan->save();
+
+        return redirect()->route('pemeriksaan.index')->with('success', 'Berhasil Melakukan Pembatalan');
     }
     public function storeDokter(Request $request)
     {

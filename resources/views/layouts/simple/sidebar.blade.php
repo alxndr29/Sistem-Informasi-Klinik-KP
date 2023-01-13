@@ -57,16 +57,16 @@
                                 <div class="according-menu"><i class="fa fa-angle-{{request()->route()->getPrefix() == '/manajemen-klinik' ? 'down' : 'right' }}"></i></div>
                             </a>
                             <ul class="sidebar-submenu" style="display: {{ request()->route()->getPrefix() == '/manajemen-klinik' ? 'block;' : 'none;' }}">
-                                <li><a class="lan-4 {{ Route::currentRouteName()== 'tindakan.index' ? 'active' : '' }}" href="{{route('tindakan.index')}}">Tindakan</a></li>
+{{--                                <li><a class="lan-4 {{ Route::currentRouteName()== 'tindakan.index' ? 'active' : '' }}" href="{{route('tindakan.index')}}">Tindakan</a></li>--}}
                                 <li><a class="lan-4 {{ Route::currentRouteName()=='poli.index' ? 'active' : '' }}" href="{{route('poli.index')}}">Poli</a></li>
                             </ul>
                         </li>
                         <li class="sidebar-list">
-                            <a class="sidebar-link sidebar-title {{request()->route()->getPrefix() == '/produk' ? 'active' : '' }}" href="#"><i class="fa fa-boxes fa-md mx-1"></i><span>Produk</span>
+                            <a class="sidebar-link sidebar-title {{request()->route()->getPrefix() == '/produk' ? 'active' : '' }}" href="#"><i class="fa fa-boxes fa-md mx-1"></i><span>Obat</span>
                                 <div class="according-menu"><i class="fa fa-angle-{{request()->route()->getPrefix() == '/produk' ? 'down' : 'right' }}"></i></div>
                             </a>
                             <ul class="sidebar-submenu" style="display: {{ request()->route()->getPrefix() == '/produk' ? 'block;' : 'none;' }}">
-                                <li><a class="lan-4 {{ Route::currentRouteName()=='daftar-produk.index' ? 'active' : '' }}" href="{{route('daftar-produk.index')}}">Daftar Produk</a></li>
+                                <li><a class="lan-4 {{ Route::currentRouteName()=='daftar-produk.index' ? 'active' : '' }}" href="{{route('daftar-produk.index')}}">Daftar Obat</a></li>
                                 <li><a class="lan-4 {{ Route::currentRouteName()=='kategori.index' ? 'active' : '' }}" href="{{route('kategori.index')}}">Kategori</a></li>
                             </ul>
                         </li>
