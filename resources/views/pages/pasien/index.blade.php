@@ -26,10 +26,10 @@
     <div class="row">
         <div class="col-12">
             @if ($message = Session::get('success'))
-                <div class="alert alert-success dark alert-dismissible fade show" role="alert">
-                    <strong>Berhasil</strong> {{$message}}
-                    <button class="btn-close" type="button" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
+            <div class="alert alert-success dark alert-dismissible fade show" role="alert">
+                <strong>Berhasil</strong> {{$message}}
+                <button class="btn-close" type="button" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
             @endif
         </div>
         <div class="col-12">
@@ -62,11 +62,12 @@
                                 <tr>
                                     <td>{{$key+1}}</td>
                                     <td>{{$value->nama_lengkap}}</td>
-                                    <td>{{$value->umur .' Tahun'}}</td>
+                                    <td>
+                                        {{\Carbon\Carbon::parse($value->tanggal_lahir)->diff(\Carbon\Carbon::now())->format('%y Tahun, %m Bulan and %d Hari');}}
+                                    </td>
                                     <td><span class="badge badge-{{$value->jenis_kelamin == "Laki-laki" ? 'primary' : 'secondary'}}">{{$value->jenis_kelamin}}</span></td>
                                     <td>{{$value->alamat}}</td>
                                     <td>
-
                                         <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="{{ route('pasien.delete', $value->idpasien) }}" method="POST">
                                             <a class="btn btn-primary btn-sm me-2" href="{{route('pasien.show',$value->idpasien)}}">
                                                 Detail

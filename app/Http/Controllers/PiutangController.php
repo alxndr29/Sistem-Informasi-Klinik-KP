@@ -26,7 +26,7 @@ class PiutangController extends Controller
             $kunjungan->status = "Selesai";
             $kunjungan->status_bayar = 1;
             $kunjungan->save();
-            return redirect('piutang/index')->with('pesan', 'Berhasil Melakukan Pembayaran');
+            return redirect('laporan/keuangan/piutang')->with('pesan', 'Berhasil Melakukan Pembayaran');
         }catch(\Exception $e){
             return $e->getMessage();
         }

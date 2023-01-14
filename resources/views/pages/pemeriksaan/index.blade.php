@@ -26,7 +26,7 @@
                 <div class="card-body">
                     <div class="media static-top-widget">
                         <div class="media-body">
-                            <h6 class="font-roboto">Total Pasien Selesai Hari Ini</h6>
+                            <h6 class="font-roboto">Total Pasien Hari Ini</h6>
                             <h4 class="mb-0 counter">{{$total_pasien_hari_ini}} Orang</h4>
                         </div>
                         <svg class="fill-secondary" width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">

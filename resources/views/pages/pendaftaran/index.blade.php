@@ -359,9 +359,9 @@
 
     <script type="text/javascript">
         $(document).ready(function () {
-            $('#pasien').select2();
-            $('#poli').select2();
-            $('#dokter').select2();
+            // $('#pasien').select2();
+            // $('#poli').select2();
+            // $('#dokter').select2();
         });
     </script>
 

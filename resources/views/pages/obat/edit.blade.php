@@ -87,7 +87,7 @@
                                 <div class="mb-3">
                                     <label class="form-label">Satuan</label>
                                     <select class="form-select" aria-label="Default select example" name="satuan">
-                                        <option value="{{$obat->satuan}}}">{{$obat->satuan}}</option>
+                                        <option value="{{$obat->satuan}}}" selected>{{$obat->satuan}}</option>
                                         <option value="Strip">Strip</option>
                                         <option value="Tablet">Tablet</option>
                                         <option value="Sirup">Sirup</option>

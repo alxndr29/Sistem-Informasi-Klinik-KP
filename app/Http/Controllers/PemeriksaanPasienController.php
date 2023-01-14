@@ -9,7 +9,7 @@ use App\Models\Obat;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Carbon;
 use App\Models\Stockin;
-
+use App\Models\Dokter;
 class PemeriksaanPasienController extends Controller
 {
     //
@@ -17,6 +17,8 @@ class PemeriksaanPasienController extends Controller
     {
         if (\Auth::user()->role == "Dokter")
         {
+            // $dokter = Dokter::where(\Auth::user()->id);
+            // return $dokter->iddokter;
             $total_pasien_hari_ini = Kunjungan::where('tanggal', date('Y-m-d'))->where('dokter_iddokter', \Auth::user()->id)->count();
             $total_pasien_7_hari = Kunjungan::where('tanggal', '>=', Carbon::now()->subDays(7))->where('dokter_iddokter', \Auth::user()->id)->count();
             $total_pasien_1_bulan = Kunjungan::where('tanggal', '>=', Carbon::now()->subDays(30))->where('dokter_iddokter', \Auth::user()->id)->count();

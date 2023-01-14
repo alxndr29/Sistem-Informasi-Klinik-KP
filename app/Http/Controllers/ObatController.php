@@ -16,7 +16,8 @@ class ObatController extends Controller
     public function index()
     {
         $obat = Obat::all();
-        $kategori = DB::table('kategori')->get();
+        // $kategori = DB::table('kategori')->get();
+        $kategori = Kategori::all();
         return view('pages.obat.index', compact('obat','kategori'));
     }
     public function create()
