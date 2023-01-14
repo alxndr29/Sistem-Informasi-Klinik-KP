@@ -45,7 +45,10 @@
                                 @foreach ($value->obat as $obat)
                                 <tr>
                                     <td class="text-center">{{$key+1}}</td>
-                                    <td class="text-center">{{$value->created_at}}</td>
+                                    <td class="text-center">
+                                        <!-- {{$value->created_at->diffForHumans()}} -->
+                                        {{ \Carbon\Carbon::parse($value->created_at)->toDayDateTimeString() }}
+                                    </td>
                                     <td class="text-center">{{$obat->nama}}</td>
                                     <td class="text-center"><span class="badge badge-info">{{$obat->kategori}}</span></td>
                                     <td class="text-center">{{$value->pasien->nama_lengkap}}</td>

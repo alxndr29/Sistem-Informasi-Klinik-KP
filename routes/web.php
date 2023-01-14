@@ -89,7 +89,7 @@ Route::middleware(['auth'])->group(function () {
         Route::resource('daftar-dokter',DokterController::class);
     });
     Route::prefix('farmasi')->group(function (){
-        Route::get('stok-barang',[FarmasiController::class,'stokBarang'])->name('stok-barang');
+        Route::get('stok-barang/{tgl?}',[FarmasiController::class,'stokBarang'])->name('stok-barang');
         Route::get('obat-masuk',[FarmasiController::class,'obatMasuk'])->name('obat-masuk');
         Route::get('obat-keluar',[FarmasiController::class, 'obatKeluar'])->name('obat-keluar');
     });

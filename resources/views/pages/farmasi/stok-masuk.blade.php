@@ -50,13 +50,18 @@
                                 @foreach ($stokin as $key => $value)
                                 @foreach ($value->obat as $obat)
                                 <tr>
-                                   <td class="text-center">B-00{{$key+1}}</td>
-                                   <td class="text-center">{{$value->created_at}}</td>
-                                   <td class="text-center">{{$obat->nama}}</td>
-                                   <td class="text-center"><span class="badge badge-info">{{$obat->kategori}}</span></td>
-                                   <td class="text-center">{{number_format($obat->pivot->jumlah)}}</td>
-                                   <td class="text-center">Rp. {{number_format($obat->pivot->harga)}}</td>
-                                   <td class="text-center">Rp. {{number_format($obat->pivot->harga * $obat->pivot->jumlah)}}</td>
+                                    <td class="text-center">B-00{{$key+1}}</td>
+                                    <td class="text-center">
+                                        @php
+                                        \Carbon\Carbon::setLocale('id');
+                                        @endphp
+                                        {{ \Carbon\Carbon::parse($value->created_at)->toDayDateTimeString() }}
+                                    </td>
+                                    <td class="text-center">{{$obat->nama}}</td>
+                                    <td class="text-center"><span class="badge badge-info">{{$obat->kategori}}</span></td>
+                                    <td class="text-center">{{number_format($obat->pivot->jumlah)}}</td>
+                                    <td class="text-center">Rp. {{number_format($obat->pivot->harga)}}</td>
+                                    <td class="text-center">Rp. {{number_format($obat->pivot->harga * $obat->pivot->jumlah)}}</td>
                                 </tr>
                                 @endforeach
                                 @endforeach

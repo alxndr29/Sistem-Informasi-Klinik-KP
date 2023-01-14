@@ -9,7 +9,11 @@ class FarmasiController extends Controller
 {
     public function stokBarang($bulan = null)
     {
-        $obat = Obat::all();
+        if($bulan != null){
+            // $obat = Obat::whereMonth('created_at',$bulan);
+        }else{
+            $obat = Obat::all();
+        }
         return view('pages.farmasi.stok-barang', compact('obat'));
     }
     public function obatMasuk($awal = null, $akhir = null)
