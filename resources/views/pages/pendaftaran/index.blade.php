@@ -205,9 +205,9 @@
                                             </div>
                                         </div>
                                         <div class="col-6">
-                                            <label class="form-label" for="exampleFormControlInput1">Umur Pasien</label>
-                                            <input class="form-control form-control-lg" name="umur"
-                                                   id="exampleFormControlInput1" type="text"
+                                            <label class="form-label" for="exampleFormControlInput1">Tanggal Lahir</label>
+                                            <input class="form-control form-control-lg" name="tanggal_lahir"
+                                                   id="exampleFormControlInput1" type="date"
                                                    placeholder="Masukan nama pasien">
                                         </div>
                                         <div class="col-6">

@@ -61,6 +61,7 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                @if(isset($obat))
                                 @foreach ($obat as $key => $value )
                                 <tr>
                                     <td class="text-center">{{$key+1}}</td>
@@ -72,6 +73,21 @@
                                     <td class="text-center fw-bold">Rp.{{($value->stokmasuk() - $value->stokkeluar()) * $value->harga}}</td>
                                 </tr>
                                 @endforeach
+                                @endif
+
+                                @if(isset($a))
+                                @foreach ($a as $key => $value)
+                                <tr>
+                                    <td class="text-center">{{$key+1}}</td>
+                                    <td class="text-center">{{$value->nama }}</td>
+                                    <td class="text-center">Rp.{{$value->harga}}</td>
+                                    <td class="text-center"><span class="badge badge-danger">{{$value->rso_jumlah}}</span></td>
+                                    <td class="text-center"><span class="badge badge-primary">{{$value->ohs_jumlah}}</span></td>
+                                    <td class="text-center"><span class="badge badge-success">{{ ($value->ohs_jumlah) - ($value->rso_jumlah)}}</span></td>
+                                    <td class="text-center fw-bold">Rp. {{ (($value->ohs_jumlah) - ($value->rso_jumlah)) * $value->harga }}</td>
+                                </tr>
+                                @endforeach
+                                @endif
                                 <!-- @php
                                 $i = 1;
                                 @endphp
@@ -135,12 +151,13 @@
         n = d.getMonth(),
         y = d.getFullYear();
     console.log(n)
+   
     $('#months option:eq(' + n + ')').prop('selected', true);
     $('#years option[value="' + y + '"]').prop('selected', true);
 
     $(document).ready(function() {
         $("#btn-cari").on('click', function() {
-            location.href = "{{url('penyimpanan/stok-barang')}}/" + $("#months").val();
+            location.href = "{{url('farmasi/stok-barang')}}/" + $("#months").val();
         });
     });
 </script>

@@ -22,19 +22,26 @@ class LaporanController extends Controller
             if ($tahun != null) {
                 $currentYear = $tahun;
             }
-            $januari = Kunjungan::whereYear('created_at', $currentYear)->where('status_bayar', 1)->whereMonth('created_at', 1)->where('status', 'selesai')->count();
-            $februari = Kunjungan::whereYear('created_at', $currentYear)->where('status_bayar', 1)->whereMonth('created_at', 2)->where('status', 'selesai')->count();
-            $maret = Kunjungan::whereYear('created_at', $currentYear)->where('status_bayar', 1)->whereMonth('created_at', 3)->where('status', 'selesai')->count();
-            $april = Kunjungan::whereYear('created_at', $currentYear)->where('status_bayar', 1)->whereMonth('created_at', 4)->where('status', 'selesai')->count();
-            $mei = Kunjungan::whereYear('created_at', $currentYear)->where('status_bayar', 1)->whereMonth('created_at', 5)->where('status', 'selesai')->count();
-            $juni = Kunjungan::whereYear('created_at', $currentYear)->where('status_bayar', 1)->whereMonth('created_at', 6)->where('status', 'selesai')->count();
-            $juli = Kunjungan::whereYear('created_at', $currentYear)->where('status_bayar', 1)->whereMonth('created_at', 7)->where('status', 'selesai')->count();
-            $agustus = Kunjungan::whereYear('created_at', $currentYear)->where('status_bayar', 1)->whereMonth('created_at', 8)->where('status', 'selesai')->count();
-            $september = Kunjungan::whereYear('created_at', $currentYear)->where('status_bayar', 1)->whereMonth('created_at', 9)->where('status', 'selesai')->count();
-            $oktober = Kunjungan::whereYear('created_at', $currentYear)->where('status_bayar', 1)->whereMonth('created_at', 10)->where('status', 'selesai')->count();
-            $november = Kunjungan::whereYear('created_at', $currentYear)->where('status_bayar', 1)->whereMonth('created_at', 11)->where('status', 'selesai')->count();
-            $desember = Kunjungan::whereYear('created_at', $currentYear)->where('status_bayar', 1)->whereMonth('created_at', 12)->where('status', 'selesai')->count();
-            return view('pages.laporan.index', compact('currentYear', 'januari', 'februari', 'maret', 'april', 'mei', 'juni', 'juli', 'agustus', 'september', 'oktober', 'november', 'desember'));
+            $data = DB::select(DB::raw('SELECT m.name, m.id,
+                    (SELECT COUNT(k.idkunjungan) FROM kunjungan AS k WHERE MONTH(k.created_at) = m.id AND YEAR(k.created_at) = 2023 AND k.status_bayar =1) AS totalPasien,
+                    (SELECT SUM(k1.tarif_periksa + k1.tarif_obat) FROM kunjungan AS k1 
+                    WHERE MONTH(k1.created_at) = m.id AND YEAR(k1.created_at) = '. $currentYear.' AND k1.status_bayar = 1) AS totalPendapatan
+                    FROM months AS m;'));
+            // return $data;
+             return view('pages.laporan.index', compact('currentYear','data'));
+            // $januari = Kunjungan::whereYear('created_at', $currentYear)->where('status_bayar', 1)->whereMonth('created_at', 1)->where('status', 'selesai')->count();
+            // $februari = Kunjungan::whereYear('created_at', $currentYear)->where('status_bayar', 1)->whereMonth('created_at', 2)->where('status', 'selesai')->count();
+            // $maret = Kunjungan::whereYear('created_at', $currentYear)->where('status_bayar', 1)->whereMonth('created_at', 3)->where('status', 'selesai')->count();
+            // $april = Kunjungan::whereYear('created_at', $currentYear)->where('status_bayar', 1)->whereMonth('created_at', 4)->where('status', 'selesai')->count();
+            // $mei = Kunjungan::whereYear('created_at', $currentYear)->where('status_bayar', 1)->whereMonth('created_at', 5)->where('status', 'selesai')->count();
+            // $juni = Kunjungan::whereYear('created_at', $currentYear)->where('status_bayar', 1)->whereMonth('created_at', 6)->where('status', 'selesai')->count();
+            // $juli = Kunjungan::whereYear('created_at', $currentYear)->where('status_bayar', 1)->whereMonth('created_at', 7)->where('status', 'selesai')->count();
+            // $agustus = Kunjungan::whereYear('created_at', $currentYear)->where('status_bayar', 1)->whereMonth('created_at', 8)->where('status', 'selesai')->count();
+            // $september = Kunjungan::whereYear('created_at', $currentYear)->where('status_bayar', 1)->whereMonth('created_at', 9)->where('status', 'selesai')->count();
+            // $oktober = Kunjungan::whereYear('created_at', $currentYear)->where('status_bayar', 1)->whereMonth('created_at', 10)->where('status', 'selesai')->count();
+            // $november = Kunjungan::whereYear('created_at', $currentYear)->where('status_bayar', 1)->whereMonth('created_at', 11)->where('status', 'selesai')->count();
+            // $desember = Kunjungan::whereYear('created_at', $currentYear)->where('status_bayar', 1)->whereMonth('created_at', 12)->where('status', 'selesai')->count();
+            // return view('pages.laporan.index', compact('currentYear', 'januari', 'februari', 'maret', 'april', 'mei', 'juni', 'juli', 'agustus', 'september', 'oktober', 'november', 'desember'));
         }
     }
     public function showDetailLaporanKeuangan()

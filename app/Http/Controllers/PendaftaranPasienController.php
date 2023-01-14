@@ -56,7 +56,7 @@ class PendaftaranPasienController extends Controller
         $pasien = Pasien::updateOrCreate([
             'nama_lengkap' => $request->get('nama_lengkap'),
             'jenis_kelamin' => $request->get('jenis_kelamin'),
-            'umur' => $request->get('umur'),
+            'tanggal_lahir' => $request->get('tanggal_lahir'),
             'no_telp' => $request->get('no_telp'),
         ]);
 

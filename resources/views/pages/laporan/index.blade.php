@@ -55,103 +55,17 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                @foreach ($data as $key => $value)
                                 <tr>
-                                    <td>1</td>
-                                    <td>Januari</td>
-                                    <td>{{$januari}} Pasien</td>
-                                    <td>Rp. 23.000.000</td>
+                                    <td>{{$key + 1}}</td>
+                                    <td>{{$value->name}}</td>
+                                    <td>{{$value->totalPasien}} Pasien</td>
+                                    <td>Rp. {{number_format($value->totalPendapatan)}}</td>
                                     <td>
-                                        <a href="{{route('laporan.index',['tahun' => $currentYear, 'bulan' => 1])}}" class="btn btn-primary">Detail</a>
+                                        <a href="{{route('laporan.index',['tahun' => $currentYear, 'bulan' => $value->id])}}" class="btn btn-primary">Detail</a>
                                     </td>
                                 </tr>
-{{--                                <tr>--}}
-{{--                                    <td>2</td>--}}
-{{--                                    <td>Februari</td>--}}
-{{--                                    <td>{{$februari}} Pasien</td>--}}
-{{--                                     <td>--}}
-{{--                                        <a href="{{route('laporan.index',['tahun' => $currentYear, 'bulan' => 2])}}" class="btn btn-primary">Detail</a>--}}
-{{--                                    </td>--}}
-{{--                                </tr>--}}
-{{--                                <tr>--}}
-{{--                                    <td>3</td>--}}
-{{--                                    <td>Maret</td>--}}
-{{--                                    <td>{{$maret}} Pasien</td>--}}
-{{--                                     <td>--}}
-{{--                                        <a href="{{route('laporan.index',['tahun' => $currentYear, 'bulan' => 3])}}" class="btn btn-primary">Detail</a>--}}
-{{--                                    </td>--}}
-{{--                                </tr>--}}
-{{--                                <tr>--}}
-{{--                                    <td>4</td>--}}
-{{--                                    <td>April</td>--}}
-{{--                                    <td>{{$april}} Pasien</td>--}}
-{{--                                     <td>--}}
-{{--                                        <a href="{{route('laporan.index',['tahun' => $currentYear, 'bulan' => 4])}}" class="btn btn-primary">Detail</a>--}}
-{{--                                    </td>--}}
-{{--                                </tr>--}}
-{{--                                <tr>--}}
-{{--                                    <td>5</td>--}}
-{{--                                    <td>Mei</td>--}}
-{{--                                    <td>{{$mei}} Pasien</td>--}}
-{{--                                     <td>--}}
-{{--                                        <a href="{{route('laporan.index',['tahun' => $currentYear, 'bulan' => 5])}}" class="btn btn-primary">Detail</a>--}}
-{{--                                    </td>--}}
-{{--                                </tr>--}}
-{{--                                <tr>--}}
-{{--                                    <td>6</td>--}}
-{{--                                    <td>Juni</td>--}}
-{{--                                    <td>{{$juni}} Pasien</td>--}}
-{{--                                     <td>--}}
-{{--                                        <a href="{{route('laporan.index',['tahun' => $currentYear, 'bulan' => 6])}}" class="btn btn-primary">Detail</a>--}}
-{{--                                    </td>--}}
-{{--                                </tr>--}}
-{{--                                <tr>--}}
-{{--                                    <td>7</td>--}}
-{{--                                    <td>Juli</td>--}}
-{{--                                    <td>{{$juli}} Pasien</td>--}}
-{{--                                     <td>--}}
-{{--                                        <a href="{{route('laporan.index',['tahun' => $currentYear, 'bulan' => 7])}}" class="btn btn-primary">Detail</a>--}}
-{{--                                    </td>--}}
-{{--                                </tr>--}}
-{{--                                <tr>--}}
-{{--                                    <td>8</td>--}}
-{{--                                    <td>Agustus</td>--}}
-{{--                                    <td>{{$agustus}} Pasien</td>--}}
-{{--                                     <td>--}}
-{{--                                        <a href="{{route('laporan.index',['tahun' => $currentYear, 'bulan' => 8])}}" class="btn btn-primary">Detail</a>--}}
-{{--                                    </td>--}}
-{{--                                </tr>--}}
-{{--                                <tr>--}}
-{{--                                    <td>9</td>--}}
-{{--                                    <td>September</td>--}}
-{{--                                    <td>{{$september}} Pasien</td>--}}
-{{--                                     <td>--}}
-{{--                                        <a href="{{route('laporan.index',['tahun' => $currentYear, 'bulan' => 9])}}" class="btn btn-primary">Detail</a>--}}
-{{--                                    </td>--}}
-{{--                                </tr>--}}
-{{--                                <tr>--}}
-{{--                                    <td>10</td>--}}
-{{--                                    <td>Oktober</td>--}}
-{{--                                    <td>{{$oktober}} Pasien</td>--}}
-{{--                                     <td>--}}
-{{--                                        <a href="{{route('laporan.index',['tahun' => $currentYear, 'bulan' => 10])}}" class="btn btn-primary">Detail</a>--}}
-{{--                                    </td>--}}
-{{--                                </tr>--}}
-{{--                                <tr>--}}
-{{--                                    <td>11</td>--}}
-{{--                                    <td>November</td>--}}
-{{--                                    <td>{{$november}} Pasien</td>--}}
-{{--                                     <td>--}}
-{{--                                        <a href="{{route('laporan.index',['tahun' => $currentYear, 'bulan' => 11])}}" class="btn btn-primary">Detail</a>--}}
-{{--                                    </td>--}}
-{{--                                </tr>--}}
-{{--                                <tr>--}}
-{{--                                    <td>12</td>--}}
-{{--                                    <td>Desember</td>--}}
-{{--                                    <td>{{$desember}} Pasien</td>--}}
-{{--                                     <td>--}}
-{{--                                        <a href="{{route('laporan.index',['tahun' => $currentYear, 'bulan' => 12])}}" class="btn btn-primary">Detail</a>--}}
-{{--                                    </td>--}}
-{{--                                </tr>--}}
+                                @endforeach
 
                             </tbody>
                         </table>
@@ -183,6 +97,7 @@
             "paging": false
         });
     });
+
     function cari() {
         location.href = "{{route('laporan.index')}}/" + $("#tahun").val();
     }
