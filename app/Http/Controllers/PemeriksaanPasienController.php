@@ -19,7 +19,13 @@ class PemeriksaanPasienController extends Controller
         $total_pasien_7_hari = Kunjungan::where('tanggal', '>=', Carbon::now()->subDays(7))->count();
         $total_pasien_1_bulan = Kunjungan::where('tanggal', '>=', Carbon::now()->subDays(30))->count();
         $total_pemasukan = Kunjungan::select(DB::raw("sum(tarif_obat + tarif_periksa) as pemasukan"))->where('status_bayar',1)->first();
-        $kunjungan = Kunjungan::all();
+        //$kunjungan = Kunjungan::with('poli','pasien','dokter','obat')->get();
+        $kunjungan = DB::table('kunjungan as k')
+            ->join('pasien as p','k.pasien_idpasien','=','p.idpasien')
+            ->join('dokter as d','k.dokter_iddokter','=','d.iddokter')
+            ->join('poli as po','k.poli_idpoli','=','po.idpoli')
+            ->select('po.nama_lengkap as poli','d.nama_lengkap as dokter', 'p.nama_lengkap as pasien', 'k.*')
+            ->get();
 
         return view('pages.pemeriksaan.index', compact('kunjungan', 'total_pasien_hari_ini', 'total_pasien_7_hari', 'total_pasien_1_bulan', 'total_pemasukan'));
     }

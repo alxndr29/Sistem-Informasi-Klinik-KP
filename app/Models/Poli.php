@@ -12,7 +12,7 @@ class Poli extends Model
     protected $dates = ['deleted_at'];
     protected $table = 'poli';
     protected $primaryKey = 'idpoli';
-
+    protected $fillable = ['nama_lengkap'];
     public function kunjungan()
     {
         return $this->hasMany(Kunjungan::class);

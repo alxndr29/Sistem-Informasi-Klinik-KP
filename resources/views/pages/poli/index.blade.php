@@ -43,8 +43,10 @@
                                 <tr>
                                     <th>No</th>
                                     <th>Nama Lengkap</th>
+                                    <th>Tanggal Ditambahkan</th>
+                                    <th>Tanggal Diubah Terakhir</th>
                                     <!-- <th>Detail</th> -->
-                                    <th>Edit</th>
+                                    <th>Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -52,15 +54,18 @@
                                 <tr>
                                     <td>{{$key+1}}</td>
                                     <td>{{$value->nama_lengkap}}</td>
-                                    <!-- <td>
-                                        <a class="btn btn-success" href="{{route('dokter.show',$value->idpoli)}}">
-                                            Detail
-                                        </a>
-                                    </td> -->
+                                    <td>{{$value->created_at}}</td>
+                                    <td>{{$value->updated_at}}</td>
                                     <td>
-                                        <a class="btn btn-warning" href="{{route('poli.edit',$value->idpoli)}}">
-                                            Edit
-                                        </a>
+                                        <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="{{ route('poli.destroy', $value->idpoli) }}" method="POST">
+                                            <a href="{{route('poli.edit', $value->idpoli)}}"
+                                                   class="btn btn-warning text-dark  me-2">Edit</a>
+                                            @csrf
+                                            @method('DELETE')
+                                            <button class="btn btn-danger btn-xs" type="submit">
+                                                Delete
+                                            </button>
+                                        </form>
                                     </td>
                                 </tr>
                                 @endforeach

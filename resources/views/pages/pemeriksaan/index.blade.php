@@ -160,9 +160,9 @@
                                 @foreach ($kunjungan as $key => $value)
                                 <tr>
                                     <td>{{$key+1}}</td>
-                                    <td>{{$value->pasien->nama_lengkap}}</td>
-                                    <td>{{$value->poli->nama_lengkap}}</td>
-                                    <td>{{$value->dokter->nama_lengkap}}</td>
+                                    <td>{{$value->pasien}}</td>
+                                    <td>{{$value->poli}}</td>
+                                    <td>{{$value->dokter}}</td>
                                     <td>
                                         @if($value->status == "Menunggu Pemeriksaan")
                                         <span class="badge badge-warning text-dark">Menunggu Pemeriksaan</span>

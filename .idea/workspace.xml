@@ -3,20 +3,18 @@
   <component name="ChangeListManager">
     <list default="true" id="2ea64314-2dd2-4b21-9338-cb52a29c32ea" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/KategoriController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/KategoriController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/PasienController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/PasienController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/PemeriksaanPasienController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/PemeriksaanPasienController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/PendaftaranPasienController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/PendaftaranPasienController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/PoliController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/PoliController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Models/Kunjungan.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Kunjungan.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/Pasien.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Pasien.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/components/modal-large.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/components/modal-large.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/layouts/simple/sidebar.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/simple/sidebar.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/pages/farmasi/stok-masuk.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pages/farmasi/stok-masuk.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/pages/kategori/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pages/kategori/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/pages/laporan/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pages/laporan/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/pages/pemeriksaan/bayar.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pages/pemeriksaan/bayar.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/Poli.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Poli.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/assets/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/assets/css/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/assets/scss/utils/_variables.scss" beforeDir="false" afterPath="$PROJECT_DIR$/public/assets/scss/utils/_variables.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/pages/pasien/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pages/pasien/index.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/pages/pemeriksaan/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pages/pemeriksaan/index.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/pages/pendaftaran/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pages/pendaftaran/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/pages/poli/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pages/poli/index.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -213,7 +211,7 @@
       <workItem from="1673352003795" duration="13653000" />
       <workItem from="1673490928860" duration="1068000" />
       <workItem from="1673492040691" duration="660000" />
-      <workItem from="1673492805246" duration="29209000" />
+      <workItem from="1673492805246" duration="32981000" />
     </task>
     <servers />
   </component>

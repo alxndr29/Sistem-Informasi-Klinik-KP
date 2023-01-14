@@ -326,24 +326,18 @@
                                 <label class="form-label">Keluhan / Diagnosa Awal</label>
                                 <textarea class="form-control" rows="3" name="diagnosa_awal" required></textarea>
                             </div>
-                            <div class="col-6 w-50">
-                                <button class="btn btn-primary" type="submit" data-bs-original-title="" title="">
+                            <div class="col-12">
+
+                                <button class="btn btn-primary w-50 me-4" type="submit" data-bs-original-title="" title="">
                                     Daftar
+                                </button>
+                                <button class="btn btn-light w-25 " type="button" data-bs-dismiss="modal"
+                                        data-bs-original-title=""
+                                        title="">Close
                                 </button>
                         </div>
                         </div>
                     </form>
-                </div>
-                <div class="modal-footer">
-                    <div class="row d-flex justify-content-end">
-                        <div class="col-6">
-                            <button class="btn btn-light" type="button" data-bs-dismiss="modal"
-                                    data-bs-original-title=""
-                                    title="">Close
-                            </button>
-                        </div>
-
-                    </div>
                 </div>
             </div>
         </div>

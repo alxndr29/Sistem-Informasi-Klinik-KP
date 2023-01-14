@@ -13,7 +13,7 @@ class PoliController extends Controller
     //
     public function index()
     {
-        $poli = Poli::all();
+        $poli = DB::table('poli')->get();
         return view('pages.poli.index', compact('poli'));
     }
     public function create()

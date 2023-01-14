@@ -24,7 +24,15 @@
 
 <div class="container-fluid">
     <div class="row">
-        <div class="col">
+        <div class="col-12">
+            @if ($message = Session::get('success'))
+                <div class="alert alert-success dark alert-dismissible fade show" role="alert">
+                    <strong>Berhasil</strong> {{$message}}
+                    <button class="btn-close" type="button" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            @endif
+        </div>
+        <div class="col-12">
             <div class="card">
                 <div class="card-header p-4">
                     <div class="d-flex justify-content-between">
@@ -42,14 +50,10 @@
                             <thead>
                                 <tr>
                                     <th>No</th>
-                                    <th>NIK</th>
-                                    <th>BPJS No</th>
                                     <th>Nama</th>
-                                    <th>TTL</th>
+                                    <th>Umur</th>
                                     <th>Jenis Kelamin</th>
                                     <th>Alamat</th>
-                                    <th>Pekerjaan</th>
-                                    <th>Agama</th>
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
@@ -57,21 +61,25 @@
                                 @foreach ($pasien as $key => $value)
                                 <tr>
                                     <td>{{$key+1}}</td>
-                                    <td>{{$value->nik}}</td>
-                                    <td>{{$value->no_bpjs}}</td>
                                     <td>{{$value->nama_lengkap}}</td>
-                                    <td>{{$value->tempat_lahir}}, {{$value->tanggal_lahir}}</td>
-                                    <td>{{$value->alamat}}</td>
+                                    <td>{{$value->umur .' Tahun'}}</td>
                                     <td><span class="badge badge-{{$value->jenis_kelamin == "Laki-laki" ? 'primary' : 'secondary'}}">{{$value->jenis_kelamin}}</span></td>
-                                    <td>{{$value->pekerjaan}}</td>
-                                    <td>{{$value->agama}}</td>
+                                    <td>{{$value->alamat}}</td>
                                     <td>
-                                        <a class="btn btn-primary btn-sm me-2" href="{{route('pasien.show',$value->idpasien)}}">
-                                            Detail
-                                        </a>
-                                        <a class="btn btn-warning btn-sm text-dark" href="{{route('pasien.edit',$value->idpasien)}}">
-                                            Edit
-                                        </a>
+
+                                        <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="{{ route('pasien.delete', $value->idpasien) }}" method="POST">
+                                            <a class="btn btn-primary btn-sm me-2" href="{{route('pasien.show',$value->idpasien)}}">
+                                                Detail
+                                            </a>
+                                            <a class="btn btn-warning btn-sm text-dark me-2" href="{{route('pasien.edit',$value->idpasien)}}">
+                                                Edit
+                                            </a>
+                                            @csrf
+                                            @method('DELETE')
+                                            <button class="btn btn-danger btn-xs" type="submit">
+                                                Delete
+                                            </button>
+                                        </form>
                                     </td>
                                 </tr>
                                 @endforeach

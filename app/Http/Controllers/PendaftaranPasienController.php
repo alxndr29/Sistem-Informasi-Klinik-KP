@@ -8,6 +8,7 @@ use App\Models\Pasien;
 use App\Models\Poli;
 use App\Models\Dokter;
 use App\Models\Kunjungan;
+use Illuminate\Support\Facades\DB;
 
 class PendaftaranPasienController extends Controller
 {
@@ -16,7 +17,7 @@ class PendaftaranPasienController extends Controller
     {
         $pasien = Pasien::all();
         // return $pasien;
-        $poli = Poli::all();
+        $poli = DB::table('poli')->get();
         $dokter = Dokter::all();
         return view('pages.pendaftaran.index', compact('pasien', 'poli', 'dokter'));
     }
