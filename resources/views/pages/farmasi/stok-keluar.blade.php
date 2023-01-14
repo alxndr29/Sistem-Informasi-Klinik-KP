@@ -22,9 +22,6 @@
         <!-- Zero Configuration  Starts-->
         <div class="col-sm-12">
             <div class="card">
-                <div class="card-header">
-                    <button class=""></button>
-                </div>
                 <div class="card-body">
                     <div class="table-responsive">
                         <table class="display" id="basic-1">
@@ -59,7 +56,7 @@
                                 @endforeach
 
                                 @endforeach
-                                <!-- @for($i =1; $i <100; $i++) 
+                                <!-- @for($i =1; $i <100; $i++)
                                 <tr>
                                     <td>{{$i}}</td>
                                     <td class="text-center">{{\Carbon\Carbon::parse('2019-02-28 22:42:27')->format('d M y h:m')}}</td>

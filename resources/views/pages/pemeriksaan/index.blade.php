@@ -1,5 +1,5 @@
 @extends('layouts.simple.master')
-@section('title', 'Satuan Produk')
+@section('title', 'Pemeriksaan Pasien')
 
 @section('css')
 <link rel="stylesheet" type="text/css" href="{{asset('assets/css/vendors/datatables.css')}}">
@@ -13,11 +13,8 @@
 @endsection
 
 @section('breadcrumb-items')
-<li class="breadcrumb-item">
-    Transaksi
-</li>
-<li class="breadcrumb-item">Pembelian</li>
-<li class="breadcrumb-item active">Buat Transaksi</li>
+<li class="breadcrumb-item">Dashboard</li>
+<li class="breadcrumb-item active">Pemeriksaan Pasien</li>
 @endsection
 
 @section('content')
@@ -129,10 +126,10 @@
         @endif
         <div class="col">
             <div class="card">
-                <div class="card-header">
+                <div class="card-header p-4">
                     <div class="d-flex justify-content-between">
                         <div>
-                            <h3>Data Pemeriksaan Pasien<h3>
+                            <h3>Daftar & Riwayat Kunjungan Pasien Hari Ini<h3>
                         </div>
                         <a href="" class="btn btn-primary">Refresh Data</a>
                     </div>

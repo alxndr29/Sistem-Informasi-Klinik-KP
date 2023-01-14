@@ -1,5 +1,5 @@
 @extends('layouts.simple.master')
-@section('title', 'Satuan Produk')
+@section('title', 'Daftar Pasien')
 
 @section('css')
 <link rel="stylesheet" type="text/css" href="{{asset('assets/css/vendors/datatables.css')}}">

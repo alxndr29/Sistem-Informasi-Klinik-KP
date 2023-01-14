@@ -24,25 +24,38 @@
 
 <div class="container-fluid">
     <div class="row">
+        <div class="col-sm-12">
+            <div class="card p-4">
+                <div class="row">
+                    <div class="col-9">
+                        <label class="form-label" for="months">Tahun</label>
+                        <select class="form-select digits" id="tahun">
+                            <option value="2022">2022</option>
+                            <option selected value="2023">2023</option>
+                        </select>
+                    </div>
+                    <div class="col-3">
+                        <button class="btn btn-lg btn-primary w-100 mt-4" id='btn-cari' onClick="cari()">Cari Data</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <div class="card p-4 bg-info">
+                <div class="row">
+                    <div class="col-12 ">
+                        Menampilkan Data Keuangan Tahun :  {{$currentYear}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
         <div class="col">
             <div class="card">
-                <div class="card-header">
-                    <div class="row">
-                        <div class="col-9">
-                            <label class="form-label" for="months">Tahun</label>
-                            <select class="form-select digits" id="tahun">
-                                <option value="2022">2022</option>
-                                <option selected value="2023">2023</option>
-                            </select>
-                        </div>
-                        <div class="col-3">
-                            <button class="btn btn-lg btn-primary w-100 mt-4" id='btn-cari' onClick="cari()">Cari Data</button>
-                        </div>
-                    </div>
-
-                </div>
                 <div class="card-body">
-                    Menampilkan Data Untuk Tahun {{$currentYear}}
                     <div class="table-responsive">
                         <table class="display" id="basic-100">
                             <thead>

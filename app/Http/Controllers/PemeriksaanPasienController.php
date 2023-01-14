@@ -15,23 +15,49 @@ class PemeriksaanPasienController extends Controller
     //
     public function index()
     {
-        $total_pasien_hari_ini = Kunjungan::where('tanggal', date('Y-m-d'))->count();
-        $total_pasien_7_hari = Kunjungan::where('tanggal', '>=', Carbon::now()->subDays(7))->count();
-        $total_pasien_1_bulan = Kunjungan::where('tanggal', '>=', Carbon::now()->subDays(30))->count();
-        $total_pemasukan = Kunjungan::select(DB::raw("sum(tarif_obat + tarif_periksa) as pemasukan"))->where('status_bayar',1)->first();
-        //$kunjungan = Kunjungan::with('poli','pasien','dokter','obat')->get();
-        $kunjungan = DB::table('kunjungan as k')
-            ->join('pasien as p','k.pasien_idpasien','=','p.idpasien')
-            ->join('dokter as d','k.dokter_iddokter','=','d.iddokter')
-            ->join('poli as po','k.poli_idpoli','=','po.idpoli')
-            ->select('po.nama_lengkap as poli','d.nama_lengkap as dokter', 'p.nama_lengkap as pasien', 'k.*')
-            ->get();
+        if (\Auth::user()->role == "Dokter")
+        {
+            $total_pasien_hari_ini = Kunjungan::where('tanggal', date('Y-m-d'))->where('dokter_iddokter', \Auth::user()->id)->count();
+            $total_pasien_7_hari = Kunjungan::where('tanggal', '>=', Carbon::now()->subDays(7))->where('dokter_iddokter', \Auth::user()->id)->count();
+            $total_pasien_1_bulan = Kunjungan::where('tanggal', '>=', Carbon::now()->subDays(30))->where('dokter_iddokter', \Auth::user()->id)->count();
+            $total_pemasukan = Kunjungan::select(DB::raw("sum(tarif_obat + tarif_periksa) as pemasukan"))->where('status_bayar',1)->where('dokter_iddokter', \Auth::user()->id)->first();
+            //$kunjungan = Kunjungan::with('poli','pasien','dokter','obat')->get();
+            $kunjungan = DB::table('kunjungan as k')
+                ->join('pasien as p','k.pasien_idpasien','=','p.idpasien')
+                ->join('dokter as d','k.dokter_iddokter','=','d.iddokter')
+                ->join('poli as po','k.poli_idpoli','=','po.idpoli')
+                ->where('dokter_iddokter', \Auth::user()->id)
+                ->select('po.nama_lengkap as poli','d.nama_lengkap as dokter', 'p.nama_lengkap as pasien', 'k.*')
+                ->get();
+        }
+        else
+        {
+            $total_pasien_hari_ini = Kunjungan::where('tanggal', date('Y-m-d'))->count();
+            $total_pasien_7_hari = Kunjungan::where('tanggal', '>=', Carbon::now()->subDays(7))->count();
+            $total_pasien_1_bulan = Kunjungan::where('tanggal', '>=', Carbon::now()->subDays(30))->count();
+            $total_pemasukan = Kunjungan::select(DB::raw("sum(tarif_obat + tarif_periksa) as pemasukan"))->where('status_bayar',1)->first();
+            //$kunjungan = Kunjungan::with('poli','pasien','dokter','obat')->get();
+            $kunjungan = DB::table('kunjungan as k')
+                ->join('pasien as p','k.pasien_idpasien','=','p.idpasien')
+                ->join('dokter as d','k.dokter_iddokter','=','d.iddokter')
+                ->join('poli as po','k.poli_idpoli','=','po.idpoli')
+                ->select('po.nama_lengkap as poli','d.nama_lengkap as dokter', 'p.nama_lengkap as pasien', 'k.*')
+                ->get();
+        }
+
 
         return view('pages.pemeriksaan.index', compact('kunjungan', 'total_pasien_hari_ini', 'total_pasien_7_hari', 'total_pasien_1_bulan', 'total_pemasukan'));
     }
     public function edit($id)
     {
-        $kunjungan = Kunjungan::find($id);
+//        $kunjungan = Kunjungan::find($id);
+        $kunjungan = DB::table('kunjungan as k')
+            ->join('pasien as p','k.pasien_idpasien','=','p.idpasien')
+            ->join('dokter as d','k.dokter_iddokter','=','d.iddokter')
+            ->join('poli as po','k.poli_idpoli','=','po.idpoli')
+            ->where('k.idkunjungan','=', $id)
+            ->select('po.nama_lengkap as poli','d.nama_lengkap as dokter', 'p.nama_lengkap as pasien', 'k.*')
+            ->first();
         $obat = Obat::all();
         return view('pages.pemeriksaan.edit', compact('kunjungan', 'obat', 'id'));
     }
@@ -47,24 +73,29 @@ class PemeriksaanPasienController extends Controller
     public function bayarput(Request $request, $id)
     {
         try {
-            $kunjungan = Kunjungan::find($id);
-            $kunjungan->tarif_periksa = $request->get('nominal_pembayaran');
-            $kunjungan->metode_pembayaran = $request->get('metode_pembayaran');
+            $kunjungan = DB::table('kunjungan as k')
+                ->join('pasien as p','k.pasien_idpasien','=','p.idpasien')
+                ->join('dokter as d','k.dokter_iddokter','=','d.iddokter')
+                ->join('poli as po','k.poli_idpoli','=','po.idpoli')
+                ->where('k.idkunjungan','=', $id);
+            $storeKunjungan = Kunjungan::find($id);
+            $storeKunjungan->tarif_periksa = $request->get('nominal_pembayaran');
+            $storeKunjungan->metode_pembayaran = $request->get('metode_pembayaran');
             if ($request->get('metode_pembayaran') == "Cash") {
-                $kunjungan->status_bayar = 1;
-                $kunjungan->status = "Selesai";
+                $storeKunjungan->status_bayar = 1;
+                $storeKunjungan->status = "Selesai";
             }
             if ($request->get('metode_pembayaran') == "Kredit") {
-                $kunjungan->status_bayar = 0;
-                $kunjungan->status = "Belum Bayar";
+                $storeKunjungan->status_bayar = 0;
+                $storeKunjungan->status = "Belum Bayar";
             }
             if ($request->get('metode_pembayaran') == "Gratis") {
-                $kunjungan->status_bayar = 1;
-                $kunjungan->status = "Selesai";
+                $storeKunjungan->status_bayar = 1;
+                $storeKunjungan->status = "Selesai";
             }
-            $kunjungan->jam_selesai = date("h:i:sa");
-            $kunjungan->save();
-            return redirect('pemeriksaan/index')->with('pesan', 'Berhasil');
+            $storeKunjungan->jam_selesai = date("h:i:sa");
+            $storeKunjungan->save();
+            return redirect()->route('pemeriksaan.index')->with('pesan', 'Berhasil');
         } catch (\Exception $e) {
             return $e->getMessage();
         }

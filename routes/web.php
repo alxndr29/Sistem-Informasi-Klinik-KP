@@ -76,9 +76,21 @@ Route::middleware(['auth'])->group(function () {
         Route::post('pemeriksaan-pasien/pembatalan-pasien',[PemeriksaanPasienController::class, 'pembatalanPasien'])->name('pembatalanPasien');
     });
     Route::prefix('laporan')->group(function (){
+        Route::prefix('pasien')->group(function (){
+            Route::get('harian',[LaporanController::class,'pasienHarian'])->name('pasien-harian');
+            Route::get('bulanan',[LaporanController::class,'pasienBulanan'])->name('pasien-bulanan');
+        });
+        Route::prefix('keuangan')->group(function (){
+            Route::get('pendapatan-harian',[LaporanController::class,'pendapatanHarian'])->name('pendapatan-harian');
+            Route::get('pendapatan-bulanan',[LaporanController::class,'pendapatanBulanan'])->name('pendapatan-bulanan');
+
+            Route::get('keuangan',[LaporanController::class,'keuangan'])->name('keuangan');
+            Route::get('piutang',[LaporanController::class,'piutang'])->name('piutang');
+            Route::get('cashflow',[LaporanController::class, 'cashflow'])->name('cashflow');
+
+        });
         Route::get('keuangan',[LaporanController::class,'keuangan'])->name('keuangan');
-        Route::get('piutang',[LaporanController::class,'piutang'])->name('piutang');
-        Route::get('cashflow',[LaporanController::class, 'cashflow'])->name('cashflow');
+
     });
     Route::prefix('produk')->group(function (){
         Route::resource('daftar-produk',ObatController::class);
@@ -189,7 +201,7 @@ Route::middleware(['auth'])->group(function () {
     });
 
     Route::controller(PiutangController::class)->group(function () {
-        Route::prefix('piutang')->group(function () {
+        Route::prefix('laporan/keuangan')->group(function () {
             Route::name('piutang.')->group(function () {
                 Route::get('index', 'index')->name('index');
                 Route::get('edit/{id}', 'edit')->name('edit');

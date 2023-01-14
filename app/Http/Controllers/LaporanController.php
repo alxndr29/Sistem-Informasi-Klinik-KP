@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Models\Kunjungan;
 use Illuminate\Support\Facades\DB;
@@ -160,7 +161,7 @@ class LaporanController extends Controller
 
         return view('pages.laporan.cashflow', compact(
             'currentYear',
-            
+
             'januari_pemasukan',
             'januari_piutang',
 
@@ -201,8 +202,8 @@ class LaporanController extends Controller
 
     public function piutang()
     {
-        // return view('pages.laporan.cashflow');
-        return redirect('piutang/index');
+        $kunjungan = Kunjungan::where('status', 'Belum Bayar')->get();
+        return view('pages.piutang.index', compact('kunjungan'));
     }
     public function keuangan()
     {
@@ -210,4 +211,93 @@ class LaporanController extends Controller
         // return view('pages.laporan.keuangan', compact('kunjungan'));
         return redirect('laporan/index');
     }
+    public function pasienHarian(Request $request)
+    {
+        if ($request->tahun != null && $request->bulan)
+        {
+            $year = $request->tahun;
+            $month = $request->bulan;
+            $TotalPasienHarian =  DB::select('call get_pasien_harian(?,?)', [$request->tahun,$request->bulan]);
+        }else
+        {
+            $year = Carbon::now()->format('Y');
+            $month = Carbon::now()->format('m');
+
+            $TotalPasienHarian =  DB::select('call get_pasien_harian(?,?)', [$year,$month]);
+        }
+
+        $totalPasien = 0;
+        foreach ($TotalPasienHarian as $item){
+            $totalPasien += $item->totalPasien;
+        }
+        $dataBulan = DB::table('months')->get();
+        // $kunjungan = Kunjungan::all();
+        // return view('pages.laporan.keuangan', compact('kunjungan'));
+        return view('pages.laporan.Pasien.harian', compact('TotalPasienHarian', 'year' ,'month','totalPasien', 'dataBulan'));
+    }
+    public function pasienBulanan(Request $request)
+    {
+        if ($request->tahun != null)
+        {
+            $year = $request->tahun;
+            $TotalPasienBulanan =  DB::select('call get_pasien_bulanan(?)', [$request->tahun]);
+        }else
+        {
+            $year = Carbon::now()->format('Y');
+            $TotalPasienBulanan =  DB::select('call get_pasien_bulanan(?)', [$year]);
+        }
+        $totalPasien = 0;
+        foreach ($TotalPasienBulanan as $item){
+            $totalPasien += $item->totalPasien;
+        }
+        // $kunjungan = Kunjungan::all();
+        // return view('pages.laporan.keuangan', compact('kunjungan'));
+        return view('pages.laporan.Pasien.bulanan', compact('TotalPasienBulanan', 'year' ,'totalPasien'));
+    }
+    public function pendapatanBulanan(Request $request)
+    {
+        if ($request->tahun != null)
+        {
+            $year = $request->tahun;
+            $pendapatanBulanan =  DB::select('call get_total_pendapatan_bulan(?)', [$request->tahun]);
+        }else
+        {
+            $year = Carbon::now()->format('Y');
+            $pendapatanBulanan =  DB::select('call get_total_pendapatan_bulan(?)', [$year]);
+        }
+        $grandTotal = 0;
+        foreach ($pendapatanBulanan as $item){
+            $grandTotal += $item->totalPendapatan;
+        }
+        // $kunjungan = Kunjungan::all();
+        // return view('pages.laporan.keuangan', compact('kunjungan'));
+        return view('pages.laporan.keuangan.pendapatan-bulanan', compact('pendapatanBulanan', 'year' ,'grandTotal'));
+    }
+    public function pendapatanHarian(Request $request)
+    {
+
+        if ($request->tahun != null && $request->bulan)
+        {
+            $year = $request->tahun;
+            $month = $request->bulan;
+            $pendapatanHarian =  DB::select('call get_total_pendapatan_harian(?,?)', [$request->bulan,$request->tahun]);
+        }else
+        {
+            $year = Carbon::now()->format('Y');
+            $month = Carbon::now()->format('m');
+
+            $pendapatanHarian =  DB::select('call get_total_pendapatan_harian(?,?)', [$month,$year]);
+        }
+
+        $grandTotal = 0;
+        foreach ($pendapatanHarian as $item){
+            $grandTotal += $item->totalPendapatan;
+        }
+        $dataBulan = DB::table('months')->get();
+        // $kunjungan = Kunjungan::all();
+        // return view('pages.laporan.keuangan', compact('kunjungan'));
+        return view('pages.laporan.keuangan.pendapatan-harian', compact('pendapatanHarian', 'year' ,'month','grandTotal', 'dataBulan'));
+    }
+
+
 }

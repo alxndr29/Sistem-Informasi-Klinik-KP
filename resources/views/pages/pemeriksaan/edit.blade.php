@@ -44,7 +44,7 @@
                                     <div class="col">
                                         <div class="mb-3">
                                             <label class="form-label">Pasien:</label>
-                                            <input class="form-control" type="text" value="{{$kunjungan->pasien->nama_lengkap}}" readonly>
+                                            <input class="form-control" type="text" value="{{$kunjungan->pasien}}" readonly>
                                         </div>
                                     </div>
                                 </div>
@@ -52,7 +52,7 @@
                                     <div class="col">
                                         <div class="mb-3">
                                             <label class="form-label">Poli:</label>
-                                            <input class="form-control" type="text" value="{{$kunjungan->poli->nama_lengkap}}" readonly>
+                                            <input class="form-control" type="text" value="{{$kunjungan->poli}}" readonly>
                                         </div>
                                     </div>
                                 </div>
@@ -60,7 +60,7 @@
                                     <div class="col">
                                         <div class="mb-3">
                                             <label class="form-label">Dokter:</label>
-                                            <input class="form-control" type="text" value="{{$kunjungan->dokter->nama_lengkap}}" readonly>
+                                            <input class="form-control" type="text" value="{{$kunjungan->dokter}}" readonly>
                                         </div>
                                     </div>
                                 </div>
@@ -158,7 +158,7 @@
                                     <br>
                                     <div class="d-flex justify-content-end">
                                         <div>
-                                            <button class="btn btn-success" type="button" onClick="simpanData()">Simpan</button>
+                                            <button class="btn btn-success w-100" type="button" onClick="simpanData()">Simpan & Lanjut Ke Pembayaran</button>
                                         </div>
                                     </div>
                                 </div>

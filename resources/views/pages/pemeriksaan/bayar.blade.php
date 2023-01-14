@@ -9,19 +9,19 @@
             <div class="col-12">
                 <div class="mb-3">
                     <label class="form-label">Pasien:</label>
-                    <input class="form-control" type="text" value="{{$kunjungan->pasien->nama_lengkap}}" readonly>
+                    <input class="form-control" type="text" value="{{$kunjungan->pasien}}" readonly>
                 </div>
             </div>
             <div class="col-12">
                 <div class="mb-3">
                     <label class="form-label">Poli:</label>
-                    <input class="form-control" type="text" value="{{$kunjungan->poli->nama_lengkap}}" readonly>
+                    <input class="form-control" type="text" value="{{$kunjungan->poli}}" readonly>
                 </div>
             </div>
             <div class="col-12">
                 <div class="mb-3">
                     <label class="form-label">Dokter:</label>
-                    <input class="form-control" type="text" value="{{$kunjungan->dokter->nama_lengkap}}" readonly>
+                    <input class="form-control" type="text" value="{{$kunjungan->dokter}}" readonly>
                 </div>
             </div>
             <div class="col-12">
