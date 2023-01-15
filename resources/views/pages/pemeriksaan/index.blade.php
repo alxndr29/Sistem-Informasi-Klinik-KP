@@ -201,9 +201,11 @@
                                                 </button>
                                             </form>
                                         @elseif($value->status == "Menunggu Pembayaran")
+                                            @if(Auth::user()->role != 'Dokter')
                                             <button class="btn btn-primary" type="button" onclick="pembayaranPasien({{$value->idkunjungan}})" data-bs-toggle="modal" data-original-title="test" data-bs-target="#example-modal" data-bs-original-title="" title="">
                                                 Pembayaran
                                             </button>
+                                            @endif
                                             <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="{{ route('pembatalanPasien') }}" method="POST">
                                                 @csrf
                                                 <input type="hidden" name="id" value="{{$value->idkunjungan }}">

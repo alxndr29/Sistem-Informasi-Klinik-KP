@@ -33,7 +33,6 @@ class DokterController extends Controller
             $dokter->save();
 
             $user = new User();
-            $user->id = $dokter->iddokter;
             $user->name = $request->get('nama_lengkap');
             $user->email = $request->get('email');
             if($request->get('password') != null){

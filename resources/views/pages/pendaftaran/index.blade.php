@@ -58,7 +58,6 @@
                                                 <th class="text-center">Nama Pasien</th>
                                                 <th class="text-center">Usia</th>
                                                 <th class="text-center">Jenis Kelamin</th>
-                                                <th class="text-center">Terakhir Datang Pada Tanggal</th>
                                                 <th>Aksi</th>
                                             </tr>
                                             </thead>
@@ -75,8 +74,6 @@
                                                     </td>
                                                     <td class="text-center"><span
                                                             class="badge badge-{{$data_pasien->jenis_kelamin == 'Laki-laki' ? 'primary' : 'secondary'}}">{{$data_pasien->jenis_kelamin}}</span></td>
-                                                    <td class="text-center">
-                                                        {{$data_pasien->tanggal_lahir}}</td>
                                                     <td>
                                                         <button class="btn btn-primary" type="button" onclick=""
                                                                 data-bs-toggle="modal" data-original-title="test"

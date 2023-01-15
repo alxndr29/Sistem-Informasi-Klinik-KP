@@ -126,7 +126,10 @@ class PemeriksaanPasienController extends Controller
             $kunjungan->tarif_obat = $request->get('biaya-obat');
             $kunjungan->hasil_diagnosa = $request->get('hasil_diagnosa');
             $kunjungan->status = "Menunggu Pembayaran";
+            $kunjungan->tarif_periksa = $request->get('nominal_pembayaran');
+            $kunjungan->metode_pembayaran = $request->get('metode_pembayaran');
             $kunjungan->save();
+
             foreach ($request->get('daftar_produk') as $key => $value) {
                 $kunjungan->obat()->attach((int) $value['obat_idobat'], ['jumlah' => $value['jumlah'], 'harga' => $value['harga'], 'keterangan' => $value['dosis']]);
                 $stokin = DB::table('obat_has_stok_in')->where('obat_idobat', (int) $value['obat_idobat'])->get();

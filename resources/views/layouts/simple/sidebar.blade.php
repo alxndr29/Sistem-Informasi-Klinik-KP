@@ -19,7 +19,7 @@
                             <h6>Home</h6>
                         </div>
                     </li>
-                    <li class="sidebar-list"><a class="sidebar-link sidebar-title link-nav {{ Route::currentRouteName()=='dashboard' ? 'active' : '' }}" href="{{route('dashboard.index')}}"><i data-feather="home"> </i><span>Dashboard</span></a></li>
+                    <li class="sidebar-list"><a class="sidebar-link sidebar-title link-nav {{ Route::currentRouteName()=='dashboard.index' ? 'active' : '' }}" href="{{route('dashboard.index')}}"><i data-feather="home"> </i><span>Dashboard</span></a></li>
 
                     <li class="sidebar-main-title">
                         <div>

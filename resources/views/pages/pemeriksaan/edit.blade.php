@@ -1,5 +1,5 @@
 @extends('layouts.simple.master')
-@section('title', 'Satuan Produk')
+@section('title', 'Periksa Pasien')
 
 @section('css')
 <link rel="stylesheet" type="text/css" href="{{asset('assets/css/vendors/datatables.css')}}">
@@ -16,8 +16,7 @@
 <li class="breadcrumb-item">
     Transaksi
 </li>
-<li class="breadcrumb-item">Pembelian</li>
-<li class="breadcrumb-item active">Buat Transaksi</li>
+<li class="breadcrumb-item">Pemeriksaan Pasien</li>
 @endsection
 
 @section('content')
@@ -155,6 +154,36 @@
                                             Rp. {{number_format(0)}}
                                         </div>
                                     </div>
+                                    @method('put')
+                                    @csrf
+                                    <div class="row mt-4 gy-2">
+                                        <div class="col-12">
+                                            <h6 class="text-dark">Pilih Metode Pembayaran</h6>
+                                            <div class="m-t-15 m-checkbox-inline custom-radio-ml">
+                                                <div class="m-t-15 m-checkbox-inline custom-radio-ml">
+                                                    <div class="form-check form-check-inline radio radio-primary">
+                                                        <input class="form-check-input" id="radioinline1" type="radio" name="metode_pembayaran" value="Cash" checked>
+                                                        <label class="form-check-label text-dark mb-0" for="radioinline1">Cash</label>
+                                                    </div>
+                                                    <div class="form-check form-check-inline radio radio-primary">
+                                                        <input class="form-check-input" id="radioinline2" type="radio" name="metode_pembayaran" value="Kredit">
+                                                        <label class="form-check-label text-dark mb-0" for="radioinline2">Kredit</label>
+                                                    </div>
+                                                    <div class="form-check form-check-inline radio radio-primary">
+                                                        <input class="form-check-input" id="radioinline3" type="radio" name="metode_pembayaran" value="Gratis">
+                                                        <label class="form-check-label text-dark mb-0" for="radioinline3">Gratis</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <label class="form-label text-dark">Tarif Pemeriksaan</label>
+                                            <div class="input-group"><span class="input-group-text">Rp.</span>
+                                                <input class="form-control text-right" id="pemeriksaan" style="text-align: right" value="0" type="number" placeholder="Masukan Nominal Pembayaran" required name="nominal_pembayaran">
+                                            </div>
+                                        </div>
+                                    </div>
+
                                     <br>
                                     <div class="d-flex justify-content-end">
                                         <div>
@@ -283,6 +312,8 @@
         if (daftar_produk.length == 0 || $("#hasil_diagnosa").val() == "") {
             alert('obat dan hasil diagnosa tidak boleh kosong');
         } else {
+            var pemeriksaan = $('#pemeriksaan').val();
+            var option = $('input[type="radio"]:checked').val();
             $.ajax({
                 type: 'POST',
                 url: "{{route('pemeriksaan.storedokter')}}",
@@ -291,7 +322,9 @@
                     'daftar_produk': daftar_produk,
                     'id': "{{$id}}",
                     'biaya-obat': biaya_obat,
-                    'hasil_diagnosa': $("#hasil_diagnosa").val()
+                    'hasil_diagnosa': $("#hasil_diagnosa").val(),
+                    'nominal_pembayaran': pemeriksaan,
+                    'metode_pembayaran': option
                 },
                 success: function(data) {
                     console.log(data);

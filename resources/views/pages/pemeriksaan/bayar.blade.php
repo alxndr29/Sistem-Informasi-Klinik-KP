@@ -85,15 +85,16 @@
                             <div class="m-t-15 m-checkbox-inline custom-radio-ml">
                                 <div class="m-t-15 m-checkbox-inline custom-radio-ml">
                                     <div class="form-check form-check-inline radio radio-primary">
-                                        <input class="form-check-input" id="radioinline1" type="radio" name="metode_pembayaran" value="Cash" checked>
-                                        <label class="form-check-label text-dark mb-0" for="radioinline1">Cash</label>
+                                        <input class="form-check-input" id="radioinline1" type="radio" name="metode_pembayaran" value="Cash"
+                                            {{$kunjungan->metode_pembayaran == "Cash" ? 'checked' : ''}}>
+                                        <label class="form-check-label text-dark mb-0"  for="radioinline1">Cash</label>
                                     </div>
                                     <div class="form-check form-check-inline radio radio-primary">
-                                        <input class="form-check-input" id="radioinline2" type="radio" name="metode_pembayaran" value="Kredit">
+                                        <input class="form-check-input" id="radioinline2" type="radio" {{$kunjungan->metode_pembayaran == "Kredit" ? 'checked' : ''}} name="metode_pembayaran" value="Kredit">
                                         <label class="form-check-label text-dark mb-0" for="radioinline2">Kredit</label>
                                     </div>
                                     <div class="form-check form-check-inline radio radio-primary">
-                                        <input class="form-check-input" id="radioinline3" type="radio" name="metode_pembayaran" value="Gratis">
+                                        <input class="form-check-input" id="radioinline3" type="radio" {{$kunjungan->metode_pembayaran == "Gratis" ? 'checked' : ''}} name="metode_pembayaran" value="Gratis">
                                         <label class="form-check-label text-dark mb-0" for="radioinline3">Gratis</label>
                                     </div>
                                 </div>
@@ -102,7 +103,7 @@
                         <div class="col-12">
                             <label class="form-label text-dark">Tarif Pemeriksaan</label>
                             <div class="input-group"><span class="input-group-text">Rp.</span>
-                                <input class="form-control text-right" style="text-align: right" value="0" type="number" placeholder="Masukan Nominal Pembayaran" required name="nominal_pembayaran">
+                                <input class="form-control text-right" style="text-align: right" value="{{$kunjungan->tarif_periksa}}" type="number" placeholder="Masukan Nominal Pembayaran" required name="nominal_pembayaran">
                             </div>
                         </div>
                         <div class="col-12">

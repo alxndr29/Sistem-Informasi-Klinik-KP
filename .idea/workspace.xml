@@ -2,23 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2ea64314-2dd2-4b21-9338-cb52a29c32ea" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/resources/views/pages/laporan/Pasien/bulanan.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/pages/laporan/Pasien/harian.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/pages/laporan/keuangan/pendapatan-bulanan.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/pages/laporan/keuangan/pendapatan-harian.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/LaporanController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/LaporanController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/DokterController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/DokterController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/PemeriksaanPasienController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/PemeriksaanPasienController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/PendaftaranPasienController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/PendaftaranPasienController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/layouts/simple/sidebar.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/simple/sidebar.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/pages/farmasi/stok-barang.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pages/farmasi/stok-barang.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/pages/farmasi/stok-keluar.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pages/farmasi/stok-keluar.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/pages/laporan/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pages/laporan/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/pages/pasien/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pages/pasien/index.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/pages/pemeriksaan/bayar.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pages/pemeriksaan/bayar.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/pages/pemeriksaan/edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pages/pemeriksaan/edit.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/pages/pemeriksaan/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pages/pemeriksaan/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/pages/piutang/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pages/piutang/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/pages/pendaftaran/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pages/pendaftaran/index.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -152,6 +144,7 @@
   <component name="ProjectId" id="2JDxWb4HnXp9FnQ0HZeXiyZNL29" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
+    <option name="autoscrollFromSource" value="true" />
     <option name="autoscrollToSource" value="true" />
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showExcludedFiles" value="false" />
@@ -216,7 +209,8 @@
       <workItem from="1673490928860" duration="1068000" />
       <workItem from="1673492040691" duration="660000" />
       <workItem from="1673492805246" duration="32981000" />
-      <workItem from="1673673056849" duration="12384000" />
+      <workItem from="1673673056849" duration="13818000" />
+      <workItem from="1673776102128" duration="7742000" />
     </task>
     <servers />
   </component>

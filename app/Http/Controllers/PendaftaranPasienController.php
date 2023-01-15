@@ -23,8 +23,13 @@ class PendaftaranPasienController extends Controller
     }
     public function store(Request $request){
         // return $request->all();
-        $checkKunjungan = Kunjungan::
-        where('pasien_idpasien', $request->pasien)->where('status','Menunggu Pemeriksaan')->orWhere('status', 'Menunggu Pembayaran')->get();
+
+        $checkKunjungan = DB::table('kunjungan')
+            ->where('pasien_idpasien', $request->get('pasien'))
+        ->whereBetween('status', ['Menunggu Pembayaran', 'Menunggu Pemeriksaan'])
+        ->get();
+//            Kunjungan::
+//        where('pasien_idpasien', $request->get('pasien'))->where('status','Menunggu Pemeriksaan')->orWhere('status', 'Menunggu Pembayaran')->get();
 
         if (count($checkKunjungan) > 0)
         {
@@ -43,6 +48,7 @@ class PendaftaranPasienController extends Controller
             $kunjungan->tanggal = date("Y-m-d");
             $kunjungan->jam_selesai = null;
             $kunjungan->hasil_diagnosa = null;
+
             $kunjungan->save();
             return redirect()->route('pemeriksaan.index')->with('success', 'Pasien Berhasil Terdaftar Pada Antrian');
         }catch(\Exception $e){
