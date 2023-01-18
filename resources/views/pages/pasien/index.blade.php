@@ -52,7 +52,7 @@
                                     <th>Nama</th>
                                     <th>Umur</th>
                                     <th>Jenis Kelamin</th>
-                                    <th>Alamat</th>
+                                    <!-- <th>Alamat</th> -->
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
@@ -65,7 +65,7 @@
                                         {{\Carbon\Carbon::parse($value->tanggal_lahir)->diff(\Carbon\Carbon::now())->format('%y Tahun, %m Bulan and %d Hari');}}
                                     </td>
                                     <td><span class="badge badge-{{$value->jenis_kelamin == "Laki-laki" ? 'primary' : 'secondary'}}">{{$value->jenis_kelamin}}</span></td>
-                                    <td>{{$value->alamat}}</td>
+                                    <!-- <td>{{$value->alamat}}</td> -->
                                     <td>
                                         <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="{{ route('pasien.delete', $value->idpasien) }}" method="POST">
                                             <a class="btn btn-primary btn-sm me-2" href="{{route('pasien.show',$value->idpasien)}}">

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Waktu pembuatan: 18 Jan 2023 pada 05.56
+-- Waktu pembuatan: 18 Jan 2023 pada 06.48
 -- Versi server: 5.7.33
 -- Versi PHP: 8.1.11
 
@@ -152,7 +152,7 @@ CREATE TABLE `kunjungan` (
 --
 
 INSERT INTO `kunjungan` (`idkunjungan`, `status`, `created_at`, `updated_at`, `pasien_idpasien`, `dokter_iddokter`, `poli_idpoli`, `diagnosa_awal`, `hasil_diagnosa`, `tanggal`, `jam_datang`, `jam_selesai`, `tarif_obat`, `status_bayar`, `metode_pembayaran`, `tarif_periksa`) VALUES
-(1, 'Selesai', '2023-01-17 21:46:20', '2023-01-17 21:53:28', 1, 2, 2, 'dfjjdfhskdj', 'n,,n', '2023-01-18', '05:46:20', '05:53:28', 5000, 1, 'Cash', 2000);
+(1, 'Selesai', '2023-01-17 22:45:51', '2023-01-17 22:48:08', 1, 1, 1, 'jdkajsna', 'n', '2023-01-18', '06:45:51', '06:48:08', 5000, 1, 'Cash', 10000);
 
 -- --------------------------------------------------------
 
@@ -234,14 +234,6 @@ CREATE TABLE `obat_has_stok_in` (
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data untuk tabel `obat_has_stok_in`
---
-
-INSERT INTO `obat_has_stok_in` (`obat_idobat`, `stok_in_idstok_in`, `jumlah`, `harga`, `created_at`) VALUES
-(1, 1, 99, 1000, '2023-01-18 05:45:41'),
-(2, 1, 25, 200, '2023-01-18 05:45:41');
-
 -- --------------------------------------------------------
 
 --
@@ -273,7 +265,7 @@ CREATE TABLE `pasien` (
 --
 
 INSERT INTO `pasien` (`idpasien`, `tanggal`, `nik`, `no_bpjs`, `nama_lengkap`, `tempat_lahir`, `tanggal_lahir`, `umur`, `jenis_kelamin`, `alamat`, `pekerjaan`, `agama`, `no_telp`, `created_at`, `updated_at`, `deleted_at`, `status`) VALUES
-(1, NULL, NULL, NULL, 'Pasien A', NULL, NULL, NULL, 'Laki-laki', NULL, NULL, NULL, '62812128', '2023-01-17 21:46:20', '2023-01-17 21:46:20', NULL, 1);
+(1, NULL, NULL, NULL, 'Alexander', NULL, '1999-02-09', NULL, 'Laki-laki', NULL, NULL, NULL, '123465', '2023-01-17 22:45:51', '2023-01-17 22:45:51', NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -625,7 +617,7 @@ ALTER TABLE `tanggal`
 -- AUTO_INCREMENT untuk tabel `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1003;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1001;
 
 --
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
