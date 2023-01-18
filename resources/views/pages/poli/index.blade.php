@@ -13,10 +13,8 @@
 @endsection
 
 @section('breadcrumb-items')
-<li class="breadcrumb-item">
-    Transaksi
-</li>
-<li class="breadcrumb-item">Pembelian</li>
+
+<li class="breadcrumb-item">Manajemen Klinik</li>
 <li class="breadcrumb-item active">Buat Transaksi</li>
 @endsection
 

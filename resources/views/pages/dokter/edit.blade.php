@@ -94,6 +94,18 @@
                                 @endif
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="col">
+                                <label class="form-label">Poli</label>
+                                <div class="mb-3">
+                                    <select class="form-select digits" name="poli">
+                                        @foreach ($poli as $value)
+                                        <option value="{{$value->idpoli}}" {{ ($value->idpoli == $dokter->poli_idpoli) ? 'selected' : '' }}>{{$value->nama_lengkap}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="card-footer text-end">
                         <button class="btn btn-primary" type="submit" data-bs-original-title="" title="">Submit</button>

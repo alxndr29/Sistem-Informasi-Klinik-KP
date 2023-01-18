@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Waktu pembuatan: 14 Jan 2023 pada 14.16
+-- Waktu pembuatan: 18 Jan 2023 pada 05.56
 -- Versi server: 5.7.33
 -- Versi PHP: 8.1.11
 
@@ -21,6 +21,40 @@ SET time_zone = "+00:00";
 -- Database: `si_klinik`
 --
 
+DELIMITER $$
+--
+-- Prosedur
+--
+CREATE DEFINER=`root`@`localhost` PROCEDURE `get_pasien_bulanan` (IN `tahun` INT)   BEGIN
+	SELECT m.name AS bulan,
+	(SELECT COUNT(k.idkunjungan) FROM kunjungan AS k WHERE MONTH(k.created_at) = m.id AND YEAR(k.created_at) = tahun AND k.status_bayar =1) AS totalPasien
+	FROM months AS m;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `get_pasien_harian` (IN `tahun` INT, IN `bulan` INT)   BEGIN
+	SELECT t.id AS tanggal,
+	(SELECT COUNT(k.idkunjungan) FROM kunjungan AS k WHERE DAY(k.created_at) = t.id AND MONTH(k.created_at) = bulan AND YEAR(k.created_at) = tahun AND k.status_bayar =1) AS totalPasien
+	FROM tanggal AS t;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `get_total_pendapatan_bulan` (IN `tahun` INT)   BEGIN
+	SELECT m.name AS bulan,
+	(SELECT SUM(k1.tarif_periksa + k1.tarif_obat) FROM kunjungan AS k1 
+	WHERE MONTH(k1.created_at) = m.id AND YEAR(k1.created_at) = tahun AND k1.status_bayar = 1) AS totalPendapatan
+	FROM months AS m;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `get_total_pendapatan_harian` (IN `bulan` INT, IN `tahun` INT)   BEGIN
+	SELECT t.id AS tanggal,
+	(SELECT SUM(k1.tarif_periksa + k1.tarif_obat) FROM kunjungan AS k1 
+	WHERE DAY(k1.created_at) = t.id AND MONTH(k1.created_at) = bulan AND YEAR(k1.created_at) = tahun AND k1.status_bayar = 1) AS totalPendapatan
+
+	FROM tanggal AS t;
+	
+END$$
+
+DELIMITER ;
+
 -- --------------------------------------------------------
 
 --
@@ -30,22 +64,25 @@ SET time_zone = "+00:00";
 CREATE TABLE `dokter` (
   `iddokter` int(11) NOT NULL,
   `nama_lengkap` varchar(255) DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  `deleted_at` timestamp NULL DEFAULT NULL,
   `jenis_kelamin` enum('Laki-laki','Perempuan') DEFAULT NULL,
   `tempat_lahir` varchar(255) DEFAULT NULL,
   `tanggal_lahir` date DEFAULT NULL,
   `alamat` varchar(255) DEFAULT NULL,
-  `status` tinyint(4) DEFAULT '1'
+  `status` tinyint(4) DEFAULT '1',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL,
+  `poli_idpoli` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data untuk tabel `dokter`
 --
 
-INSERT INTO `dokter` (`iddokter`, `nama_lengkap`, `created_at`, `updated_at`, `deleted_at`, `jenis_kelamin`, `tempat_lahir`, `tanggal_lahir`, `alamat`, `status`) VALUES
-(1, 'Dr Strange', '2023-01-12 06:59:24', '2023-01-12 06:59:48', NULL, 'Perempuan', 'New York', '1965-02-12', 'Jln. Tenggilis X', 1);
+INSERT INTO `dokter` (`iddokter`, `nama_lengkap`, `jenis_kelamin`, `tempat_lahir`, `tanggal_lahir`, `alamat`, `status`, `created_at`, `updated_at`, `deleted_at`, `poli_idpoli`) VALUES
+(1, 'Dokter A', 'Laki-laki', 'Surabaya', '1999-02-09', 'Tenggilis', 1, '2023-01-17 21:43:45', '2023-01-17 21:43:45', NULL, 1),
+(2, 'Dokter B', 'Perempuan', 'Mamumere', '1987-02-09', 'frans seda', 1, '2023-01-17 21:44:24', '2023-01-17 21:44:33', NULL, 2),
+(3, 'Dokter C', 'Perempuan', 'Maumere', '1998-08-08', 'Koskwo', 1, '2023-01-17 21:54:07', '2023-01-17 21:54:07', NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -74,7 +111,7 @@ CREATE TABLE `kategori` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
-  `deskripsi` varchar(50) NOT NULL
+  `deskripsi` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -82,8 +119,8 @@ CREATE TABLE `kategori` (
 --
 
 INSERT INTO `kategori` (`id`, `name`, `created_at`, `updated_at`, `deleted_at`, `deskripsi`) VALUES
-(1, 'Obat Batuk Pilek', '2023-01-12 07:06:17', '2023-01-12 07:06:17', NULL, 'Deskripsi untuk obat batuk pilek'),
-(2, 'Obat Demam', '2023-01-12 07:06:28', '2023-01-12 07:06:28', NULL, 'Deskripsi untuk obat demam');
+(1, 'Kategori A', '2023-01-17 21:44:50', '2023-01-17 21:44:50', NULL, 'Deskripsiii'),
+(2, 'Kategori B', '2023-01-17 21:44:58', '2023-01-17 21:44:58', NULL, 'desss');
 
 -- --------------------------------------------------------
 
@@ -115,10 +152,7 @@ CREATE TABLE `kunjungan` (
 --
 
 INSERT INTO `kunjungan` (`idkunjungan`, `status`, `created_at`, `updated_at`, `pasien_idpasien`, `dokter_iddokter`, `poli_idpoli`, `diagnosa_awal`, `hasil_diagnosa`, `tanggal`, `jam_datang`, `jam_selesai`, `tarif_obat`, `status_bayar`, `metode_pembayaran`, `tarif_periksa`) VALUES
-(1, 'Selesai', '2023-01-12 07:01:45', '2023-01-12 07:15:27', 1, 1, 1, 'Tidak Bisa Melihat', 'Sudah sembuh bosku', '2023-01-12', '03:01:45', '03:15:27', 30000, 1, 'Cash', 10000),
-(2, 'Selesai', '2023-01-12 17:01:27', '2023-01-12 17:10:57', 2, 1, 1, 'Tidak bisa melihat jauh', 'pake kacamata minus', '2023-01-13', '01:01:27', '01:06:03', 2500, 1, 'Kredit', 8000),
-(3, 'Selesai', '2023-01-12 17:46:24', '2023-01-12 17:47:37', 1, 1, 1, 'Tidak sehat kembali', 'sdh sehat kembali', '2023-01-13', '01:46:24', '01:46:53', 1000, 1, 'Kredit', 1000),
-(4, 'Menunggu Pemeriksaan', '2023-01-14 06:11:07', '2023-01-14 06:11:07', 2, 1, 1, 'asd', NULL, '2023-01-14', '02:11:07', NULL, NULL, 0, NULL, NULL);
+(1, 'Selesai', '2023-01-17 21:46:20', '2023-01-17 21:53:28', 1, 2, 2, 'dfjjdfhskdj', 'n,,n', '2023-01-18', '05:46:20', '05:53:28', 5000, 1, 'Cash', 2000);
 
 -- --------------------------------------------------------
 
@@ -183,8 +217,8 @@ CREATE TABLE `obat` (
 --
 
 INSERT INTO `obat` (`idobat`, `nama`, `kategori`, `satuan`, `created_at`, `updated_at`, `deleted_at`, `harga`) VALUES
-(1, 'Sanmol 250Mg', 'Obat Demam', 'Strip', '2023-01-12 07:06:52', '2023-01-12 07:11:04', NULL, 7500),
-(2, 'Neozep Forte 250mg', 'Obat Batuk Pilek', 'Strip', '2023-01-12 07:10:54', '2023-01-12 07:10:54', NULL, 5000);
+(1, 'Obat A', 'Kategori A', 'Strip', '2023-01-17 21:45:16', '2023-01-17 21:45:16', NULL, 5000),
+(2, 'Obat B', 'Kategori B', 'Strip', '2023-01-17 21:45:27', '2023-01-17 21:45:27', NULL, 1250);
 
 -- --------------------------------------------------------
 
@@ -196,17 +230,17 @@ CREATE TABLE `obat_has_stok_in` (
   `obat_idobat` int(11) NOT NULL,
   `stok_in_idstok_in` int(11) NOT NULL,
   `jumlah` int(11) DEFAULT NULL,
-  `harga` double DEFAULT NULL
+  `harga` double DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data untuk tabel `obat_has_stok_in`
 --
 
-INSERT INTO `obat_has_stok_in` (`obat_idobat`, `stok_in_idstok_in`, `jumlah`, `harga`) VALUES
-(1, 1, 6, 2000),
-(1, 2, 12, 2000),
-(2, 1, 13, 2000);
+INSERT INTO `obat_has_stok_in` (`obat_idobat`, `stok_in_idstok_in`, `jumlah`, `harga`, `created_at`) VALUES
+(1, 1, 99, 1000, '2023-01-18 05:45:41'),
+(2, 1, 25, 200, '2023-01-18 05:45:41');
 
 -- --------------------------------------------------------
 
@@ -222,10 +256,12 @@ CREATE TABLE `pasien` (
   `nama_lengkap` varchar(45) DEFAULT NULL,
   `tempat_lahir` varchar(45) DEFAULT NULL,
   `tanggal_lahir` date DEFAULT NULL,
+  `umur` int(11) DEFAULT NULL,
   `jenis_kelamin` enum('Perempuan','Laki-laki') DEFAULT NULL,
   `alamat` varchar(45) DEFAULT NULL,
   `pekerjaan` varchar(45) DEFAULT NULL,
   `agama` varchar(45) DEFAULT NULL,
+  `no_telp` varchar(15) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
@@ -236,9 +272,8 @@ CREATE TABLE `pasien` (
 -- Dumping data untuk tabel `pasien`
 --
 
-INSERT INTO `pasien` (`idpasien`, `tanggal`, `nik`, `no_bpjs`, `nama_lengkap`, `tempat_lahir`, `tanggal_lahir`, `jenis_kelamin`, `alamat`, `pekerjaan`, `agama`, `created_at`, `updated_at`, `deleted_at`, `status`) VALUES
-(1, '2023-01-12', '12345678', '123123', 'Gusti Bagus', 'Balikpapan', '1999-10-29', 'Laki-laki', 'Jln. Perumnas No 32', 'WIRASWASTA', 'BUDHA', '2023-01-12 06:57:38', '2023-01-12 06:58:04', NULL, 1),
-(2, '2023-01-13', '78910', '4321', 'Alexander Evan', 'Ende', '2010-10-10', 'Laki-laki', 'Jln. Sultan Hassanudin', 'WIRASWASTA', 'KATOLIK', '2023-01-12 17:01:07', '2023-01-12 17:01:07', NULL, 1);
+INSERT INTO `pasien` (`idpasien`, `tanggal`, `nik`, `no_bpjs`, `nama_lengkap`, `tempat_lahir`, `tanggal_lahir`, `umur`, `jenis_kelamin`, `alamat`, `pekerjaan`, `agama`, `no_telp`, `created_at`, `updated_at`, `deleted_at`, `status`) VALUES
+(1, NULL, NULL, NULL, 'Pasien A', NULL, NULL, NULL, 'Laki-laki', NULL, NULL, NULL, '62812128', '2023-01-17 21:46:20', '2023-01-17 21:46:20', NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -271,7 +306,10 @@ CREATE TABLE `poli` (
 --
 
 INSERT INTO `poli` (`idpoli`, `nama_lengkap`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 'Poli Mata Batin', '2023-01-12 07:01:25', '2023-01-12 07:01:34', NULL);
+(1, 'Poli A', '2023-01-17 21:38:58', '2023-01-17 21:39:47', NULL),
+(2, 'Poli B', '2023-01-17 21:39:19', '2023-01-17 21:39:19', NULL),
+(3, 'Poli C', '2023-01-17 21:39:25', '2023-01-17 21:39:25', NULL),
+(4, 'Poli D', '2023-01-17 21:39:33', '2023-01-17 21:39:41', '2023-01-17 21:39:41');
 
 -- --------------------------------------------------------
 
@@ -292,10 +330,7 @@ CREATE TABLE `resep_stock_out` (
 --
 
 INSERT INTO `resep_stock_out` (`kunjungan_idkunjungan`, `obat_idobat`, `jumlah`, `harga`, `keterangan`) VALUES
-(1, 1, 2, 10000, '1x1'),
-(1, 2, 2, 5000, '3x1'),
-(2, 1, 1, 2500, '1x1'),
-(3, 1, 1, 1000, '1x1');
+(1, 1, 1, 5000, '1x1');
 
 -- --------------------------------------------------------
 
@@ -315,8 +350,55 @@ CREATE TABLE `stok_in` (
 --
 
 INSERT INTO `stok_in` (`idstok_in`, `tanggal`, `created_at`, `updated_at`) VALUES
-(1, '2023-01-12', '2023-01-12 07:11:34', '2023-01-12 07:11:34'),
-(2, '2023-01-12', '2023-01-12 07:21:52', '2023-01-12 07:21:52');
+(1, '2023-01-18', '2023-01-17 21:45:41', '2023-01-17 21:45:41');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `tanggal`
+--
+
+CREATE TABLE `tanggal` (
+  `id` int(11) NOT NULL,
+  `tanggal` varchar(50) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `tanggal`
+--
+
+INSERT INTO `tanggal` (`id`, `tanggal`) VALUES
+(1, '1'),
+(2, '2'),
+(3, '3'),
+(4, '4'),
+(5, '5'),
+(6, '6'),
+(7, '7'),
+(8, '8'),
+(9, '9'),
+(10, '10'),
+(11, '11'),
+(12, '12'),
+(13, '13'),
+(14, '14'),
+(15, '15'),
+(16, '16'),
+(17, '17'),
+(18, '18'),
+(19, '19'),
+(20, '20'),
+(21, '21'),
+(22, '22'),
+(23, '23'),
+(24, '24'),
+(25, '25'),
+(26, '26'),
+(27, '27'),
+(28, '28'),
+(29, '29'),
+(30, '30'),
+(31, '2');
 
 -- --------------------------------------------------------
 
@@ -326,7 +408,7 @@ INSERT INTO `stok_in` (`idstok_in`, `tanggal`, `created_at`, `updated_at`) VALUE
 
 CREATE TABLE `users` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `role` enum('Admin','Dokter','Perawat') COLLATE utf8mb4_unicode_ci NOT NULL,
+  `role` enum('Admin','Dokter') COLLATE utf8mb4_unicode_ci NOT NULL,
   `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `email_verified_at` timestamp NULL DEFAULT NULL,
@@ -341,9 +423,30 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `role`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'Admin', 'Evan', 'evan@evan.com', NULL, '$2y$10$kG/fE9u0bfYMzesyaHGCbOzlhnEH.Z5DcIFb3qUThltL8BQUlzfDS', NULL, '2022-12-05 03:20:40', '2022-12-05 03:20:40'),
-(2, 'Dokter', 'Gusti Bagus', 'qwe@gmail.com', NULL, '$2y$10$TjiR1ifocjVoUpWoRa/Xw.ZOrbO6mReC9n8PhmS5A/wbLQekXC9ze', NULL, '2022-12-21 05:20:19', '2022-12-21 05:20:19'),
-(3, 'Dokter', 'Dr Strange', 'strange@strange.com', NULL, '$2y$10$65rGQiBgcNtQlOE4fq1im.0F9rvXJerMoge5hhOqHnfB5r9RGoZvy', NULL, '2023-01-12 06:59:24', '2023-01-12 06:59:48');
+(1, 'Dokter', 'Dokter A', 'doktera@doktera.com', NULL, '$2y$10$QTYxi2sN30m7KP2bt28rYOyPeud/hqbhGQzsxTtQUrbWoysfx61dq', NULL, '2023-01-17 21:43:45', '2023-01-17 21:43:45'),
+(2, 'Dokter', 'Dokter B', 'dokterb@dokterb.com', NULL, '$2y$10$CJoFjJba9GA93N.YFsUNPu5VHvQA/0B1FNvyKhHoAFm9o3deh7iF6', NULL, '2023-01-17 21:44:24', '2023-01-17 21:44:33'),
+(3, 'Dokter', 'Dokter C', 'dokterc@dokterc.com', NULL, '$2y$10$3TPsbBrFo5mtwAsseUKvL.mDvBOJg8K58bPwUMG8VQ7TtIU8lfwpi', NULL, '2023-01-17 21:54:07', '2023-01-17 21:54:07'),
+(1000, 'Admin', 'Evan', 'evan@evan.com', NULL, '$2y$10$kG/fE9u0bfYMzesyaHGCbOzlhnEH.Z5DcIFb3qUThltL8BQUlzfDS', NULL, '2022-12-05 03:20:40', '2022-12-05 03:20:40');
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in struktur untuk tampilan `view_pasien_harian`
+-- (Lihat di bawah untuk tampilan aktual)
+--
+CREATE TABLE `view_pasien_harian` (
+`tanggal` int(11)
+,`totalPasien` bigint(21)
+);
+
+-- --------------------------------------------------------
+
+--
+-- Struktur untuk view `view_pasien_harian`
+--
+DROP TABLE IF EXISTS `view_pasien_harian`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `view_pasien_harian`  AS SELECT `t`.`id` AS `tanggal`, (select count(`k`.`idkunjungan`) from `kunjungan` `k` where ((cast(`k`.`created_at` as date) = `t`.`id`) and (year(`k`.`created_at`) = 2023) and (`k`.`status_bayar` = 1))) AS `totalPasien` FROM `tanggal` AS `t`;
 
 --
 -- Indexes for dumped tables
@@ -353,7 +456,8 @@ INSERT INTO `users` (`id`, `role`, `name`, `email`, `email_verified_at`, `passwo
 -- Indeks untuk tabel `dokter`
 --
 ALTER TABLE `dokter`
-  ADD PRIMARY KEY (`iddokter`);
+  ADD PRIMARY KEY (`iddokter`),
+  ADD KEY `fk_dokter_poli1_idx` (`poli_idpoli`);
 
 --
 -- Indeks untuk tabel `failed_jobs`
@@ -380,6 +484,12 @@ ALTER TABLE `kunjungan`
 -- Indeks untuk tabel `migrations`
 --
 ALTER TABLE `migrations`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indeks untuk tabel `months`
+--
+ALTER TABLE `months`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -429,6 +539,12 @@ ALTER TABLE `stok_in`
   ADD PRIMARY KEY (`idstok_in`);
 
 --
+-- Indeks untuk tabel `tanggal`
+--
+ALTER TABLE `tanggal`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indeks untuk tabel `users`
 --
 ALTER TABLE `users`
@@ -443,7 +559,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT untuk tabel `dokter`
 --
 ALTER TABLE `dokter`
-  MODIFY `iddokter` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `iddokter` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT untuk tabel `failed_jobs`
@@ -461,13 +577,19 @@ ALTER TABLE `kategori`
 -- AUTO_INCREMENT untuk tabel `kunjungan`
 --
 ALTER TABLE `kunjungan`
-  MODIFY `idkunjungan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `idkunjungan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT untuk tabel `migrations`
 --
 ALTER TABLE `migrations`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT untuk tabel `months`
+--
+ALTER TABLE `months`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT untuk tabel `obat`
@@ -479,37 +601,49 @@ ALTER TABLE `obat`
 -- AUTO_INCREMENT untuk tabel `pasien`
 --
 ALTER TABLE `pasien`
-  MODIFY `idpasien` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `idpasien` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT untuk tabel `poli`
 --
 ALTER TABLE `poli`
-  MODIFY `idpoli` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `idpoli` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT untuk tabel `stok_in`
 --
 ALTER TABLE `stok_in`
-  MODIFY `idstok_in` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `idstok_in` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT untuk tabel `tanggal`
+--
+ALTER TABLE `tanggal`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT untuk tabel `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1003;
 
 --
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
 --
 
 --
+-- Ketidakleluasaan untuk tabel `dokter`
+--
+ALTER TABLE `dokter`
+  ADD CONSTRAINT `fk_dokter_poli1` FOREIGN KEY (`poli_idpoli`) REFERENCES `poli` (`idpoli`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
 -- Ketidakleluasaan untuk tabel `kunjungan`
 --
 ALTER TABLE `kunjungan`
-  ADD CONSTRAINT `fk_kunjungan_dokter1` FOREIGN KEY (`dokter_iddokter`) REFERENCES `dokter` (`iddokter`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_kunjungan_pasien` FOREIGN KEY (`pasien_idpasien`) REFERENCES `pasien` (`idpasien`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_kunjungan_poli1` FOREIGN KEY (`poli_idpoli`) REFERENCES `poli` (`idpoli`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `FK_kunjungan_poli` FOREIGN KEY (`poli_idpoli`) REFERENCES `poli` (`idpoli`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_kunjungan_dokter1` FOREIGN KEY (`dokter_iddokter`) REFERENCES `dokter` (`iddokter`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_kunjungan_pasien` FOREIGN KEY (`pasien_idpasien`) REFERENCES `pasien` (`idpasien`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Ketidakleluasaan untuk tabel `obat_has_stok_in`
@@ -522,8 +656,8 @@ ALTER TABLE `obat_has_stok_in`
 -- Ketidakleluasaan untuk tabel `resep_stock_out`
 --
 ALTER TABLE `resep_stock_out`
-  ADD CONSTRAINT `fk_kunjungan_has_obat_kunjungan1` FOREIGN KEY (`kunjungan_idkunjungan`) REFERENCES `kunjungan` (`idkunjungan`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_kunjungan_has_obat_obat1` FOREIGN KEY (`obat_idobat`) REFERENCES `obat` (`idobat`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_kunjungan_has_obat_kunjungan1` FOREIGN KEY (`kunjungan_idkunjungan`) REFERENCES `kunjungan` (`idkunjungan`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_kunjungan_has_obat_obat1` FOREIGN KEY (`obat_idobat`) REFERENCES `obat` (`idobat`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -17,7 +17,7 @@ class PendaftaranPasienController extends Controller
     {
         $pasien = Pasien::all();
         // return $pasien;
-        $poli = DB::table('poli')->get();
+        $poli = Poli::all();
         $dokter = Dokter::all();
         return view('pages.pendaftaran.index', compact('pasien', 'poli', 'dokter'));
     }

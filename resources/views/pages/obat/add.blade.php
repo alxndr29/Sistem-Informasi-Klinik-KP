@@ -13,11 +13,7 @@
 @endsection
 
 @section('breadcrumb-items')
-<li class="breadcrumb-item">
-    Pelayanan
-</li>
-<li class="breadcrumb-item">Pelayanan</li>
-<li class="breadcrumb-item active">Tambah Obat</li>
+
 @endsection
 @section('content')
 <div class="container-fluid">

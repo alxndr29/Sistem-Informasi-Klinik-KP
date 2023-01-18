@@ -28,8 +28,8 @@
                     </div>
                     <!-- <button class="btn btn-primary" type="button" onclick="" data-bs-toggle="modal" data-original-title="test" data-bs-target="#exampleModal" data-bs-original-title="" title="">Tambah Stok Barang
                     </button> -->
-                    <a class="btn btn-primary" href="{{url('obat/index/tambahstok')}}">Tambah Stok Barang
-                    </a>
+                    <!-- <a class="btn btn-primary" href="{{url('obat/index/tambahstok')}}">Tambah Stok Barang
+                    </a> -->
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">

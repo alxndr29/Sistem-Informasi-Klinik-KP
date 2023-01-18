@@ -48,6 +48,7 @@
                                     <th>TTL</th>
                                     <th>Jenis Kelamin</th>
                                     <th>Alamat</th>
+                                    <th>Poli</th>
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
@@ -60,6 +61,7 @@
                                     <td>{{$value->tempat_lahir}}, {{$value->tanggal_lahir}}</td>
                                     <td><span class="badge badge-{{$value->jenis_kelamin == "Laki-laki" ? 'primary' : 'secondary'}}">{{$value->jenis_kelamin}}</span></td>
                                     <td>{{$value->alamat}}</td>
+                                    <td>{{$value->poli->nama_lengkap}}</td>
                                     <td>
                                         <form onsubmit="return confirm('Apakah Anda Yakin ?');"
                                               action="{{ route('daftar-dokter.destroy', $value->iddokter) }}"

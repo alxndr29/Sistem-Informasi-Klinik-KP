@@ -144,6 +144,7 @@
                                     <th>Poli Tujuan</th>
                                     <th>Dokter Tujuan</th>
                                     <th>Status</th>
+                                    <th>Tanggal</th>
                                     <th>Jam Datang</th>
                                     <th>Jam Selesai</th>
                                     <th>Tarif Obat</th>
@@ -170,6 +171,9 @@
                                         @else
                                         <span class="badge badge-success">Selesai</span>
                                         @endif
+                                    </td>
+                                    <td>
+                                        {{$value->tanggal}}
                                     </td>
                                     <td>{{$value->jam_datang}}</td>
                                     @if ($value->jam_selesai == null)

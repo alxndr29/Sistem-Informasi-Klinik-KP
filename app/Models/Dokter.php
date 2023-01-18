@@ -17,4 +17,7 @@ class Dokter extends Model
     public function kunjungan(){
         return $this->hasMany(Kunjungan::class);
     }
+    public function poli(){
+        return $this->belongsTo(Poli::class);
+    }
 }

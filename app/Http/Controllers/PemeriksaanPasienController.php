@@ -17,18 +17,18 @@ class PemeriksaanPasienController extends Controller
     {
         if (\Auth::user()->role == "Dokter")
         {
-            // $dokter = Dokter::where(\Auth::user()->id);
+            $dokter = Dokter::where('iddokter',\Auth::user()->id)->first();
             // return $dokter->iddokter;
-            $total_pasien_hari_ini = Kunjungan::where('tanggal', date('Y-m-d'))->where('dokter_iddokter', \Auth::user()->id)->count();
-            $total_pasien_7_hari = Kunjungan::where('tanggal', '>=', Carbon::now()->subDays(7))->where('dokter_iddokter', \Auth::user()->id)->count();
-            $total_pasien_1_bulan = Kunjungan::where('tanggal', '>=', Carbon::now()->subDays(30))->where('dokter_iddokter', \Auth::user()->id)->count();
+            $total_pasien_hari_ini = Kunjungan::where('tanggal', date('Y-m-d'))->where('dokter_iddokter', $dokter->iddokter)->count();
+            $total_pasien_7_hari = Kunjungan::where('tanggal', '>=', Carbon::now()->subDays(7))->where('dokter_iddokter',$dokter->iddokter)->count();
+            $total_pasien_1_bulan = Kunjungan::where('tanggal', '>=', Carbon::now()->subDays(30))->where('dokter_iddokter', $dokter->iddokter)->count();
             $total_pemasukan = Kunjungan::select(DB::raw("sum(tarif_obat + tarif_periksa) as pemasukan"))->where('status_bayar',1)->where('dokter_iddokter', \Auth::user()->id)->first();
             //$kunjungan = Kunjungan::with('poli','pasien','dokter','obat')->get();
             $kunjungan = DB::table('kunjungan as k')
                 ->join('pasien as p','k.pasien_idpasien','=','p.idpasien')
                 ->join('dokter as d','k.dokter_iddokter','=','d.iddokter')
                 ->join('poli as po','k.poli_idpoli','=','po.idpoli')
-                ->where('dokter_iddokter', \Auth::user()->id)
+                ->where('dokter_iddokter', $dokter->iddokter)
                 ->select('po.nama_lengkap as poli','d.nama_lengkap as dokter', 'p.nama_lengkap as pasien', 'k.*')
                 ->get();
         }
@@ -46,8 +46,6 @@ class PemeriksaanPasienController extends Controller
                 ->select('po.nama_lengkap as poli','d.nama_lengkap as dokter', 'p.nama_lengkap as pasien', 'k.*')
                 ->get();
         }
-
-
         return view('pages.pemeriksaan.index', compact('kunjungan', 'total_pasien_hari_ini', 'total_pasien_7_hari', 'total_pasien_1_bulan', 'total_pemasukan'));
     }
     public function edit($id)

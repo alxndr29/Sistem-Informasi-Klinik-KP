@@ -14,10 +14,9 @@
 
 @section('breadcrumb-items')
 <li class="breadcrumb-item">
-    Transaksi
+    Pelayanan
 </li>
-<li class="breadcrumb-item">Pembelian</li>
-<li class="breadcrumb-item active">Buat Transaksi</li>
+<li class="breadcrumb-item active">Daftar Pasien</li>
 @endsection
 
 @section('content')
@@ -40,7 +39,7 @@
                             <h5>Daftar Pasien<h5>
                         </div>
                         <div class="">
-                            <a class="btn btn-primary" href="{{route('pasien.create')}}">Tambah Data Pasien</a>
+                            <!-- <a class="btn btn-primary" href="{{route('pasien.create')}}">Tambah Data Pasien</a> -->
                         </div>
                     </div>
                 </div>

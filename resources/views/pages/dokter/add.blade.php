@@ -78,6 +78,16 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="col">
+                            <label class="form-label">Poli</label>
+                                <div class="m-t-15 m-checkbox-inline custom-radio-ml">
+                                    <select class="form-select digits" name="poli">
+                                        @foreach ($poli as $value)
+                                        <option value="{{$value->idpoli}}">{{$value->nama_lengkap}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
                         </div>
 
                     </div>

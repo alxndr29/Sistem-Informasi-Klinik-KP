@@ -13,8 +13,7 @@
 @endsection
 
 @section('breadcrumb-items')
-<li class="breadcrumb-item"><a href="{{route('obat.index')}}">Daftar Obat</a></li>
-<li class="breadcrumb-item active">Edit Pasien</li>
+
 @endsection
 @section('content')
 <div class="container-fluid">

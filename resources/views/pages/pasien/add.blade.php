@@ -30,7 +30,7 @@
                 <form method="post" action="{{route('pasien.store')}}" class="form theme-form">
                     @csrf
                     <div class="card-body">
-                        <div class="row">
+                        <!-- <div class="row">
                             <div class="col">
                                 <div class="mb-3">
                                     <label class="form-label">Nomor NIK</label>
@@ -45,7 +45,7 @@
                                     <input class="form-control" type="number" placeholder="Masukan Nomor BPJS" data-bs-original-title="" title="" name="no_bpjs" required>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                         <div class="row">
                             <div class="col">
                                 <div class="mb-3">
@@ -82,11 +82,7 @@
                             <div class="col">
                                 <div class="mb-3">
                                     <label class="form-label">Pekerjaan</label>
-                                    <select class="form-select digits" name="pekerjaan">
-                                       
-                                        <option value="WIRASWASTA">WIRASWASTA</option>
-                                        <option value="PNS">PNS</option>
-                                    </select>
+                                    <input class="form-control" type="text" placeholder="Masukan Pekerjaan" data-bs-original-title="" title="" name="pekerjaan" required>
                                 </div>
                             </div>
                         </div>

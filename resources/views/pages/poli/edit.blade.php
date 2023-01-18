@@ -13,10 +13,7 @@
 @endsection
 
 @section('breadcrumb-items')
-<li class="breadcrumb-item">
-    Pelayanan
-</li>
-<li class="breadcrumb-item">Pelayanan</li>
+<li class="breadcrumb-item">Manajemen Klinik</li>
 <li class="breadcrumb-item active">Edit Poli</li>
 @endsection
 @section('content')

@@ -13,10 +13,7 @@
 @endsection
 
 @section('breadcrumb-items')
-<li class="breadcrumb-item">
-    Pelayanan
-</li>
-<li class="breadcrumb-item">Pelayanan</li>
+<li class="breadcrumb-item">Manajemen Klinik</li>
 <li class="breadcrumb-item active">Tambah Poli</li>
 @endsection
 @section('content')
@@ -33,8 +30,8 @@
                         <div class="row">
                             <div class="col">
                                 <div class="mb-3">
-                                    <label class="form-label">Nama Lengkap</label>
-                                    <input class="form-control" type="text" placeholder="Masukan Nama Lengkap" data-bs-original-title="" title="" name="nama_lengkap" required>
+                                    <label class="form-label">Nama Poli</label>
+                                    <input class="form-control" type="text" placeholder="Masukan Nama Poli" data-bs-original-title="" title="" name="nama_lengkap" required>
                                 </div>
                             </div>
                         </div>

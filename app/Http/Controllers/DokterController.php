@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Dokter;
 use Illuminate\Support\Facades\Hash;
-
+use App\Models\Poli;
 class DokterController extends Controller
 {
     //
@@ -19,7 +19,8 @@ class DokterController extends Controller
     }
     public function create()
     {
-        return view('pages.dokter.add');
+        $poli = Poli::all();
+        return view('pages.dokter.add', compact('poli'));
     }
     public function store(Request $request)
     {
@@ -30,9 +31,11 @@ class DokterController extends Controller
             $dokter->tanggal_lahir = $request->get('tanggal_lahir');
             $dokter->alamat = $request->get('alamat');
             $dokter->jenis_kelamin = $request->get('jenis_kelamin');
+            $dokter->poli_idpoli = $request->get('poli');
             $dokter->save();
 
             $user = new User();
+            $user->id = $dokter->iddokter;
             $user->name = $request->get('nama_lengkap');
             $user->email = $request->get('email');
             if($request->get('password') != null){
@@ -51,7 +54,8 @@ class DokterController extends Controller
     public function edit($id)
     {
         $dokter = Dokter::where('iddokter', $id)->first();
-        return view('pages.dokter.edit', compact('dokter'));
+        $poli = Poli::all();
+        return view('pages.dokter.edit', compact('dokter','poli'));
     }
     public function update(Request $request, $id)
     {
@@ -62,6 +66,7 @@ class DokterController extends Controller
             $dokter->tanggal_lahir = $request->get('tanggal_lahir');
             $dokter->alamat = $request->get('alamat');
             $dokter->jenis_kelamin = $request->get('jenis_kelamin');
+            $dokter->poli_idpoli = $request->get('poli');
             $dokter->save();
 
             User::where('name', $request->nama_lengkap)->update([

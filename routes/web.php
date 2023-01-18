@@ -134,19 +134,14 @@ Route::middleware(['auth'])->group(function () {
     });
 
 
-//    Route::controller(PoliController::class)->group(function () {
-//        Route::prefix('poli')->group(function () {
-//            Route::name('poli.')->group(function () {
-//                Route::get('index', 'index')->name('index');
-//                Route::get('add', 'create')->name('create');
-//                Route::get('show/{id}', 'show')->name('show');
-//                Route::get('edit/{id}', 'edit')->name('edit');
-//                Route::post('store', 'store')->name('store');
-//                Route::put('update/{id}', 'update')->name('update');
-//                Route::delete('delete/{id}', 'delete')->name('delete');
-//            });
-//        });
-//    });
+   Route::controller(PoliController::class)->group(function () {
+       Route::prefix('poli')->group(function () {
+           Route::name('poli.')->group(function () {
+               Route::get('showDokter/{id}', 'showDokter')->name('showDokter');
+             
+           });
+       });
+   });
 
     Route::controller(PendaftaranPasienController::class)->group(function () {
         Route::prefix('pendaftaran')->group(function () {

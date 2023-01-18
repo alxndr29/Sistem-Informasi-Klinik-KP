@@ -59,4 +59,7 @@ class PoliController extends Controller
             return $e->getMessage();
         }
     }
+    public function showDokter($id){
+        return DB::table('dokter')->where('poli_idpoli',$id)->get();
+    }
 }
