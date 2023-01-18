@@ -2,15 +2,41 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2ea64314-2dd2-4b21-9338-cb52a29c32ea" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/DokterController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/DokterController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/PemeriksaanPasienController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/PemeriksaanPasienController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/PendaftaranPasienController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/PendaftaranPasienController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/layouts/simple/sidebar.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/simple/sidebar.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/webServers.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/webServers.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/pages/buat-transaksi-baru.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pages/buat-transaksi-baru.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/pages/dokter/add.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pages/dokter/add.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/pages/dokter/edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pages/dokter/edit.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/pages/dokter/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pages/dokter/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/pages/dokter/show.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pages/dokter/show.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/pages/laporan/Pasien/bulanan.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pages/laporan/Pasien/bulanan.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/pages/laporan/Pasien/harian.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pages/laporan/Pasien/harian.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/pages/laporan/detail.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pages/laporan/detail.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/pages/laporan/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pages/laporan/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/pages/laporan/keuangan.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pages/laporan/keuangan.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/pages/laporan/keuangan/pendapatan-bulanan.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pages/laporan/keuangan/pendapatan-bulanan.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/pages/laporan/keuangan/pendapatan-harian.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pages/laporan/keuangan/pendapatan-harian.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/pages/obat/add.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pages/obat/add.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/pages/obat/edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pages/obat/edit.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/pages/obat/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pages/obat/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/pages/obat/tambahstok.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pages/obat/tambahstok.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/pages/pasien/add.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pages/pasien/add.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/pages/pasien/edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pages/pasien/edit.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/pages/pasien/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pages/pasien/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/pages/pasien/show.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pages/pasien/show.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/pages/pemeriksaan/bayar.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pages/pemeriksaan/bayar.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/pages/pemeriksaan/edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pages/pemeriksaan/edit.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/pages/pemeriksaan/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pages/pemeriksaan/index.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/pages/pendaftaran/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pages/pendaftaran/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/pages/piutang/detail.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pages/piutang/detail.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/pages/piutang/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pages/piutang/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/pages/poli/add.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pages/poli/add.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/pages/poli/edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pages/poli/edit.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/pages/poli/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pages/poli/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/pages/stok/stokkeluar.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pages/stok/stokkeluar.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/pages/stok/stokmasuk.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pages/stok/stokmasuk.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/pages/user/add.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pages/user/add.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/pages/user/edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pages/user/edit.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/pages/user/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pages/user/index.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -211,6 +237,7 @@
       <workItem from="1673492805246" duration="32981000" />
       <workItem from="1673673056849" duration="13818000" />
       <workItem from="1673776102128" duration="7742000" />
+      <workItem from="1674022357386" duration="345000" />
     </task>
     <servers />
   </component>

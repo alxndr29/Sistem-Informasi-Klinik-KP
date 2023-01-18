@@ -2,7 +2,7 @@
 <project version="4">
   <component name="WebServers">
     <option name="servers">
-      <webServer id="33e93dde-d8a2-4335-9614-da36a5ca1c5a" name="Inotive - Meranti" url="http://inotive.id">
+      <webServer id="33e93dde-d8a2-4335-9614-da36a5ca1c5a" name="Inotive - Meranti (project level)" url="http://inotive.id">
         <fileTransfer rootFolder="/domains/inotive.id/public_html/meranti" host="inotive.id" port="21">
           <advancedOptions>
             <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />

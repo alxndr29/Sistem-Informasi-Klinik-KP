@@ -84,7 +84,7 @@
 @endsection
 
 @section('script')
-@vite('resources/js/app-vue.js')
+
 <script src="{{asset('assets/js/datatable/datatables/jquery.dataTables.min.js')}}"></script>
 <script src="{{asset('assets/js/datatable/datatables/datatable.custom.js')}}"></script>
 <script src="{{asset('assets/js/select2/select2.full.min.js')}}"></script>
