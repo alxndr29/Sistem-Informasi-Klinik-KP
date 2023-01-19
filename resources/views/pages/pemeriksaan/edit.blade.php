@@ -217,6 +217,7 @@
 <script src="{{asset('assets/js/datepicker/date-picker/datepicker.custom.js')}}"></script>
 
 <script type="text/javascript">
+    var list_obat;
     $(document).ready(function() {
         $("#data-obat").DataTable({
             paging: false,
@@ -229,7 +230,8 @@
                 'aaa': 'aa'
             },
             success: function(data) {
-                console.log(data);
+                list_obat = data;
+                // cekQty(1, 2);
             },
             error: function(data) {
                 console.log(data);
@@ -241,32 +243,53 @@
     var counter = 0;
     var biaya_obat = 0;
 
+    function cekQty(id, qty) {
+        var status = 0;
+        $.each(list_obat, function(i, k) {
+            if (k.idobat == id && k.jumlah >= qty) {
+                status = 1;
+                return false;
+            }
+        });
+        return status;
+    }
+
     function tambahProduk() {
         console.log(daftar_produk.length);
         if (daftar_produk.length == 0) {
-            daftar_produk[counter] = {};
-            daftar_produk[counter].nama = $("#select-obat option:selected").text();
-            daftar_produk[counter].obat_idobat = $("#select-obat option:selected").val();
-            daftar_produk[counter].dosis = $("#select-dosis option:selected").text();
-            daftar_produk[counter].jumlah = $("#jumlah").val();
-            daftar_produk[counter].harga = $("#harga").val();
-            daftar_produk[counter].keterangan = 0;
-            counter++;
-            display();
+            if (cekQty($("#select-obat option:selected").val(), $("#jumlah").val()) == 1) {
+                daftar_produk[counter] = {};
+                daftar_produk[counter].nama = $("#select-obat option:selected").text();
+                daftar_produk[counter].obat_idobat = $("#select-obat option:selected").val();
+                daftar_produk[counter].dosis = $("#select-dosis option:selected").text();
+                daftar_produk[counter].jumlah = $("#jumlah").val();
+                daftar_produk[counter].harga = $("#harga").val();
+                daftar_produk[counter].keterangan = 0;
+                counter++;
+                display();
+            } else {
+                alert('Stok tidak mencukupi.');
+            }
+
         } else {
             $.each(daftar_produk, function(i, k) {
-                if (k.obat_idobat == $("#select-obat option:selected").val()) {
-                    alert('obat sudah ada didalam daftar.');
+                if (cekQty($("#select-obat option:selected").val(), $("#jumlah").val()) == 1) {
+                    if (k.obat_idobat == $("#select-obat option:selected").val()) {
+                        alert('obat sudah ada didalam daftar.');
+                    } else {
+                        daftar_produk[counter] = {};
+                        daftar_produk[counter].nama = $("#select-obat option:selected").text();
+                        daftar_produk[counter].obat_idobat = $("#select-obat option:selected").val();
+                        daftar_produk[counter].dosis = $("#select-dosis option:selected").text();
+                        daftar_produk[counter].jumlah = $("#jumlah").val();
+                        daftar_produk[counter].harga = $("#harga").val();
+                        daftar_produk[counter].keterangan = 0;
+                        counter++;
+                        display();
+                    }
                 } else {
-                    daftar_produk[counter] = {};
-                    daftar_produk[counter].nama = $("#select-obat option:selected").text();
-                    daftar_produk[counter].obat_idobat = $("#select-obat option:selected").val();
-                    daftar_produk[counter].dosis = $("#select-dosis option:selected").text();
-                    daftar_produk[counter].jumlah = $("#jumlah").val();
-                    daftar_produk[counter].harga = $("#harga").val();
-                    daftar_produk[counter].keterangan = 0;
-                    counter++;
-                    display();
+                    alert('Stok tidak mencukupi.');
+                    return false;
                 }
             });
         }
@@ -297,8 +320,6 @@
     }
 
     function hapus(id) {
-        // daftar_produk = daftar_produk.filter(Boolean);
-        // console.log(daftar_produk);
         $.each(daftar_produk, function(i, k) {
             console.log(k.obat_idobat);
             if (id == k.obat_idobat) {
@@ -338,7 +359,6 @@
                 }
             });
         }
-
     }
 </script>
 

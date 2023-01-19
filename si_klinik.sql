@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.3
+-- version 5.1.2
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Waktu pembuatan: 18 Jan 2023 pada 06.48
+-- Waktu pembuatan: 19 Jan 2023 pada 13.09
 -- Versi server: 5.7.33
--- Versi PHP: 8.1.11
+-- Versi PHP: 8.1.3
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -152,7 +152,8 @@ CREATE TABLE `kunjungan` (
 --
 
 INSERT INTO `kunjungan` (`idkunjungan`, `status`, `created_at`, `updated_at`, `pasien_idpasien`, `dokter_iddokter`, `poli_idpoli`, `diagnosa_awal`, `hasil_diagnosa`, `tanggal`, `jam_datang`, `jam_selesai`, `tarif_obat`, `status_bayar`, `metode_pembayaran`, `tarif_periksa`) VALUES
-(1, 'Selesai', '2023-01-17 22:45:51', '2023-01-17 22:48:08', 1, 1, 1, 'jdkajsna', 'n', '2023-01-18', '06:45:51', '06:48:08', 5000, 1, 'Cash', 10000);
+(1, 'Selesai', '2023-01-18 19:43:26', '2023-01-19 11:49:01', 1, 1, 1, 'ads', 'jnkadsa', '2023-01-19', '03:43:26', '07:49:01', 55000, 1, 'Cash', 10000),
+(2, 'Menunggu Pembayaran', '2023-01-19 11:49:12', '2023-01-19 12:08:33', 1, 1, 1, 'esasda', 'gfhdfg', '2023-01-19', '07:49:12', NULL, 100, 0, 'Cash', 10000);
 
 -- --------------------------------------------------------
 
@@ -231,8 +232,18 @@ CREATE TABLE `obat_has_stok_in` (
   `stok_in_idstok_in` int(11) NOT NULL,
   `jumlah` int(11) DEFAULT NULL,
   `harga` double DEFAULT NULL,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `stok_masuk` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `obat_has_stok_in`
+--
+
+INSERT INTO `obat_has_stok_in` (`obat_idobat`, `stok_in_idstok_in`, `jumlah`, `harga`, `created_at`, `stok_masuk`) VALUES
+(1, 5, 0, 1000, '2023-01-19 06:25:13', 10),
+(1, 6, 1, 1000, '2023-01-19 13:09:21', 1),
+(2, 5, 10, 1000, '2023-01-19 06:25:13', 10);
 
 -- --------------------------------------------------------
 
@@ -322,7 +333,7 @@ CREATE TABLE `resep_stock_out` (
 --
 
 INSERT INTO `resep_stock_out` (`kunjungan_idkunjungan`, `obat_idobat`, `jumlah`, `harga`, `keterangan`) VALUES
-(1, 1, 1, 5000, '1x1');
+(2, 1, 10, 10, '1x1');
 
 -- --------------------------------------------------------
 
@@ -342,7 +353,12 @@ CREATE TABLE `stok_in` (
 --
 
 INSERT INTO `stok_in` (`idstok_in`, `tanggal`, `created_at`, `updated_at`) VALUES
-(1, '2023-01-18', '2023-01-17 21:45:41', '2023-01-17 21:45:41');
+(1, '2023-01-18', '2023-01-17 21:45:41', '2023-01-17 21:45:41'),
+(2, '2023-01-19', '2023-01-18 19:41:43', '2023-01-18 19:41:43'),
+(3, '2023-01-19', '2023-01-18 19:43:13', '2023-01-18 19:43:13'),
+(4, '2023-01-19', '2023-01-18 19:59:27', '2023-01-18 19:59:27'),
+(5, '2023-01-19', '2023-01-18 22:25:13', '2023-01-18 22:25:13'),
+(6, '2023-01-19', '2023-01-19 12:09:21', '2023-01-19 12:09:21');
 
 -- --------------------------------------------------------
 
@@ -569,7 +585,7 @@ ALTER TABLE `kategori`
 -- AUTO_INCREMENT untuk tabel `kunjungan`
 --
 ALTER TABLE `kunjungan`
-  MODIFY `idkunjungan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `idkunjungan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT untuk tabel `migrations`
@@ -605,7 +621,7 @@ ALTER TABLE `poli`
 -- AUTO_INCREMENT untuk tabel `stok_in`
 --
 ALTER TABLE `stok_in`
-  MODIFY `idstok_in` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `idstok_in` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT untuk tabel `tanggal`
