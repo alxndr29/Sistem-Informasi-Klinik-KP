@@ -62,17 +62,17 @@
                             </thead>
                             <tbody>
                                 @if(isset($obat))
-                                @foreach ($obat as $key => $value )
-                                <tr>
-                                    <td class="text-center">{{$key+1}}</td>
-                                    <td class="text-center">{{$value->nama}}</td>
-                                    <td class="text-center">Rp.{{$value->harga}}</td>
-                                    <td class="text-center"><span class="badge badge-danger">{{$value->stokkeluar()}}</span></td>
-                                    <td class="text-center"><span class="badge badge-primary">{{$value->stokmasuk()}}</span></td>
-                                    <td class="text-center"><span class="badge badge-success">{{$value->stokmasuk() - $value->stokkeluar()}}</span></td>
-                                    <td class="text-center fw-bold">Rp.{{($value->stokmasuk() - $value->stokkeluar()) * $value->harga}}</td>
-                                </tr>
-                                @endforeach
+                                    @foreach ($obat as $key => $value )
+                                    <tr>
+                                        <td class="text-center">{{$key+1}}</td>
+                                        <td class="text-center">{{$value->nama}}</td>
+                                        <td class="text-center">Rp.{{$value->harga}}</td>
+                                        <td class="text-center"><span class="badge badge-danger">{{$value->stokkeluar()}}</span></td>
+                                        <td class="text-center"><span class="badge badge-primary">{{$value->stokmasuk()}}</span></td>
+                                        <td class="text-center"><span class="badge badge-success">{{$value->stokmasuk() - $value->stokkeluar()}}</span></td>
+                                        <td class="text-center fw-bold">Rp.{{($value->stokmasuk() - $value->stokkeluar()) * $value->harga}}</td>
+                                    </tr>
+                                    @endforeach
                                 @endif
 
                                 @if(isset($a))

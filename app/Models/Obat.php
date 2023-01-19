@@ -21,13 +21,16 @@ class Obat extends Model
     }
     public function stokin(){
         return $this->belongsToMany(Stockin::class, 'obat_has_stok_in', 'obat_idobat', 'stok_in_idstok_in')
-        ->withPivot('jumlah','harga');
+        ->withPivot('jumlah','harga','stok_masuk');
     }
     public function stokmasuk(){
-        return $this->stokin()->sum('jumlah');
+        return $this->stokin()->sum('stok_masuk');
     }
     public function stokkeluar(){
         return $this->kunjungan()->sum('jumlah');
+    }
+    public static function getobatwithsum(){
+        
     }
 
 }

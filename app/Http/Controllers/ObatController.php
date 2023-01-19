@@ -10,6 +10,7 @@ use App\Models\Stockin;
 use PhpParser\Node\Stmt\Catch_;
 use Illuminate\Support\Facades\DB;
 use App\Models\Kategori;
+
 class ObatController extends Controller
 {
     //
@@ -18,7 +19,7 @@ class ObatController extends Controller
         $obat = Obat::all();
         // $kategori = DB::table('kategori')->get();
         $kategori = Kategori::all();
-        return view('pages.obat.index', compact('obat','kategori'));
+        return view('pages.obat.index', compact('obat', 'kategori'));
     }
     public function create()
     {
@@ -43,7 +44,7 @@ class ObatController extends Controller
     {
         $obat = Obat::where('idobat', $id)->first();
         $kategori = Kategori::all();
-        return view('pages.obat.edit', compact('obat','kategori'));
+        return view('pages.obat.edit', compact('obat', 'kategori'));
     }
     public function update(Request $request, $id)
     {
@@ -75,7 +76,10 @@ class ObatController extends Controller
     }
     public function get_obat()
     {
-        return Obat::all();
+        return Obat::leftJoin('obat_has_stok_in','obat_has_stok_in.obat_idobat','=','obat.idobat')
+        ->select('obat.*', DB::raw('obat_has_stok_in.jumlah'))
+        ->get();
+        // return Obat::getobatwithsum();
     }
     public function tambahstok()
     {
@@ -91,7 +95,7 @@ class ObatController extends Controller
             $stockin->save();
             foreach ($request->get('daftar_harga') as $key => $value) {
                 if ($request->get('daftar_harga')[$key] != 0 || $request->get('daftar_jumlah')[$key] != 0) {
-                    $stockin->obat()->attach((int) $key, ['jumlah' => $request->get('daftar_jumlah')[$key], 'harga' => $request->get('daftar_harga')[$key]]);
+                    $stockin->obat()->attach((int) $key, ['jumlah' => $request->get('daftar_jumlah')[$key], 'stok_masuk' => $request->get('daftar_jumlah')[$key], 'harga' => $request->get('daftar_harga')[$key]]);
                 }
             }
             DB::commit();
@@ -105,14 +109,14 @@ class ObatController extends Controller
     {
         if ($awal == null && $akhir == null) {
             $stokin = Stockin::all();
-
         } else {
             $stokin = Stockin::where('tanggal', '', $awal)->where('tanggal', '', $akhir)->get();
         }
 
         return view('pages.stok.stokmasuk', compact('stokin'));
     }
-    public function obatkeluar($awal = null, $akhir = null){
+    public function obatkeluar($awal = null, $akhir = null)
+    {
         if ($awal == null && $akhir == null) {
             $kunjungan = Kunjungan::all();
         } else {
